@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View All Data</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <button id="backBtn">Back</button>
+        <table id="dataTable" border="1">
+            <thead>
+                <tr>
+                    <th onclick="sortTable(0)">Text</th>
+                    <th onclick="sortTable(1)">Day</th>
+                    <th onclick="sortTable(2)">Month</th>
+                    <th onclick="sortTable(3)">Time</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <script src="view-data.js"></script>
+</body>
+</html>

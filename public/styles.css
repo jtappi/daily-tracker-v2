@@ -1,0 +1,51 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+}
+
+#viewDataBtn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+#backBtn {
+    margin-bottom: 20px;
+}
+
+.center-content {
+    text-align: center;
+    margin-top: 60px; /* Adjust this value as needed to create space below the View All Data button */
+}
+
+#textInput {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#submitBtn {
+    padding: 10px 20px;
+}
+
+#suggestions {
+    list-style-type: none;
+    padding: 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    cursor: pointer;
+}

@@ -1,0 +1,19 @@
+{
+  "name": "daily-tracker-v2",
+  "version": "1.0.0",
+  "description": "A simple Node.js project.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js && open http://localhost:3000"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "express-session": "^1.18.1",
+    "helmet": "^8.0.0"
+  }
+}
