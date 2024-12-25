@@ -20,7 +20,7 @@
     margin-top: 60px; /* Adjust this value as needed to create space below the View All Data button */
 }
 
-#textInput {
+#itemName {
     width: 80%;
     padding: 10px;
     margin-bottom: 10px;
@@ -48,4 +48,25 @@ th, td {
 
 th {
     cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.categoryBtn {
+    margin: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.categoryBtn.selected {
+    background-color: #007bff;
+    color: white;
+}
+
+#costInput, #notesInput {
+    width: 80%;
+    padding: 10px;
+    margin-top: 10px;
 }

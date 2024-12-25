@@ -15,10 +15,13 @@ document.addEventListener('DOMContentLoaded', () => {
             tbody.innerHTML = '';
             data.forEach(item => {
                 const row = tbody.insertRow();
-                row.insertCell(0).textContent = item.text;
+                row.insertCell(0).textContent = item.text;            
                 row.insertCell(1).textContent = item.day;
                 row.insertCell(2).textContent = item.month;
                 row.insertCell(3).textContent = item.time;
+                row.insertCell(4).textContent = item.category || '';
+                row.insertCell(5).textContent = item.cost || '';    
+                row.insertCell(6).textContent = item.notes || '';
             });
         })
         .catch(error => {
@@ -26,15 +29,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 });
 
-function sortTable(columnIndex) {
-    const table = document.getElementById('dataTable');
-    const rows = Array.from(table.rows).slice(1);
-    const sortedRows = rows.sort((a, b) => {
-        const aText = a.cells[columnIndex].textContent;
-        const bText = b.cells[columnIndex].textContent;
-        return aText.localeCompare(bText);
+document.querySelectorAll('#dataTable th').forEach(header => {
+    header.addEventListener('click', () => {
+        const table = document.getElementById('dataTable');
+        const tbody = table.getElementsByTagName('tbody')[0];
+        const rows = Array.from(tbody.rows);
+        const column = header.getAttribute('data-column');
+        const order = header.getAttribute('data-order') === 'asc' ? 'desc' : 'asc';
+        header.setAttribute('data-order', order);
+
+        rows.sort((a, b) => {
+            const aText = a.cells[header.cellIndex].textContent;
+            const bText = b.cells[header.cellIndex].textContent;
+
+            if (order === 'asc') {
+                return aText.localeCompare(bText, undefined, { numeric: true });
+            } else {
+                return bText.localeCompare(aText, undefined, { numeric: true });
+            }
+        });
+
+        tbody.innerHTML = '';
+        rows.forEach(row => tbody.appendChild(row));
     });
-    const tbody = table.getElementsByTagName('tbody')[0];
-    tbody.innerHTML = '';
-    sortedRows.forEach(row => tbody.appendChild(row));
-}
+});

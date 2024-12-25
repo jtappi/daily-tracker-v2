@@ -9,13 +9,16 @@
 <body>
     <div class="container">
         <button id="backBtn">Back</button>
-        <table id="dataTable" border="1">
+        <table id="dataTable">
             <thead>
                 <tr>
-                    <th onclick="sortTable(0)">Text</th>
-                    <th onclick="sortTable(1)">Day</th>
-                    <th onclick="sortTable(2)">Month</th>
-                    <th onclick="sortTable(3)">Time</th>
+                    <th data-column="text">Text</th>                    
+                    <th data-column="day">Day</th>
+                    <th data-column="month">Month</th>
+                    <th data-column="time">Time</th>
+                    <th data-column="category">Category</th>
+                    <th data-column="cost">Cost</th>
+                    <th data-column="notes">Notes</th>
                 </tr>
             </thead>
             <tbody></tbody>

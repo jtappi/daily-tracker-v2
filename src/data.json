@@ -54,5 +54,60 @@
     "month": "December",
     "time": "12:34:28 PM",
     "timestamp": "2024-12-24T17:34:28.162Z"
+  },
+  {
+    "text": "Famotidine",
+    "category": "Medication",
+    "day": "Tuesday",
+    "month": "December",
+    "time": "5:07:38 PM",
+    "timestamp": "2024-12-24T22:07:38.706Z"
+  },
+  {
+    "text": "Bathroom #2",
+    "category": "Health",
+    "day": "Tuesday",
+    "month": "December",
+    "time": "5:07:49 PM",
+    "timestamp": "2024-12-24T22:07:49.972Z"
+  },
+  {
+    "text": "Famotidine",
+    "category": "Medication",
+    "cost": null,
+    "day": "Tuesday",
+    "month": "December",
+    "time": "5:22:58 PM",
+    "timestamp": "2024-12-24T22:22:58.173Z"
+  },
+  {
+    "text": "Dayquil",
+    "category": "Medication",
+    "cost": null,
+    "notes": null,
+    "day": "Tuesday",
+    "month": "December",
+    "time": "5:29:52 PM",
+    "timestamp": "2024-12-24T22:29:52.182Z"
+  },
+  {
+    "text": "PRV",
+    "category": "Home",
+    "cost": "681.95",
+    "notes": "CJ from My Georgia Plumber installed a new PRV, water pressure regulator, and I got the 1 year plan where they'll come for free.",
+    "day": "Tuesday",
+    "month": "December",
+    "time": "5:32:07 PM",
+    "timestamp": "2024-12-24T22:32:07.667Z"
+  },
+  {
+    "text": "tylenol",
+    "category": "Medication",
+    "cost": null,
+    "notes": "cold and pain",
+    "day": "Tuesday",
+    "month": "December",
+    "time": "10:26:48 PM",
+    "timestamp": "2024-12-25T03:26:48.217Z"
   }
 ]

@@ -62,7 +62,7 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/submit', (req, res) => {
-    const { text } = req.body;
+    const { text, category, cost, notes } = req.body;
     if (!text || typeof text !== 'string' || text.trim() === '') {
         return res.status(400).json({ message: 'Invalid input' });
     }
@@ -71,6 +71,9 @@ app.post('/submit', (req, res) => {
     const timestamp = now.toISOString();
     const entry = {
         text: sanitizedText,
+        category: category || null,
+        cost: cost || null,
+        notes: notes || null,
         day: dayNames[now.getDay()],
         month: monthNames[now.getMonth()],
         time: now.toLocaleTimeString(),

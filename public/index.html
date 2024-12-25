@@ -10,8 +10,16 @@
     <div class="container">
         <button id="viewDataBtn">View All Data</button>
         <div class="center-content">
-            <input type="text" id="textInput" placeholder="Type something...">
+            <input type="text" id="itemName" placeholder="Type something...">
             <button id="submitBtn">Submit</button>
+            <div id="categoryButtons" class="hidden">
+                <button class="categoryBtn" data-category="Home">Home</button>
+                <button class="categoryBtn" data-category="Medication">Medication</button>
+                <button class="categoryBtn" data-category="Bill">Bill</button>
+                <button class="categoryBtn" data-category="Health">Health</button>
+            </div>
+            <input type="text" id="costInput" class="hidden" placeholder="$" disabled>
+            <input type="text" id="notesInput" class="hidden" placeholder="Notes" disabled>
             <ul id="suggestions"></ul>
         </div>
     </div>
