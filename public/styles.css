@@ -57,7 +57,16 @@
     margin-bottom: 20px;
 }
 
-.dropdown-menu {
-    max-height: 200px;
-    overflow-y: auto;
+.tooltip-inner {
+    background-color: #333;
+    color: #fff;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 14px;
+    max-width: 200px;
+    text-align: center;
+}
+
+.tooltip .arrow::before {
+    border-top-color: #333;
 }

@@ -18,10 +18,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 row.insertCell(0).textContent = item.text;
                 row.insertCell(1).textContent = item.category || '';
                 row.insertCell(2).textContent = item.cost || '';
-                row.insertCell(3).textContent = item.notes || '';
+                const notesCell = row.insertCell(3);
+                const notesText = item.notes || '';
+                notesCell.textContent = notesText.length > 20 ? notesText.substring(0, 20) + '...' : notesText;
+                if (notesText.length > 20) {
+                    notesCell.setAttribute('data-toggle', 'tooltip');
+                    notesCell.setAttribute('title', notesText);
+                    notesCell.classList.add('notes-tooltip');
+                }
                 row.insertCell(4).textContent = item.day;
                 row.insertCell(5).textContent = item.month;
                 row.insertCell(6).textContent = item.time;
+            });
+            $('[data-toggle="tooltip"]').tooltip({
+                template: '<div class="tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>',
+                placement: 'top',
+                trigger: 'click'
             });
         })
         .catch(error => {
@@ -53,6 +65,12 @@ document.querySelectorAll('#dataTable th').forEach(header => {
         tbody.innerHTML = '';
         rows.forEach(row => tbody.appendChild(row));
     });
+});
+
+document.addEventListener('click', (event) => {
+    if (event.target.classList.contains('notes-tooltip')) {
+        $(event.target).tooltip('show');
+    }
 });
 
 function showAlert(type, message) {

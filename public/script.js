@@ -14,7 +14,12 @@ document.getElementById('itemName').addEventListener('input', () => {
     const query = document.getElementById('itemName').value;
     if (query.length >= 3) {
         fetch(`/search?query=${query}`)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(data => {
                 const suggestions = document.getElementById('suggestions');
                 suggestions.innerHTML = '';
