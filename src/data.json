@@ -139,5 +139,15 @@
     "month": "December",
     "time": "11:00:27 PM",
     "timestamp": "2024-12-25T04:00:27.956Z"
+  },
+  {
+    "text": "Bathroom #2",
+    "category": null,
+    "cost": null,
+    "notes": null,
+    "day": "Tuesday",
+    "month": "December",
+    "time": "11:06:02 PM",
+    "timestamp": "2024-12-25T04:06:02.951Z"
   }
 ]

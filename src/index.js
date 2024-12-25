@@ -116,6 +116,22 @@ app.get('/data', (req, res) => {
     });
 });
 
+app.get('/top-items', (req, res) => {
+    fs.readFile(path.join(__dirname, 'data.json'), (err, data) => {
+        if (err) throw err;
+        const json = JSON.parse(data);
+        const itemCounts = json.reduce((acc, item) => {
+            acc[item.text] = (acc[item.text] || 0) + 1;
+            return acc;
+        }, {});
+        const topItems = Object.keys(itemCounts)
+            .sort((a, b) => itemCounts[b] - itemCounts[a])
+            .slice(0, 5)
+            .map(text => json.find(item => item.text === text));
+        res.json(topItems);
+    });
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });

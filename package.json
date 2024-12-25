@@ -1,7 +1,7 @@
 {
   "name": "daily-tracker-v2",
   "version": "1.0.0",
-  "description": "A simple Node.js project.",
+  "description": "A project for tracking daily activities",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js && open http://localhost:3000"
