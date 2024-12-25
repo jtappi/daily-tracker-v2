@@ -179,5 +179,15 @@
     "month": "December",
     "time": "11:44:15 PM",
     "timestamp": "2024-12-25T04:44:15.276Z"
+  },
+  {
+    "text": "Prednisone",
+    "category": "Medication",
+    "cost": null,
+    "notes": "Day 4",
+    "day": "Wednesday",
+    "month": "December",
+    "time": "4:05:28 PM",
+    "timestamp": "2024-12-25T21:05:28.636Z"
   }
 ]

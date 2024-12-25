@@ -28,7 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 row.insertCell(4).textContent = item.day;
                 row.insertCell(5).textContent = item.month;
-                row.insertCell(6).textContent = item.time;
+                const timeCell = row.insertCell(6);
+                timeCell.textContent = item.time;
+                timeCell.setAttribute('data-timestamp', item.timestamp);
             });
             $('[data-toggle="tooltip"]').tooltip({
                 template: '<div class="tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>',
@@ -52,8 +54,14 @@ document.querySelectorAll('#dataTable th').forEach(header => {
         header.setAttribute('data-order', order);
 
         rows.sort((a, b) => {
-            const aText = a.cells[header.cellIndex].textContent;
-            const bText = b.cells[header.cellIndex].textContent;
+            let aText, bText;
+            if (column === 'timestamp') {
+                aText = a.cells[header.cellIndex].getAttribute('data-timestamp');
+                bText = b.cells[header.cellIndex].getAttribute('data-timestamp');
+            } else {
+                aText = a.cells[header.cellIndex].textContent;
+                bText = b.cells[header.cellIndex].textContent;
+            }
 
             if (order === 'asc') {
                 return aText.localeCompare(bText, undefined, { numeric: true });

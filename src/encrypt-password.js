@@ -6,7 +6,7 @@ const algorithm = 'aes-256-cbc';
 const key = crypto.randomBytes(32);
 const iv = crypto.randomBytes(16);
 
-const password = 'your-password-here'; // Replace with your password
+const password = process.env.PASSWORD; // Replace with your password
 
 const cipher = crypto.createCipheriv(algorithm, key, iv);
 let encrypted = cipher.update(password, 'utf8', 'hex');

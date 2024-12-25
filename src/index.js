@@ -29,7 +29,14 @@ app.use(session({
     cookie: { secure: false } // Set to true if using HTTPS
 }));
 
-app.use(authMiddleware);
+// Authentication middleware
+app.use((req, res, next) => {
+    if (req.session.authenticated || req.path === '/login' || req.path === '/authenticate') {
+        next();
+    } else {
+        res.redirect('/login');
+    }
+});
 
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
