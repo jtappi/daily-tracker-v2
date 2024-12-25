@@ -15,16 +15,17 @@ document.addEventListener('DOMContentLoaded', () => {
             tbody.innerHTML = '';
             data.forEach(item => {
                 const row = tbody.insertRow();
-                row.insertCell(0).textContent = item.text;            
-                row.insertCell(1).textContent = item.day;
-                row.insertCell(2).textContent = item.month;
-                row.insertCell(3).textContent = item.time;
-                row.insertCell(4).textContent = item.category || '';
-                row.insertCell(5).textContent = item.cost || '';    
-                row.insertCell(6).textContent = item.notes || '';
+                row.insertCell(0).textContent = item.text;
+                row.insertCell(1).textContent = item.category || '';
+                row.insertCell(2).textContent = item.cost || '';
+                row.insertCell(3).textContent = item.notes || '';
+                row.insertCell(4).textContent = item.day;
+                row.insertCell(5).textContent = item.month;
+                row.insertCell(6).textContent = item.time;
             });
         })
         .catch(error => {
+            showAlert('danger', 'An error occurred while fetching data.');
             console.error('There was a problem with the fetch operation:', error);
         });
 });
@@ -53,3 +54,22 @@ document.querySelectorAll('#dataTable th').forEach(header => {
         rows.forEach(row => tbody.appendChild(row));
     });
 });
+
+function showAlert(type, message) {
+    const alertContainer = document.getElementById('alertContainer');
+    const alert = document.createElement('div');
+    alert.className = `alert alert-${type} alert-dismissible fade show`;
+    alert.role = 'alert';
+    alert.innerHTML = `
+        ${message}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    `;
+    alertContainer.appendChild(alert);
+    setTimeout(() => {
+        alert.classList.remove('show');
+        alert.classList.add('hide');
+        setTimeout(() => alert.remove(), 500);
+    }, 5000);
+}

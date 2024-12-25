@@ -109,5 +109,35 @@
     "month": "December",
     "time": "10:26:48 PM",
     "timestamp": "2024-12-25T03:26:48.217Z"
+  },
+  {
+    "text": "Famotidine",
+    "category": "Medication",
+    "cost": null,
+    "notes": null,
+    "day": "Tuesday",
+    "month": "December",
+    "time": "10:36:20 PM",
+    "timestamp": "2024-12-25T03:36:20.832Z"
+  },
+  {
+    "text": "PRV",
+    "category": "Home",
+    "cost": null,
+    "notes": "no notes on this one",
+    "day": "Tuesday",
+    "month": "December",
+    "time": "10:56:01 PM",
+    "timestamp": "2024-12-25T03:56:01.816Z"
+  },
+  {
+    "text": "TLC",
+    "category": "Medication",
+    "cost": null,
+    "notes": "a lil sump",
+    "day": "Tuesday",
+    "month": "December",
+    "time": "11:00:27 PM",
+    "timestamp": "2024-12-25T04:00:27.956Z"
   }
 ]

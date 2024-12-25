@@ -1,14 +1,14 @@
 .container {
-    max-width: 600px;
+    max-width: 800px;
     margin: 0 auto;
     padding: 20px;
     position: relative;
 }
 
 #viewDataBtn {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+    position: relative;
+    top: 0;
+    right: 0;
 }
 
 #backBtn {
@@ -21,7 +21,7 @@
 }
 
 #itemName {
-    width: 80%;
+    width: 100%;
     padding: 10px;
     margin-bottom: 10px;
 }
@@ -35,29 +35,8 @@
     padding: 0;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th, td {
-    padding: 10px;
-    text-align: left;
-    border: 1px solid #ddd;
-}
-
-th {
-    cursor: pointer;
-}
-
 .hidden {
     display: none;
-}
-
-.categoryBtn {
-    margin: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
 }
 
 .categoryBtn.selected {
@@ -66,7 +45,19 @@ th {
 }
 
 #costInput, #notesInput {
-    width: 80%;
-    padding: 10px;
     margin-top: 10px;
+}
+
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.card-title {
+    margin-bottom: 20px;
+}
+
+.dropdown-menu {
+    max-height: 200px;
+    overflow-y: auto;
 }
