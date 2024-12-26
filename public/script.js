@@ -15,6 +15,12 @@ document.getElementById('itemName').addEventListener('input', () => {
     if (query.length >= 3) {
         fetch(`/search?query=${query}`)
             .then(response => {
+                if (response.redirected) {
+                    console.log('Redirecting to:', response.url);
+                    document.getElementById('loadingSpinner').classList.remove('hidden');
+                    window.location.href = response.url;
+                    return;
+                }
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -102,7 +108,15 @@ function submitItem(itemName, selectedCategory, cost, notes) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ text: itemName, category: selectedCategory, cost: cost, notes: notes })
-    }).then(response => response.json())
+    }).then(response => {
+        if (response.redirected) {
+            console.log('Redirecting to:', response.url);
+            document.getElementById('loadingSpinner').classList.remove('hidden');
+            window.location.href = response.url;
+            return;
+        }
+        return response.json();
+    })
       .then(data => {
           if (data.message) {
               showAlert('success', data.message);
@@ -124,7 +138,18 @@ function submitItem(itemName, selectedCategory, cost, notes) {
 
 document.addEventListener('DOMContentLoaded', () => {
     fetch('/top-items')
-        .then(response => response.json())
+        .then(response => {
+            if (response.redirected) {
+                console.log('Redirecting to:', response.url);
+                document.getElementById('loadingSpinner').classList.remove('hidden');
+                window.location.href = response.url;
+                return;
+            }
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
         .then(data => {
             const topItemsContainer = document.getElementById('topItems');
             topItemsContainer.innerHTML = '';

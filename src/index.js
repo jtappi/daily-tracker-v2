@@ -6,7 +6,6 @@ const path = require('path');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const crypto = require('crypto'); // Ensure crypto is correctly imported
-const authMiddleware = require('./auth-middleware');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -31,9 +30,12 @@ app.use(session({
 
 // Authentication middleware
 app.use((req, res, next) => {
+    console.log('Session:', req.session);
+    console.log('Request Path:', req.path);
     if (req.session.authenticated || req.path === '/login' || req.path === '/authenticate') {
         next();
     } else {
+        console.log('Redirecting to login');
         res.redirect('/login');
     }
 });
@@ -65,6 +67,7 @@ app.post('/authenticate', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
+    console.log('Serving login page');
     res.sendFile(path.join(__dirname, '../public/login.html'));
 });
 
