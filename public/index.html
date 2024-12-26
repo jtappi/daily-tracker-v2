@@ -9,43 +9,43 @@
 </head>
 <body>
     <div class="container mt-5">
-        <div id="alertContainer"></div>
+        <div id="alertContainer" data-testid="alert-container"></div>
         <div class="d-flex justify-content-end mb-3">
-            <button id="viewDataBtn" class="btn btn-primary">View All Data</button>
+            <button id="viewDataBtn" class="btn btn-primary" data-testid="view-data-btn">View All Data</button>
         </div>
         <div class="card p-4">
             <div class="form-group position-relative">
-                <input type="text" id="itemName" class="form-control" placeholder="Type something...">
-                <div id="suggestions" class="dropdown-menu w-100"></div>
+                <input type="text" id="itemName" class="form-control" placeholder="Type something..." data-testid="item-name-input">
+                <div id="suggestions" class="dropdown-menu w-100" data-testid="suggestions-dropdown"></div>
             </div>
-            <div id="topItems" class="mb-3"></div>
-            <div id="categoryButtons" class="btn-group btn-group-toggle hidden" data-toggle="buttons">
-                <label class="btn btn-outline-primary categoryBtn" data-category="Home">
+            <div id="topItems" class="mb-3" data-testid="top-items-container"></div>
+            <div id="categoryButtons" class="btn-group btn-group-toggle hidden" data-toggle="buttons" data-testid="category-buttons">
+                <label class="btn btn-outline-primary categoryBtn" data-category="Home" data-testid="category-home">
                     <input type="radio" name="category" autocomplete="off"> Home
                 </label>
-                <label class="btn btn-outline-primary categoryBtn" data-category="Medication">
+                <label class="btn btn-outline-primary categoryBtn" data-category="Medication" data-testid="category-medication">
                     <input type="radio" name="category" autocomplete="off"> Medication
                 </label>
-                <label class="btn btn-outline-primary categoryBtn" data-category="Bill">
+                <label class="btn btn-outline-primary categoryBtn" data-category="Bill" data-testid="category-bill">
                     <input type="radio" name="category" autocomplete="off"> Bill
                 </label>
-                <label class="btn btn-outline-primary categoryBtn" data-category="Health">
+                <label class="btn btn-outline-primary categoryBtn" data-category="Health" data-testid="category-health">
                     <input type="radio" name="category" autocomplete="off"> Health
                 </label>
-                <label class="btn btn-outline-primary categoryBtn" data-category="Pain">
+                <label class="btn btn-outline-primary categoryBtn" data-category="Pain" data-testid="category-pain">
                     <input type="radio" name="category" autocomplete="off"> Pain
                 </label>
             </div>
             <div class="form-group mt-3">
-                <input type="text" id="costInput" class="form-control hidden" placeholder="$" disabled>
+                <input type="text" id="costInput" class="form-control hidden" placeholder="$" disabled data-testid="cost-input">
             </div>
             <div class="form-group">
-                <input type="text" id="notesInput" class="form-control hidden" placeholder="Notes" disabled>
+                <input type="text" id="notesInput" class="form-control hidden" placeholder="Notes" disabled data-testid="notes-input">
             </div>
-            <button id="submitBtn" class="btn btn-success mt-3">Submit</button>
+            <button id="submitBtn" class="btn btn-success mt-3" data-testid="submit-btn">Submit</button>
         </div>
     </div>
-    <div id="loadingSpinner" class="loading-spinner hidden">
+    <div id="loadingSpinner" class="loading-spinner hidden" data-testid="loading-spinner">
         <div class="spinner-border text-primary" role="status">
             <span class="sr-only">Loading...</span>
         </div>
