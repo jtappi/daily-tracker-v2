@@ -14,8 +14,8 @@ app.use(helmet());
 
 // Rate limiting to prevent abuse
 const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100 // limit each IP to 100 requests per windowMs
+    windowMs: process.env.RATE_LIMIT_WINDOW_MS || 15 * 60 * 1000, // 15 minutes
+    max: process.env.RATE_LIMIT_MAX || 100 // limit each IP to 100 requests per windowMs
 });
 app.use(limiter);
 
@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.json());
 app.use(session({
-    secret: 'your-secret-key', // Replace with your secret key
+    secret: process.env.SECRET_KEY, // Replace with your secret key
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false } // Set to true if using HTTPS
@@ -42,7 +42,7 @@ app.use((req, res, next) => {
         next();
     } else {
         console.log('Redirecting to login');
-        res.redirect('/login.html');
+        res.redirect('/login');
     }
 });
 
@@ -51,9 +51,9 @@ const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Frida
 
 app.post('/authenticate', (req, res) => {
     const { password } = req.body;
-    const encryptedPassword = JSON.parse(fs.readFileSync(path.join(__dirname, 'encrypted-password.json')));
-    const key = Buffer.from(JSON.parse(fs.readFileSync(path.join(__dirname, 'key.json'))).key, 'hex');
-    const iv = Buffer.from(encryptedPassword.iv, 'hex');
+    const encryptedPassword = process.env.ENCRYPTED_PASSWORD;
+    const key = Buffer.from(process.env.ENCRYPTION_KEY, 'hex');
+    const iv = Buffer.from(process.env.ENCRYPTION_IV, 'hex');
 
     function decrypt(text) {
         const decipher = crypto.createDecipheriv('aes-256-cbc', key, iv);
@@ -62,7 +62,7 @@ app.post('/authenticate', (req, res) => {
         return decrypted;
     }
 
-    const storedPassword = decrypt(encryptedPassword.encryptedData);
+    const storedPassword = decrypt(encryptedPassword);
 
     if (password === storedPassword) {
         req.session.authenticated = true;
