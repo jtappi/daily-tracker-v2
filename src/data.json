@@ -199,5 +199,25 @@
     "month": "December",
     "time": "1:29:58 AM",
     "timestamp": "2024-12-26T06:29:58.391Z"
+  },
+  {
+    "text": "Water",
+    "category": "Health",
+    "cost": null,
+    "notes": "1 Glass",
+    "day": "Thursday",
+    "month": "December",
+    "time": "1:32:09 AM",
+    "timestamp": "2024-12-26T06:32:09.559Z"
+  },
+  {
+    "text": "Heartburn",
+    "category": "Pain",
+    "cost": null,
+    "notes": null,
+    "day": "Thursday",
+    "month": "December",
+    "time": "1:36:33 AM",
+    "timestamp": "2024-12-26T06:36:33.964Z"
   }
 ]
