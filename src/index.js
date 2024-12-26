@@ -19,6 +19,12 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
+// Middleware to set the X-Forwarded-Proto header to http
+app.use((req, res, next) => {
+    req.headers['x-forwarded-proto'] = 'http';
+    next();
+});
+
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.json());
 app.use(session({
@@ -36,7 +42,7 @@ app.use((req, res, next) => {
         next();
     } else {
         console.log('Redirecting to login');
-        res.redirect('/login');
+        res.redirect('/login.html');
     }
 });
 
@@ -143,5 +149,5 @@ app.get('/top-items', (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server is running on http://localhost:${PORT}/login.html`);
 });

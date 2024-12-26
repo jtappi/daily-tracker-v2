@@ -189,5 +189,15 @@
     "month": "December",
     "time": "4:05:28 PM",
     "timestamp": "2024-12-25T21:05:28.636Z"
+  },
+  {
+    "text": "Famotidine",
+    "category": null,
+    "cost": null,
+    "notes": null,
+    "day": "Thursday",
+    "month": "December",
+    "time": "1:29:58 AM",
+    "timestamp": "2024-12-26T06:29:58.391Z"
   }
 ]

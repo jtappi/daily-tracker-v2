@@ -11,31 +11,50 @@ document.addEventListener('DOMContentLoaded', () => {
             return response.json();
         })
         .then(data => {
-            const tbody = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
-            tbody.innerHTML = '';
-            data.forEach(item => {
-                const row = tbody.insertRow();
-                row.insertCell(0).textContent = item.text;
-                row.insertCell(1).textContent = item.category || '';
-                row.insertCell(2).textContent = item.cost || '';
-                const notesCell = row.insertCell(3);
-                const notesText = item.notes || '';
-                notesCell.textContent = notesText.length > 20 ? notesText.substring(0, 20) + '...' : notesText;
-                if (notesText.length > 20) {
-                    notesCell.setAttribute('data-toggle', 'tooltip');
-                    notesCell.setAttribute('title', notesText);
-                    notesCell.classList.add('notes-tooltip');
-                }
-                row.insertCell(4).textContent = item.day;
-                row.insertCell(5).textContent = item.month;
-                const timeCell = row.insertCell(6);
-                timeCell.textContent = item.time;
-                timeCell.setAttribute('data-timestamp', item.timestamp);
+            const itemFilter = document.getElementById('itemFilter');
+            const uniqueItems = [...new Set(data.map(item => item.text))];
+            uniqueItems.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item;
+                option.textContent = item;
+                itemFilter.appendChild(option);
             });
-            $('[data-toggle="tooltip"]').tooltip({
-                template: '<div class="tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>',
-                placement: 'top',
-                trigger: 'click'
+
+            const tbody = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
+            const renderTable = (filteredData) => {
+                tbody.innerHTML = '';
+                filteredData.forEach(item => {
+                    const row = tbody.insertRow();
+                    row.insertCell(0).textContent = item.text;
+                    row.insertCell(1).textContent = item.category || '';
+                    row.insertCell(2).textContent = item.cost || '';
+                    const notesCell = row.insertCell(3);
+                    const notesText = item.notes || '';
+                    notesCell.textContent = notesText.length > 20 ? notesText.substring(0, 20) + '...' : notesText;
+                    if (notesText.length > 20) {
+                        notesCell.setAttribute('data-toggle', 'tooltip');
+                        notesCell.setAttribute('title', notesText);
+                        notesCell.classList.add('notes-tooltip');
+                    }
+                    row.insertCell(4).textContent = item.day;
+                    row.insertCell(5).textContent = item.month;
+                    const timeCell = row.insertCell(6);
+                    timeCell.textContent = item.time;
+                    timeCell.setAttribute('data-timestamp', item.timestamp);
+                });
+                $('[data-toggle="tooltip"]').tooltip({
+                    template: '<div class="tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>',
+                    placement: 'top',
+                    trigger: 'click'
+                });
+            };
+
+            renderTable(data);
+
+            itemFilter.addEventListener('change', () => {
+                const selectedItem = itemFilter.value;
+                const filteredData = selectedItem ? data.filter(item => item.text === selectedItem) : data;
+                renderTable(filteredData);
             });
         })
         .catch(error => {
