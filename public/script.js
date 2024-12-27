@@ -11,7 +11,15 @@ document.getElementById('submitBtn').addEventListener('click', () => {
     submitItem(itemName, selectedCategory, cost, notes, calories);
 });
 
-document.getElementById('itemName').addEventListener('input', () => {
+function debounce(func, wait) {
+    let timeout;
+    return function(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+}
+
+const fetchSuggestions = debounce(() => {
     const query = document.getElementById('itemName').value;
     if (query.length >= 3) {
         fetch(`/search?query=${query}`)
@@ -74,7 +82,9 @@ document.getElementById('itemName').addEventListener('input', () => {
         document.getElementById('notesInput').classList.add('hidden');
         document.getElementById('notesInput').disabled = true;
     }
-});
+}, 300);
+
+document.getElementById('itemName').addEventListener('input', fetchSuggestions);
 
 document.querySelectorAll('.categoryBtn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -82,8 +92,22 @@ document.querySelectorAll('.categoryBtn').forEach(btn => {
         btn.classList.add('selected');
         if (btn.dataset.category === 'Food') {
             document.getElementById('caloriesContainer').classList.remove('hidden');
+            document.getElementById('costInput').classList.add('hidden');
+            document.getElementById('costInput').disabled = true;
+            document.getElementById('notesInput').classList.remove('hidden');
+            document.getElementById('notesInput').disabled = false;
+        } else if (btn.dataset.category === 'TO DO') {
+            document.getElementById('caloriesContainer').classList.add('hidden');
+            document.getElementById('costInput').classList.add('hidden');
+            document.getElementById('costInput').disabled = true;
+            document.getElementById('notesInput').classList.remove('hidden');
+            document.getElementById('notesInput').disabled = false;
         } else {
             document.getElementById('caloriesContainer').classList.add('hidden');
+            document.getElementById('costInput').classList.remove('hidden');
+            document.getElementById('costInput').disabled = false;
+            document.getElementById('notesInput').classList.remove('hidden');
+            document.getElementById('notesInput').disabled = false;
         }
     });
 });

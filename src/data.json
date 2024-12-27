@@ -229,5 +229,35 @@
     "month": "December",
     "time": "1:48:34 AM",
     "timestamp": "2024-12-27T06:48:34.843Z"
+  },
+  {
+    "text": "Ice Cream",
+    "category": "Food",
+    "cost": "22.79",
+    "notes": "Charleston",
+    "day": "Friday",
+    "month": "December",
+    "time": "2:33:45 AM",
+    "timestamp": "2024-12-27T07:33:45.163Z"
+  },
+  {
+    "text": "Filter - ",
+    "category": "TO DO",
+    "cost": null,
+    "notes": "fix the filter Reset button code",
+    "day": "Friday",
+    "month": "December",
+    "time": "2:35:59 AM",
+    "timestamp": "2024-12-27T07:35:59.861Z"
+  },
+  {
+    "text": "Daily Task App",
+    "category": "TO DO",
+    "cost": null,
+    "notes": "Create an Admin Page that can reset user passwords and keeps track on how many users exist.",
+    "day": "Friday",
+    "month": "December",
+    "time": "2:41:38 AM",
+    "timestamp": "2024-12-27T07:41:38.758Z"
   }
 ]
