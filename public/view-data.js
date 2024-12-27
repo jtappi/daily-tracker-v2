@@ -11,18 +11,11 @@ document.addEventListener('DOMContentLoaded', () => {
             return response.json();
         })
         .then(data => {
-            const itemFilter = document.getElementById('itemFilter');
-            const categoryFilter = document.getElementById('categoryFilter');
-            const uniqueItems = [...new Set(data.map(item => item.text))];
-            uniqueItems.forEach(item => {
-                const option = document.createElement('option');
-                option.value = item;
-                option.textContent = item;
-                itemFilter.appendChild(option);
-            });
-
             const tbody = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
-            const renderTable = (filteredData) => {
+            const resetBtn = document.getElementById('resetBtn');
+            let filteredData = data;
+
+            const renderTable = () => {
                 tbody.innerHTML = '';
                 filteredData.forEach(item => {
                     const row = tbody.insertRow();
@@ -42,6 +35,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     const timeCell = row.insertCell(6);
                     timeCell.textContent = item.time;
                     timeCell.setAttribute('data-timestamp', item.timestamp);
+
+                    // Add click event to filter rows
+                    Array.from(row.cells).forEach(cell => {
+                        cell.addEventListener('click', () => {
+                            const column = cell.parentElement.parentElement.parentElement.querySelector(`th:nth-child(${cell.cellIndex + 1})`).getAttribute('data-column');
+                            const value = cell.textContent;
+                            filterData(column, value);
+                        });
+                    });
                 });
                 $('[data-toggle="tooltip"]').tooltip({
                     template: '<div class="tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>',
@@ -50,20 +52,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             };
 
-            renderTable(data);
+            renderTable();
 
-            const filterData = () => {
-                const selectedItem = itemFilter.value;
-                const selectedCategory = categoryFilter.value;
-                const filteredData = data.filter(item => {
-                    return (selectedItem ? item.text === selectedItem : true) &&
-                           (selectedCategory ? item.category === selectedCategory : true);
-                });
-                renderTable(filteredData);
+            const filterData = (column, value) => {
+                filteredData = data.filter(item => item[column] === value);
+                renderTable();
+                resetBtn.classList.remove('hidden');
+                resetBtn.textContent = `Reset (Filtered by ${column}: ${value})`;
             };
 
-            itemFilter.addEventListener('change', filterData);
-            categoryFilter.addEventListener('change', filterData);
+            const resetFilter = () => {
+                filteredData = data;
+                renderTable();
+                resetBtn.classList.add('hidden');
+                resetBtn.textContent = 'Reset';
+            };
+
+            resetBtn.addEventListener('click', resetFilter);
         })
         .catch(error => {
             showAlert('danger', 'An error occurred while fetching data.');

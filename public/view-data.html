@@ -9,39 +9,24 @@
 </head>
 <body>
     <div class="container mt-5">
-        <div id="alertContainer" data-testid="alert-container"></div>
+        <div id="alertContainer"></div>
         <div class="d-flex justify-content-end mb-3">
-            <button id="backBtn" class="btn btn-secondary" data-testid="back-btn">Back</button>
+            <button id="backBtn" class="btn btn-secondary">Back</button>
         </div>
         <div class="card p-4">
-            <div class="form-group">
-                <label for="itemFilter">Filter by Item Name:</label>
-                <select id="itemFilter" class="form-control" data-testid="item-filter">
-                    <option value="">All Items</option>
-                </select>
+            <div class="d-flex justify-content-end mb-3">
+                <button id="resetBtn" class="btn btn-warning hidden">Reset</button>
             </div>
-            <div class="form-group">
-                <label for="categoryFilter">Filter by Category:</label>
-                <select id="categoryFilter" class="form-control">
-                    <option value="">All Categories</option>
-                    <option value="Home">Home</option>
-                    <option value="Medication">Medication</option>
-                    <option value="Bill">Bill</option>
-                    <option value="Health">Health</option>
-                    <option value="Pain">Pain</option>
-                    <option value="Food">Food</option>
-                </select>
-            </div>
-            <table id="dataTable" class="table table-striped table-hover" data-testid="data-table">
+            <table id="dataTable" class="table table-striped table-hover">
                 <thead class="thead-dark">
                     <tr>
-                        <th data-column="text" data-testid="column-text">Text</th>
-                        <th data-column="category" data-testid="column-category">Category</th>
-                        <th data-column="cost" data-testid="column-cost">Cost</th>
-                        <th data-column="notes" data-testid="column-notes">Notes</th>
-                        <th data-column="day" data-testid="column-day">Day</th>
-                        <th data-column="month" data-testid="column-month">Month</th>
-                        <th data-column="timestamp" data-testid="column-timestamp">Time</th>
+                        <th data-column="text">Text</th>
+                        <th data-column="category">Category</th>
+                        <th data-column="cost">Cost</th>
+                        <th data-column="notes">Notes</th>
+                        <th data-column="day">Day</th>
+                        <th data-column="month">Month</th>
+                        <th data-column="timestamp">Time</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
