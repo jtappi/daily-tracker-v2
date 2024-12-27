@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/index.js && open http://localhost:3000"
   },
-  "author": "",
+  "author": "jtappi",
   "license": "ISC",
   "dependencies": {
     "crypto": "^1.0.1",
