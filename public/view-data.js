@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then(data => {
             const itemFilter = document.getElementById('itemFilter');
+            const categoryFilter = document.getElementById('categoryFilter');
             const uniqueItems = [...new Set(data.map(item => item.text))];
             uniqueItems.forEach(item => {
                 const option = document.createElement('option');
@@ -51,11 +52,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
             renderTable(data);
 
-            itemFilter.addEventListener('change', () => {
+            const filterData = () => {
                 const selectedItem = itemFilter.value;
-                const filteredData = selectedItem ? data.filter(item => item.text === selectedItem) : data;
+                const selectedCategory = categoryFilter.value;
+                const filteredData = data.filter(item => {
+                    return (selectedItem ? item.text === selectedItem : true) &&
+                           (selectedCategory ? item.category === selectedCategory : true);
+                });
                 renderTable(filteredData);
-            });
+            };
+
+            itemFilter.addEventListener('change', filterData);
+            categoryFilter.addEventListener('change', filterData);
         })
         .catch(error => {
             showAlert('danger', 'An error occurred while fetching data.');
