@@ -7,7 +7,8 @@ document.getElementById('submitBtn').addEventListener('click', () => {
     const selectedCategory = document.querySelector('.categoryBtn.selected')?.dataset.category || null;
     const cost = document.getElementById('costInput').value || null;
     const notes = document.getElementById('notesInput').value || null;
-    submitItem(itemName, selectedCategory, cost, notes);
+    const calories = document.getElementById('caloriesInput').value || null;
+    submitItem(itemName, selectedCategory, cost, notes, calories);
 });
 
 document.getElementById('itemName').addEventListener('input', () => {
@@ -79,6 +80,11 @@ document.querySelectorAll('.categoryBtn').forEach(btn => {
     btn.addEventListener('click', () => {
         document.querySelectorAll('.categoryBtn').forEach(btn => btn.classList.remove('selected'));
         btn.classList.add('selected');
+        if (btn.dataset.category === 'Food') {
+            document.getElementById('caloriesContainer').classList.remove('hidden');
+        } else {
+            document.getElementById('caloriesContainer').classList.add('hidden');
+        }
     });
 });
 
@@ -101,13 +107,13 @@ function showAlert(type, message) {
     }, 5000);
 }
 
-function submitItem(itemName, selectedCategory, cost, notes) {
+function submitItem(itemName, selectedCategory, cost, notes, calories) {
     fetch('/submit', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ text: itemName, category: selectedCategory, cost: cost, notes: notes })
+        body: JSON.stringify({ text: itemName, category: selectedCategory, cost: cost, notes: notes, calories: calories })
     }).then(response => {
         if (response.redirected) {
             console.log('Redirecting to:', response.url);
@@ -128,6 +134,7 @@ function submitItem(itemName, selectedCategory, cost, notes) {
           document.getElementById('costInput').disabled = true;
           document.getElementById('notesInput').classList.add('hidden');
           document.getElementById('notesInput').disabled = true;
+          document.getElementById('caloriesContainer').classList.add('hidden');
           document.querySelectorAll('.categoryBtn').forEach(btn => btn.classList.remove('selected'));
       })
       .catch((error) => {

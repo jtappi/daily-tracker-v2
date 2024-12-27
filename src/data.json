@@ -219,5 +219,15 @@
     "month": "December",
     "time": "1:36:33 AM",
     "timestamp": "2024-12-26T06:36:33.964Z"
+  },
+  {
+    "text": "Burrito",
+    "category": "Food",
+    "cost": null,
+    "notes": null,
+    "day": "Friday",
+    "month": "December",
+    "time": "1:48:34 AM",
+    "timestamp": "2024-12-27T06:48:34.843Z"
   }
 ]
