@@ -4,7 +4,8 @@
   "description": "A project for tracking daily activities",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js && open http://localhost:3000"
+    "start": "node src/index.js",
+    "start-local": "node src/index.js && open http://localhost:3000"
   },
   "author": "jtappi",
   "license": "ISC",
