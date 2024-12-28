@@ -20,7 +20,7 @@ document.getElementById('loginForm').addEventListener('submit', async (event) =>
             alert('Authentication failed');
         }
     } catch (error) {
-        console.error('Error:', error);
+        console.log(`Error: ${error} + ${process.env.PASSWORD} + ${process.env.SECRET_KEY}}`);
         alert('An error occurred');
     }
 });
