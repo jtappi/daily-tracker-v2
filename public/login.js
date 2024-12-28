@@ -13,9 +13,11 @@ document.getElementById('loginForm').addEventListener('submit', async (event) =>
         });
 
         if (response.ok) {
+            console.log(`TRY 1: ${error} + ${process.env.PASSWORD} + ${process.env.SECRET_KEY}}`);
             // Handle successful authentication
             window.location.href = '/index.html';
         } else {
+            console.log(`TRY 2: ${error} + ${process.env.PASSWORD} + ${process.env.SECRET_KEY}}`);
             // Handle authentication failure
             alert('Authentication failed');
         }
