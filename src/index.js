@@ -7,15 +7,21 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const crypto = require('crypto'); // Ensure crypto is correctly imported
 const app = express();
-const PORT = process.env.PORT || 3000;
+
+// Load environment variables
+const port = process.env.PORT || 3000;
+const secretKey = process.env.SECRET_KEY;
+const encryptionKey = process.env.ENCRYPTION_KEY;
+const encryptionIv = process.env.ENCRYPTION_IV;
+const encryptedPassword = process.env.ENCRYPTED_PASSWORD;
 
 // Use Helmet to set various HTTP headers for security
 app.use(helmet());
 
 // Rate limiting to prevent abuse
 const limiter = rateLimit({
-    windowMs: process.env.RATE_LIMIT_WINDOW_MS || 15 * 60 * 1000, // 15 minutes
-    max: process.env.RATE_LIMIT_MAX || 100 // limit each IP to 100 requests per windowMs
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100 // limit each IP to 100 requests per windowMs
 });
 app.use(limiter);
 
@@ -27,8 +33,9 @@ app.use((req, res, next) => {
 
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(session({
-    secret: process.env.SECRET_KEY, // Replace with your secret key
+    secret: secretKey,
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false } // Set to true if using HTTPS
@@ -51,9 +58,8 @@ const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Frida
 
 app.post('/authenticate', (req, res) => {
     const { password } = req.body;
-    const encryptedPassword = process.env.ENCRYPTED_PASSWORD;
-    const key = Buffer.from(process.env.ENCRYPTION_KEY, 'hex');
-    const iv = Buffer.from(process.env.ENCRYPTION_IV, 'hex');
+    const key = Buffer.from(encryptionKey, 'hex');
+    const iv = Buffer.from(encryptionIv, 'hex');
 
     function decrypt(text) {
         const decipher = crypto.createDecipheriv('aes-256-cbc', key, iv);
@@ -148,6 +154,6 @@ app.get('/top-items', (req, res) => {
     });
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}/login.html`);
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
 });
