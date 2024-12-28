@@ -1,6 +1,6 @@
 # My Node.js Project
 
-This is a simple Node.js project that serves as an entry point for building applications.
+This is a simple Node.js project that serves as an entry point for building applications..
 
 ## Project Structure
 
