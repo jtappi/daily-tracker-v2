@@ -167,35 +167,36 @@ function submitItem(itemName, selectedCategory, cost, notes, calories) {
       });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    fetch('/top-items')
-        .then(response => {
-            if (response.redirected) {
-                console.log('Redirecting to:', response.url);
-                document.getElementById('loadingSpinner').classList.remove('hidden');
-                window.location.href = response.url;
-                return;
-            }
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            const topItemsContainer = document.getElementById('topItems');
-            topItemsContainer.innerHTML = '';
-            data.forEach(item => {
-                const button = document.createElement('button');
-                button.classList.add('btn', 'btn-outline-secondary', 'm-1');
-                button.textContent = item.text;
-                button.addEventListener('click', () => {
-                    submitItem(item.text, item.category, item.cost, item.notes);
-                });
-                topItemsContainer.appendChild(button);
-            });
-        })
-        .catch((error) => {
-            showAlert('danger', 'An error occurred while fetching top items.');
-            console.error('Error:', error);
-        });
-});
+async function fetchTopItems() {
+    try {
+        const response = await fetch('/top-items');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const topItems = await response.json();
+        displayTopItems(topItems);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+function displayTopItems(items) {
+    const topItemsContainer = document.getElementById('topItemsContainer');
+    if (!topItemsContainer) {
+        console.error('Element with ID "topItemsContainer" not found');
+        return;
+    }
+    topItemsContainer.innerHTML = '';
+    items.forEach(item => {
+        const itemElement = document.createElement('div');
+        itemElement.className = 'item';
+        itemElement.innerHTML = `
+            <h3>${item.name}</h3>
+            <p>Category: ${item.category}</p>
+        `;
+        topItemsContainer.appendChild(itemElement);
+    });
+}
+
+// Call fetchTopItems when the page loads
+document.addEventListener('DOMContentLoaded', fetchTopItems);

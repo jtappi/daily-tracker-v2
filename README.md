@@ -6,17 +6,20 @@ This app will track your daily activities of all sorts!
 
 ```
 my-nodejs-project
+├── .env
+├── package.json
 ├── src
 │   └── index.js
-├── public
-│   ├── index.html
-│   ├── view-data.html
-│   ├── script.js
-│   ├── view-data.js
-│   ├── styles.css
-│   └── data.json
-├── package.json
-└── README.md
+└── public
+    ├── login.html
+    ├── login.js
+    ├── index.html
+    ├── script.js
+    ├── styles.css
+    ├── favicon.ico
+    ├── jquery-3.5.1.min.js
+    ├── popper.min.js
+    └── bootstrap.min.js
 ```
 
 ## Getting Started
