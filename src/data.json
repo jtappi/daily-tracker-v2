@@ -4,56 +4,64 @@
     "day": "Tuesday",
     "month": "December",
     "time": "11:39:30 AM",
-    "timestamp": "2024-12-24T16:39:30.093Z"
+    "timestamp": "2024-12-24T16:39:30.093Z",
+    "category": "none"
   },
   {
     "text": "Bathroom #2",
     "day": "Tuesday",
     "month": "December",
     "time": "11:40:01 AM",
-    "timestamp": "2024-12-24T16:40:01.814Z"
+    "timestamp": "2024-12-24T16:40:01.814Z",
+    "category": "none"
   },
   {
     "text": "Bathroom #1",
     "day": "Tuesday",
     "month": "December",
     "time": "11:40:04 AM",
-    "timestamp": "2024-12-24T16:40:04.709Z"
+    "timestamp": "2024-12-24T16:40:04.709Z",
+    "category": "none"
   },
   {
     "text": "Famotidine",
     "day": "Tuesday",
     "month": "December",
     "time": "11:44:06 AM",
-    "timestamp": "2024-12-24T16:44:06.934Z"
+    "timestamp": "2024-12-24T16:44:06.934Z",
+    "category": "none"
   },
   {
     "text": "Omeprazole 10mg",
     "day": "Tuesday",
     "month": "December",
     "time": "12:20:15 PM",
-    "timestamp": "2024-12-24T17:20:15.864Z"
+    "timestamp": "2024-12-24T17:20:15.864Z",
+    "category": "none"
   },
   {
     "text": "Famotidine",
     "day": "Tuesday",
     "month": "December",
     "time": "12:25:56 PM",
-    "timestamp": "2024-12-24T17:25:56.051Z"
+    "timestamp": "2024-12-24T17:25:56.051Z",
+    "category": "none"
   },
   {
     "text": "Air Filter",
     "day": "Tuesday",
     "month": "December",
     "time": "12:28:22 PM",
-    "timestamp": "2024-12-24T17:28:22.932Z"
+    "timestamp": "2024-12-24T17:28:22.932Z",
+    "category": "none"
   },
   {
     "text": "testing",
     "day": "Tuesday",
     "month": "December",
     "time": "12:34:28 PM",
-    "timestamp": "2024-12-24T17:34:28.162Z"
+    "timestamp": "2024-12-24T17:34:28.162Z",
+    "category": "none"
   },
   {
     "text": "Famotidine",
@@ -142,7 +150,7 @@
   },
   {
     "text": "Bathroom #2",
-    "category": null,
+    "category": "none",
     "cost": null,
     "notes": null,
     "day": "Tuesday",
@@ -162,7 +170,7 @@
   },
   {
     "text": "Bathroom #1",
-    "category": null,
+    "category": "none",
     "cost": null,
     "notes": null,
     "day": "Tuesday",
@@ -172,7 +180,7 @@
   },
   {
     "text": "Omeprazole 10mg",
-    "category": null,
+    "category": "none",
     "cost": null,
     "notes": null,
     "day": "Tuesday",
@@ -192,7 +200,7 @@
   },
   {
     "text": "Famotidine",
-    "category": null,
+    "category": "none",
     "cost": null,
     "notes": null,
     "day": "Thursday",
