@@ -1,3 +1,10 @@
+# TO DO
+Add the abilit to delete an entry (with a confirmation)
+Hide the login password that is visible under Authenticate
+Add the ability to upload a receipt
+Add the ability to alter the timestamp when submitting a new item
+Update the UI to ensure that I see the EST times
+
 # My Node.js Project
 
 This app will track your daily activities of all sorts!
