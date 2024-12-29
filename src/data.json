@@ -267,5 +267,25 @@
     "month": "December",
     "time": "2:41:38 AM",
     "timestamp": "2024-12-27T07:41:38.758Z"
+  },
+  {
+    "text": "cheerios",
+    "category": null,
+    "cost": null,
+    "notes": null,
+    "day": "Sunday",
+    "month": "December",
+    "time": "12:13:37 AM",
+    "timestamp": "2024-12-29T05:13:37.166Z"
+  },
+  {
+    "text": "Specialty",
+    "category": null,
+    "cost": null,
+    "notes": null,
+    "day": "Sunday",
+    "month": "December",
+    "time": "12:26:17 AM",
+    "timestamp": "2024-12-29T05:26:17.520Z"
   }
 ]

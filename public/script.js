@@ -17,10 +17,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (submitBtn) {
         submitBtn.addEventListener('click', () => {
             const itemName = document.getElementById('itemName').value;
-            const selectedCategory = document.querySelector('.categoryBtn.selected')?.dataset.category || null;
-            const cost = document.getElementById('costInput').value || null;
-            const notes = document.getElementById('notesInput').value || null;
-            const calories = document.getElementById('caloriesInput').value || null;
+            const selectedCategory = document.querySelector('.categoryBtn input:checked')?.parentElement.dataset.category || null;
+            const cost = document.getElementById('costInput')?.value || null;
+            const notes = document.getElementById('notesInput')?.value || null;
+            const calories = document.getElementById('caloriesInput')?.value || null;
             submitItem(itemName, selectedCategory, cost, notes, calories);
         });
     }

@@ -22,8 +22,8 @@ fs.readFile(dataFilePath, 'utf8', (err, data) => {
 
     // Update objects missing a category
     jsonData = jsonData.map(item => {
-        if (!item.category) {
-            item.category = 'none';
+        if (!item.hasOwnProperty('category')) {
+            item.category = null;
         }
         return item;
     });
