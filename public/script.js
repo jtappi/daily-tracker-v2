@@ -201,15 +201,15 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         topItemsContainer.innerHTML = '';
-        items.forEach(item => {
-            const itemElement = document.createElement('div');
-            itemElement.className = 'item';
-            itemElement.innerHTML = `
-                <h3>${item.name}</h3>
-                <p>Category: ${item.category}</p>
-            `;
-            topItemsContainer.appendChild(itemElement);
-        });
+            items.forEach(item => {
+                const button = document.createElement('button');
+                button.classList.add('btn', 'btn-outline-secondary', 'm-1');
+                button.textContent = item.text;
+                button.addEventListener('click', () => {
+                    submitItem(item.text, item.category, item.cost, item.notes);
+                });
+                topItemsContainer.appendChild(button);
+            });
     }
 
     // Call fetchTopItems when the page loads

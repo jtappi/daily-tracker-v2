@@ -307,5 +307,55 @@
     "month": "December",
     "time": "12:40:10 AM",
     "timestamp": "2024-12-29T05:40:10.801Z"
+  },
+  {
+    "text": "Famotidine",
+    "category": "none",
+    "cost": null,
+    "notes": null,
+    "day": "Sunday",
+    "month": "December",
+    "time": "1:17:42 AM",
+    "timestamp": "2024-12-29T06:17:42.461Z"
+  },
+  {
+    "text": "Bathroom #2",
+    "category": "none",
+    "cost": null,
+    "notes": null,
+    "day": "Sunday",
+    "month": "December",
+    "time": "1:17:44 AM",
+    "timestamp": "2024-12-29T06:17:44.164Z"
+  },
+  {
+    "text": "PRV",
+    "category": "Home",
+    "cost": "681.95",
+    "notes": "CJ from My Georgia Plumber installed a new PRV, water pressure regulator, and I got the 1 year plan where they'll come for free.",
+    "day": "Sunday",
+    "month": "December",
+    "time": "1:17:45 AM",
+    "timestamp": "2024-12-29T06:17:45.026Z"
+  },
+  {
+    "text": "Bathroom #1",
+    "category": "none",
+    "cost": null,
+    "notes": null,
+    "day": "Sunday",
+    "month": "December",
+    "time": "1:17:45 AM",
+    "timestamp": "2024-12-29T06:17:45.782Z"
+  },
+  {
+    "text": "Omeprazole 10mg",
+    "category": "none",
+    "cost": null,
+    "notes": null,
+    "day": "Sunday",
+    "month": "December",
+    "time": "1:17:46 AM",
+    "timestamp": "2024-12-29T06:17:46.517Z"
   }
 ]
