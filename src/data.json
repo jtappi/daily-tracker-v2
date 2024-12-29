@@ -287,5 +287,25 @@
     "month": "December",
     "time": "12:26:17 AM",
     "timestamp": "2024-12-29T05:26:17.520Z"
+  },
+  {
+    "text": "Famotidine",
+    "category": "Food",
+    "cost": null,
+    "notes": null,
+    "day": "Sunday",
+    "month": "December",
+    "time": "12:32:45 AM",
+    "timestamp": "2024-12-29T05:32:45.682Z"
+  },
+  {
+    "text": "Knee",
+    "category": "Pain",
+    "cost": null,
+    "notes": "swollen and hard",
+    "day": "Sunday",
+    "month": "December",
+    "time": "12:40:10 AM",
+    "timestamp": "2024-12-29T05:40:10.801Z"
   }
 ]

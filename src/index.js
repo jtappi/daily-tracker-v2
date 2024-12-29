@@ -140,16 +140,31 @@ app.get('/data', (req, res) => {
 
 app.get('/top-items', (req, res) => {
     fs.readFile(path.join(__dirname, 'data.json'), (err, data) => {
-        if (err) throw err;
+        if (err) {
+            console.error('Error reading data.json:', err);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
         const json = JSON.parse(data);
+
+        // Count occurrences of each text value
         const itemCounts = json.reduce((acc, item) => {
-            acc[item.text] = (acc[item.text] || 0) + 1;
+            if (item.text) {
+                acc[item.text] = (acc[item.text] || 0) + 1;
+            }
             return acc;
         }, {});
+
+        // Get the top 5 items based on their counts
         const topItems = Object.keys(itemCounts)
             .sort((a, b) => itemCounts[b] - itemCounts[a])
             .slice(0, 5)
-            .map(text => json.find(item => item.text === text));
+            .map(text => {
+                const item = json.find(item => item.text === text);
+                return item ? { ...item, category: item.category || 'none' } : undefined;
+            })
+            .filter(item => item !== undefined); // Filter out undefined values
+
+        // Send the top items as a JSON response
         res.json(topItems);
     });
 });
