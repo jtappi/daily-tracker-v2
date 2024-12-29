@@ -5,7 +5,7 @@ This app will track your daily activities of all sorts!
 ## Project Structure
 
 ```
-my-nodejs-project
+/path/to/your/project
 ├── .env
 ├── package.json
 ├── src
