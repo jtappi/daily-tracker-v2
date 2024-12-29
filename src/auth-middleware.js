@@ -1,10 +1,11 @@
-const crypto = require('crypto'); // Ensure crypto is correctly imported
+const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
+require('dotenv').config(); // Ensure environment variables are loaded
 
 const algorithm = 'aes-256-cbc';
 const encryptedPassword = JSON.parse(fs.readFileSync(path.join(__dirname, 'encrypted-password.json')));
-const key = Buffer.from(JSON.parse(fs.readFileSync(path.join(__dirname, 'key.json'))).key, 'hex');
+const key = Buffer.from(process.env.ENCRYPTION_KEY, 'hex'); // Use environment variable for the key
 const iv = Buffer.from(encryptedPassword.iv, 'hex');
 
 function decrypt(text) {
