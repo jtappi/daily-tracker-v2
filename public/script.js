@@ -174,28 +174,9 @@ async function fetchTopItems() {
             throw new Error('Network response was not ok');
         }
         const topItems = await response.json();
-        displayTopItems(topItems);
     } catch (error) {
         console.error('Error:', error);
     }
-}
-
-function displayTopItems(items) {
-    const topItemsContainer = document.getElementById('topItemsContainer');
-    if (!topItemsContainer) {
-        console.error('Element with ID "topItemsContainer" not found');
-        return;
-    }
-    topItemsContainer.innerHTML = '';
-    items.forEach(item => {
-        const itemElement = document.createElement('div');
-        itemElement.className = 'item';
-        itemElement.innerHTML = `
-            <h3>${item.name}</h3>
-            <p>Category: ${item.category}</p>
-        `;
-        topItemsContainer.appendChild(itemElement);
-    });
 }
 
 // Call fetchTopItems when the page loads
