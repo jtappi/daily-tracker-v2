@@ -1,361 +1,62 @@
 [
   {
     "text": "Famotidine",
-    "day": "Tuesday",
-    "month": "December",
-    "time": "11:39:30 AM",
-    "timestamp": "2024-12-24T16:39:30.093Z",
-    "category": "none"
-  },
-  {
-    "text": "Bathroom #2",
-    "day": "Tuesday",
-    "month": "December",
-    "time": "11:40:01 AM",
-    "timestamp": "2024-12-24T16:40:01.814Z",
-    "category": "none"
-  },
-  {
-    "text": "Bathroom #1",
-    "day": "Tuesday",
-    "month": "December",
-    "time": "11:40:04 AM",
-    "timestamp": "2024-12-24T16:40:04.709Z",
-    "category": "none"
-  },
-  {
-    "text": "Famotidine",
-    "day": "Tuesday",
-    "month": "December",
-    "time": "11:44:06 AM",
-    "timestamp": "2024-12-24T16:44:06.934Z",
-    "category": "none"
-  },
-  {
-    "text": "Omeprazole 10mg",
-    "day": "Tuesday",
-    "month": "December",
-    "time": "12:20:15 PM",
-    "timestamp": "2024-12-24T17:20:15.864Z",
-    "category": "none"
-  },
-  {
-    "text": "Famotidine",
-    "day": "Tuesday",
-    "month": "December",
-    "time": "12:25:56 PM",
-    "timestamp": "2024-12-24T17:25:56.051Z",
-    "category": "none"
-  },
-  {
-    "text": "Air Filter",
-    "day": "Tuesday",
-    "month": "December",
-    "time": "12:28:22 PM",
-    "timestamp": "2024-12-24T17:28:22.932Z",
-    "category": "none"
-  },
-  {
-    "text": "testing",
-    "day": "Tuesday",
-    "month": "December",
-    "time": "12:34:28 PM",
-    "timestamp": "2024-12-24T17:34:28.162Z",
-    "category": "none"
-  },
-  {
-    "text": "Famotidine",
-    "category": "Medication",
-    "day": "Tuesday",
-    "month": "December",
-    "time": "5:07:38 PM",
-    "timestamp": "2024-12-24T22:07:38.706Z"
-  },
-  {
-    "text": "Bathroom #2",
-    "category": "Health",
-    "day": "Tuesday",
-    "month": "December",
-    "time": "5:07:49 PM",
-    "timestamp": "2024-12-24T22:07:49.972Z"
-  },
-  {
-    "text": "Famotidine",
-    "category": "Medication",
-    "cost": null,
-    "day": "Tuesday",
-    "month": "December",
-    "time": "5:22:58 PM",
-    "timestamp": "2024-12-24T22:22:58.173Z"
-  },
-  {
-    "text": "Dayquil",
     "category": "Medication",
     "cost": null,
     "notes": null,
-    "day": "Tuesday",
+    "day": "Sunday",
     "month": "December",
-    "time": "5:29:52 PM",
-    "timestamp": "2024-12-24T22:29:52.182Z"
+    "time": "1:44:50 AM",
+    "timestamp": "2024-12-29T06:44:50.691Z"
   },
   {
-    "text": "PRV",
-    "category": "Home",
-    "cost": "681.95",
-    "notes": "CJ from My Georgia Plumber installed a new PRV, water pressure regulator, and I got the 1 year plan where they'll come for free.",
-    "day": "Tuesday",
-    "month": "December",
-    "time": "5:32:07 PM",
-    "timestamp": "2024-12-24T22:32:07.667Z"
-  },
-  {
-    "text": "tylenol",
-    "category": "Medication",
-    "cost": null,
-    "notes": "cold and pain",
-    "day": "Tuesday",
-    "month": "December",
-    "time": "10:26:48 PM",
-    "timestamp": "2024-12-25T03:26:48.217Z"
-  },
-  {
-    "text": "Famotidine",
+    "text": "Omeprazole 10MG",
     "category": "Medication",
     "cost": null,
     "notes": null,
-    "day": "Tuesday",
+    "day": "Sunday",
     "month": "December",
-    "time": "10:36:20 PM",
-    "timestamp": "2024-12-25T03:36:20.832Z"
+    "time": "1:45:13 AM",
+    "timestamp": "2024-12-29T06:45:13.479Z"
   },
   {
-    "text": "PRV",
-    "category": "Home",
-    "cost": null,
-    "notes": "no notes on this one",
-    "day": "Tuesday",
-    "month": "December",
-    "time": "10:56:01 PM",
-    "timestamp": "2024-12-25T03:56:01.816Z"
-  },
-  {
-    "text": "TLC",
-    "category": "Medication",
-    "cost": null,
-    "notes": "a lil sump",
-    "day": "Tuesday",
-    "month": "December",
-    "time": "11:00:27 PM",
-    "timestamp": "2024-12-25T04:00:27.956Z"
-  },
-  {
-    "text": "Bathroom #2",
-    "category": "none",
-    "cost": null,
-    "notes": null,
-    "day": "Tuesday",
-    "month": "December",
-    "time": "11:06:02 PM",
-    "timestamp": "2024-12-25T04:06:02.951Z"
-  },
-  {
-    "text": "PRV",
-    "category": "Home",
-    "cost": "681.95",
-    "notes": "CJ from My Georgia Plumber installed a new PRV, water pressure regulator, and I got the 1 year plan where they'll come for free.",
-    "day": "Tuesday",
-    "month": "December",
-    "time": "11:44:11 PM",
-    "timestamp": "2024-12-25T04:44:11.273Z"
-  },
-  {
-    "text": "Bathroom #1",
-    "category": "none",
-    "cost": null,
-    "notes": null,
-    "day": "Tuesday",
-    "month": "December",
-    "time": "11:44:12 PM",
-    "timestamp": "2024-12-25T04:44:12.958Z"
-  },
-  {
-    "text": "Omeprazole 10mg",
-    "category": "none",
-    "cost": null,
-    "notes": null,
-    "day": "Tuesday",
-    "month": "December",
-    "time": "11:44:15 PM",
-    "timestamp": "2024-12-25T04:44:15.276Z"
-  },
-  {
-    "text": "Prednisone",
-    "category": "Medication",
-    "cost": null,
-    "notes": "Day 4",
-    "day": "Wednesday",
-    "month": "December",
-    "time": "4:05:28 PM",
-    "timestamp": "2024-12-25T21:05:28.636Z"
-  },
-  {
-    "text": "Famotidine",
-    "category": "none",
-    "cost": null,
-    "notes": null,
-    "day": "Thursday",
-    "month": "December",
-    "time": "1:29:58 AM",
-    "timestamp": "2024-12-26T06:29:58.391Z"
-  },
-  {
-    "text": "Water",
-    "category": "Health",
-    "cost": null,
-    "notes": "1 Glass",
-    "day": "Thursday",
-    "month": "December",
-    "time": "1:32:09 AM",
-    "timestamp": "2024-12-26T06:32:09.559Z"
-  },
-  {
-    "text": "Heartburn",
-    "category": "Pain",
-    "cost": null,
-    "notes": null,
-    "day": "Thursday",
-    "month": "December",
-    "time": "1:36:33 AM",
-    "timestamp": "2024-12-26T06:36:33.964Z"
-  },
-  {
-    "text": "Burrito",
+    "text": "Spaghetti with Pasta Sauce",
     "category": "Food",
     "cost": null,
-    "notes": null,
-    "day": "Friday",
+    "notes": "Included salad and bread",
+    "day": "Sunday",
     "month": "December",
-    "time": "1:48:34 AM",
-    "timestamp": "2024-12-27T06:48:34.843Z"
+    "time": "1:46:13 AM",
+    "timestamp": "2024-12-29T06:46:13.223Z"
   },
   {
-    "text": "Ice Cream",
+    "text": "Spaghetti with Pasta Sauce",
     "category": "Food",
-    "cost": "22.79",
-    "notes": "Charleston",
-    "day": "Friday",
-    "month": "December",
-    "time": "2:33:45 AM",
-    "timestamp": "2024-12-27T07:33:45.163Z"
-  },
-  {
-    "text": "Filter - ",
-    "category": "TO DO",
     "cost": null,
-    "notes": "fix the filter Reset button code",
-    "day": "Friday",
+    "notes": "Included salad and bread",
+    "day": "Sunday",
     "month": "December",
-    "time": "2:35:59 AM",
-    "timestamp": "2024-12-27T07:35:59.861Z"
+    "time": "1:46:24 AM",
+    "timestamp": "2024-12-29T06:46:24.352Z"
   },
   {
-    "text": "Daily Task App",
-    "category": "TO DO",
-    "cost": null,
-    "notes": "Create an Admin Page that can reset user passwords and keeps track on how many users exist.",
-    "day": "Friday",
-    "month": "December",
-    "time": "2:41:38 AM",
-    "timestamp": "2024-12-27T07:41:38.758Z"
-  },
-  {
-    "text": "cheerios",
-    "category": null,
+    "text": "Omeprazole 10MG",
+    "category": "Medication",
     "cost": null,
     "notes": null,
     "day": "Sunday",
     "month": "December",
-    "time": "12:13:37 AM",
-    "timestamp": "2024-12-29T05:13:37.166Z"
-  },
-  {
-    "text": "Specialty",
-    "category": null,
-    "cost": null,
-    "notes": null,
-    "day": "Sunday",
-    "month": "December",
-    "time": "12:26:17 AM",
-    "timestamp": "2024-12-29T05:26:17.520Z"
+    "time": "1:46:25 AM",
+    "timestamp": "2024-12-29T06:46:25.201Z"
   },
   {
     "text": "Famotidine",
-    "category": "Food",
+    "category": "Medication",
     "cost": null,
     "notes": null,
     "day": "Sunday",
     "month": "December",
-    "time": "12:32:45 AM",
-    "timestamp": "2024-12-29T05:32:45.682Z"
-  },
-  {
-    "text": "Knee",
-    "category": "Pain",
-    "cost": null,
-    "notes": "swollen and hard",
-    "day": "Sunday",
-    "month": "December",
-    "time": "12:40:10 AM",
-    "timestamp": "2024-12-29T05:40:10.801Z"
-  },
-  {
-    "text": "Famotidine",
-    "category": "none",
-    "cost": null,
-    "notes": null,
-    "day": "Sunday",
-    "month": "December",
-    "time": "1:17:42 AM",
-    "timestamp": "2024-12-29T06:17:42.461Z"
-  },
-  {
-    "text": "Bathroom #2",
-    "category": "none",
-    "cost": null,
-    "notes": null,
-    "day": "Sunday",
-    "month": "December",
-    "time": "1:17:44 AM",
-    "timestamp": "2024-12-29T06:17:44.164Z"
-  },
-  {
-    "text": "PRV",
-    "category": "Home",
-    "cost": "681.95",
-    "notes": "CJ from My Georgia Plumber installed a new PRV, water pressure regulator, and I got the 1 year plan where they'll come for free.",
-    "day": "Sunday",
-    "month": "December",
-    "time": "1:17:45 AM",
-    "timestamp": "2024-12-29T06:17:45.026Z"
-  },
-  {
-    "text": "Bathroom #1",
-    "category": "none",
-    "cost": null,
-    "notes": null,
-    "day": "Sunday",
-    "month": "December",
-    "time": "1:17:45 AM",
-    "timestamp": "2024-12-29T06:17:45.782Z"
-  },
-  {
-    "text": "Omeprazole 10mg",
-    "category": "none",
-    "cost": null,
-    "notes": null,
-    "day": "Sunday",
-    "month": "December",
-    "time": "1:17:46 AM",
-    "timestamp": "2024-12-29T06:17:46.517Z"
+    "time": "1:46:25 AM",
+    "timestamp": "2024-12-29T06:46:25.983Z"
   }
 ]

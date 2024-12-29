@@ -8,6 +8,14 @@ const rateLimit = require('express-rate-limit');
 const crypto = require('crypto'); // Ensure crypto is correctly imported
 const app = express();
 
+// Path to the data.json file
+const dataFilePath = path.join(__dirname, 'data.json');
+
+// Check if data.json exists, if not create it with an empty array
+if (!fs.existsSync(dataFilePath)) {
+    fs.writeFileSync(dataFilePath, JSON.stringify([]), 'utf8');
+}
+
 // Load environment variables
 const port = process.env.PORT || 3000;
 const secretKey = process.env.SECRET_KEY;
