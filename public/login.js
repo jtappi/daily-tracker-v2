@@ -1,27 +1,33 @@
-document.getElementById('loginForm').addEventListener('submit', async (event) => {
-    event.preventDefault();
+document.addEventListener('DOMContentLoaded', () => {
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const password = document.getElementById('password').value;
 
-    const password = document.getElementById('password').value;
+            try {
+                const response = await fetch('/authenticate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ password })
+                });
 
-    try {
-        const response = await fetch('/authenticate', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ password })
+                const result = await response.json();
+
+                if (result.success) {
+                    // Handle successful authentication
+                    window.location.href = '/index.html';
+                } else {
+                    // Handle authentication failure
+                    showAlert('danger', 'Authentication failed. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showAlert('danger', 'An error occurred. Please try again.');
+            }
         });
-
-        if (response.ok) {
-            // Handle successful authentication
-            window.location.href = '/index.html';
-        } else {
-            // Handle authentication failure
-            alert('Authentication failed');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('An error occurred');
     }
 });
 
@@ -37,9 +43,4 @@ function showAlert(type, message) {
         </button>
     `;
     alertContainer.appendChild(alert);
-    setTimeout(() => {
-        alert.classList.remove('show');
-        alert.classList.add('hide');
-        setTimeout(() => alert.remove(), 500);
-    }, 5000);
 }
