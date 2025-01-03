@@ -11,3 +11,4 @@ npm-debug.log*
 
 # Other files
 .DS_Store
+src/data.json
