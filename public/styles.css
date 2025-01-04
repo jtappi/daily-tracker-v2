@@ -78,3 +78,13 @@
     transform: translate(-50%, -50%);
     z-index: 1050;
 }
+
+.limerick {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.monkey-video {
+    max-width: 100%;
+    height: auto;
+}
