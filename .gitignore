@@ -11,4 +11,6 @@ npm-debug.log*
 
 # Other files
 .DS_Store
+
+# Ignore data.json file
 src/data.json
