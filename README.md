@@ -4,6 +4,8 @@ Hide the login password that is visible under Authenticate
 Add the ability to upload a receipt
 Add the ability to alter the timestamp when submitting a new item
 Update the UI to ensure that I see the EST times
+Ability to alter the whole entry
+Document DB instead of JSON
 
 # My Node.js Project
 
