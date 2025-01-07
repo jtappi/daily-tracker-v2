@@ -106,14 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.classList.add('selected');
             if (btn.dataset.category === 'Food') {
                 document.getElementById('caloriesContainer').classList.remove('hidden');
-                document.getElementById('costInput').classList.add('hidden');
-                document.getElementById('costInput').disabled = true;
-                document.getElementById('notesInput').classList.remove('hidden');
-                document.getElementById('notesInput').disabled = false;
-            } else if (btn.dataset.category === 'TO DO') {
-                document.getElementById('caloriesContainer').classList.add('hidden');
-                document.getElementById('costInput').classList.add('hidden');
-                document.getElementById('costInput').disabled = true;
+                document.getElementById('costInput').classList.remove('hidden');
+                document.getElementById('costInput').disabled = false;
                 document.getElementById('notesInput').classList.remove('hidden');
                 document.getElementById('notesInput').disabled = false;
             } else {

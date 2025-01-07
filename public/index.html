@@ -45,6 +45,21 @@
                         <label class="btn btn-outline-primary categoryBtn" data-category="Pain" data-testid="category-pain">
                             <input type="radio" name="category" autocomplete="off"> Pain
                         </label>
+                        <label class="btn btn-outline-primary categoryBtn" data-category="Food" data-testid="category-food">
+                            <input type="radio" name="category" autocomplete="off"> Food
+                        </label>
+                        <label class="btn btn-outline-primary categoryBtn" data-category="TO DO" data-testid="category-todo">
+                            <input type="radio" name="category" autocomplete="off"> To Do
+                        </label>
+                    </div>
+                    <div class="form-group mt-3">
+                        <input type="text" id="costInput" class="form-control hidden" placeholder="$" disabled data-testid="cost-input">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="notesInput" class="form-control hidden" placeholder="Notes" disabled data-testid="notes-input">
+                    </div>
+                    <div class="form-group hidden" id="caloriesContainer">
+                        <input type="text" id="caloriesInput" class="form-control" placeholder="Calories" data-testid="calories-input">
                     </div>
                     <div class="mt-auto">
                         <button id="submitBtn" class="btn btn-primary btn-block mt-3">Submit</button>
