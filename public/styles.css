@@ -1,5 +1,5 @@
 .container {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
     position: relative;
@@ -50,9 +50,11 @@
 
 .card {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: #fff;
 }
-
 .card-title {
     margin-bottom: 20px;
 }
@@ -87,4 +89,28 @@
 .monkey-video {
     max-width: 100%;
     height: auto;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+#topItems {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: #fff;
+}
+
+#topItems .item {
+    width: 100%;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
 }
