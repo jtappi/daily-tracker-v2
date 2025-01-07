@@ -86,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 .catch((error) => {
                     showAlert('danger', 'An error occurred while fetching suggestions.');
                     console.error('Error:', error);
+                    window.location.href = '/login.html';
                 });
         } else {
             document.getElementById('suggestions').innerHTML = '';
@@ -120,8 +121,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    const alertContainer = document.getElementById('alertContainer');
+
     function showAlert(type, message) {
-        const alertContainer = document.getElementById('alertContainer');
         const alert = document.createElement('div');
         alert.className = `alert alert-${type} alert-dismissible fade show`;
         alert.role = 'alert';
@@ -129,8 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ${message}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
-            </button>
-        `;
+            `;
         alertContainer.appendChild(alert);
         setTimeout(() => {
             alert.classList.remove('show');
@@ -147,45 +148,46 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             body: JSON.stringify({ text: itemName, category: selectedCategory, cost: cost, notes: notes, calories: calories })
         }).then(response => {
-            if (response.redirected) {
-                console.log('Redirecting to:', response.url);
-                document.getElementById('loadingSpinner').classList.remove('hidden');
-                window.location.href = response.url;
+            if (response.status > 400) {
+                window.location.href = '/login.html';
                 return;
             }
             return response.json();
         })
-          .then(data => {
-              if (data.message) {
-                  showAlert('success', data.message);
-              }
-              document.getElementById('itemName').value = '';
-              document.getElementById('suggestions').innerHTML = '';
-              document.getElementById('suggestions').classList.remove('show');
-              document.getElementById('categoryButtons').classList.add('hidden');
-              document.getElementById('costInput').classList.add('hidden');
-              document.getElementById('costInput').disabled = true;
-              document.getElementById('notesInput').classList.add('hidden');
-              document.getElementById('notesInput').disabled = true;
-              document.getElementById('caloriesContainer').classList.add('hidden');
-              document.querySelectorAll('.categoryBtn').forEach(btn => btn.classList.remove('selected'));
-          })
-          .catch((error) => {
-              showAlert('danger', 'An error occurred while submitting the data.');
-              console.error('Error:', error);
-          });
+        .then(data => {
+            if (data.message) {
+                showAlert('success', data.message);
+            }
+            document.getElementById('itemName').value = '';
+            document.getElementById('suggestions').innerHTML = '';
+            document.getElementById('suggestions').classList.remove('show');
+            document.getElementById('categoryButtons').classList.add('hidden');
+            document.getElementById('costInput').classList.add('hidden');
+            document.getElementById('costInput').disabled = true;
+            document.getElementById('notesInput').classList.add('hidden');
+            document.getElementById('notesInput').disabled = true;
+            document.getElementById('caloriesContainer').classList.add('hidden');
+            document.querySelectorAll('.categoryBtn').forEach(btn => btn.classList.remove('selected'));
+        })
+        .catch((error) => {
+            showAlert('danger', 'An error occurred while submitting the data.');
+            console.error('Error:', error);
+            window.location.href = '/login.html';
+        });
     }
 
     async function fetchTopItems() {
         try {
             const response = await fetch('/top-items');
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+            if (response.status > 400) {
+                window.location.href = '/login.html';
+                return;
             }
             const topItems = await response.json();
             displayTopItems(topItems);
         } catch (error) {
             console.error('Error:', error);
+            window.location.href = '/login.html';
         }
     }
 
@@ -196,15 +198,15 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         topItemsContainer.innerHTML = '';
-            items.forEach(item => {
-                const button = document.createElement('button');
-                button.classList.add('btn', 'btn-outline-secondary', 'm-1');
-                button.textContent = item.text;
-                button.addEventListener('click', () => {
-                    submitItem(item.text, item.category, item.cost, item.notes);
-                });
-                topItemsContainer.appendChild(button);
+        items.forEach(item => {
+            const button = document.createElement('button');
+            button.classList.add('btn', 'btn-outline-secondary', 'm-1');
+            button.textContent = item.text;
+            button.addEventListener('click', () => {
+                submitItem(item.text, item.category, item.cost, item.notes);
             });
+            topItemsContainer.appendChild(button);
+        });
     }
 
     // Call fetchTopItems when the page loads
