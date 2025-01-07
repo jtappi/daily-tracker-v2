@@ -200,5 +200,5 @@ app.get('/index.html', (req, res) => {
 
 // Start server
 app.listen(port, () => {
-    console.log(`Server is running on port https://localhost:${port}`);
+    console.log(`Server is running on port http://localhost:${port}`);
 });
