@@ -161,6 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
               }
               document.getElementById('itemName').value = '';
               document.getElementById('suggestions').innerHTML = '';
+              document.getElementById('suggestions').classList.remove('show');
               document.getElementById('categoryButtons').classList.add('hidden');
               document.getElementById('costInput').classList.add('hidden');
               document.getElementById('costInput').disabled = true;
