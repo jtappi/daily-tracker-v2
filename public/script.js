@@ -211,4 +211,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Call fetchTopItems when the page loads
     fetchTopItems();
+
+    // Show category buttons when item name is typed
+    document.getElementById('itemName').addEventListener('input', () => {
+        const categoryButtons = document.getElementById('categoryButtons');
+        if (document.getElementById('itemName').value.length > 0) {
+            categoryButtons.classList.remove('hidden');
+        } else {
+            categoryButtons.classList.add('hidden');
+        }
+    });
 });
