@@ -164,6 +164,37 @@ app.get('/top-items', (req, res) => {
     });
 });
 
+// Update data route
+app.put('/data/:id', (req, res) => {
+    const { id } = req.params;
+    const updatedItem = req.body;
+
+    fs.readFile(dataFilePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading data file:', err);
+            return res.status(500).json({ success: false, message: 'Internal server error' });
+        }
+
+        let jsonData = JSON.parse(data);
+        const index = jsonData.findIndex(item => item.id === parseInt(id));
+
+        if (index === -1) {
+            return res.status(404).json({ success: false, message: 'Item not found' });
+        }
+
+        jsonData[index] = { ...jsonData[index], ...updatedItem };
+
+        fs.writeFile(dataFilePath, JSON.stringify(jsonData, null, 2), 'utf8', (err) => {
+            if (err) {
+                console.error('Error writing data file:', err);
+                return res.status(500).json({ success: false, message: 'Internal server error' });
+            }
+
+            res.json({ success: true, message: 'Item updated successfully' });
+        });
+    });
+});
+
 // Default route to redirect to login if not authenticated
 app.get('/', (req, res) => {
     if (req.session.authenticated) {

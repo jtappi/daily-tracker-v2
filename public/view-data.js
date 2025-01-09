@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const renderTable = () => {
                 tbody.innerHTML = '';
-                filteredData.forEach(item => {
+                filteredData.forEach((item, index) => {
                     const row = tbody.insertRow();
                     row.insertCell(0).textContent = item.text;
                     row.insertCell(1).textContent = item.category || '';
@@ -33,16 +33,26 @@ document.addEventListener('DOMContentLoaded', () => {
                     row.insertCell(4).textContent = item.day;
                     row.insertCell(5).textContent = item.month;
                     const timeCell = row.insertCell(6);
-                    timeCell.textContent = item.time;
-                    timeCell.setAttribute('data-timestamp', item.timestamp);
+                    timeCell.textContent = item.timestamp;
 
-                    // Add click event to filter rows
-                    Array.from(row.cells).forEach(cell => {
-                        cell.addEventListener('click', () => {
-                            const column = cell.parentElement.parentElement.parentElement.querySelector(`th:nth-child(${cell.cellIndex + 1})`).getAttribute('data-column');
-                            const value = cell.textContent;
-                            filterData(column, value);
-                        });
+                    // Add actions column
+                    const actionsCell = row.insertCell(7);
+                    actionsCell.innerHTML = `
+                        <i class="fas fa-edit edit-icon" data-index="${index}"></i>
+                        <i class="fas fa-trash-alt delete-icon" data-index="${index}"></i>
+                        <i class="fas fa-save save-icon d-none" data-index="${index}"></i>
+                        <i class="fas fa-undo undo-icon d-none" data-index="${index}"></i>
+                    `;
+
+                    // Add click event to filter rows, excluding the Actions column
+                    Array.from(row.cells).forEach((cell, cellIndex) => {
+                        if (cellIndex < row.cells.length - 1) { // Exclude the last cell (Actions column)
+                            cell.addEventListener('click', () => {
+                                const column = cell.parentElement.parentElement.parentElement.querySelector(`th:nth-child(${cell.cellIndex + 1})`).getAttribute('data-column');
+                                const value = cell.textContent;
+                                filterData(column, value);
+                            });
+                        }
                     });
                 });
                 $('[data-toggle="tooltip"]').tooltip({
@@ -53,6 +63,109 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             renderTable();
+
+            tbody.addEventListener('click', (event) => {
+                const target = event.target;
+                const index = target.getAttribute('data-index');
+                if (target.classList.contains('edit-icon')) {
+                    editRow(index);
+                } else if (target.classList.contains('save-icon')) {
+                    saveRow(index);
+                } else if (target.classList.contains('undo-icon')) {
+                    undoRow(index);
+                } else if (target.classList.contains('delete-icon')) {
+                    confirmDelete(index);
+                }
+            });
+
+            function editRow(index) {
+                const row = tbody.rows[index];
+                for (let i = 0; i < row.cells.length - 1; i++) {
+                    row.cells[i].contentEditable = 'true';
+                }
+                toggleIcons(row, true);
+            }
+
+            function saveRow(index) {
+                const row = tbody.rows[index];
+                const updatedItem = {
+                    id: filteredData[index].id, // Ensure the id is included
+                    text: row.cells[0].innerText,
+                    category: row.cells[1].innerText,
+                    cost: row.cells[2].innerText,
+                    notes: row.cells[3].innerText,
+                    day: row.cells[4].innerText,
+                    month: row.cells[5].innerText,
+                    timestamp: row.cells[6].innerText
+                };
+
+                fetch(`/data/${updatedItem.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(updatedItem)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(result => {
+                    if (result.success) {
+                        filteredData[index] = updatedItem;
+                        for (let i = 0; i < row.cells.length - 1; i++) {
+                            row.cells[i].contentEditable = 'false';
+                        }
+                        toggleIcons(row, false);
+                        showAlert('success', 'Item updated successfully');
+                    } else {
+                        showAlert('danger', 'Failed to update item');
+                    }
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                    showAlert('danger', 'Failed to update item');
+                });
+            }
+
+            function undoRow(index) {
+                const row = tbody.rows[index];
+                row.cells[0].innerText = filteredData[index].text;
+                row.cells[1].innerText = filteredData[index].category;
+                row.cells[2].innerText = filteredData[index].cost;
+                row.cells[3].innerText = filteredData[index].notes;
+                row.cells[4].innerText = filteredData[index].day;
+                row.cells[5].innerText = filteredData[index].month;
+                row.cells[6].innerText = filteredData[index].timestamp;
+                for (let i = 0; i < row.cells.length - 1; i++) {
+                    row.cells[i].contentEditable = 'false';
+                }
+                toggleIcons(row, false);
+            }
+
+            function toggleIcons(row, isEditing) {
+                row.querySelector('.edit-icon').classList.toggle('d-none', isEditing);
+                row.querySelector('.delete-icon').classList.toggle('d-none', isEditing);
+                row.querySelector('.save-icon').classList.toggle('d-none', !isEditing);
+                row.querySelector('.undo-icon').classList.toggle('d-none', !isEditing);
+            }
+
+            function confirmDelete(index) {
+                $('#deleteModal').modal('show');
+                document.getElementById('confirmDelete').onclick = () => {
+                    deleteRow(index);
+                    $('#deleteModal').modal('hide');
+                };
+            }
+
+            function deleteRow(index) {
+                filteredData.splice(index, 1);
+                renderTable();
+                // Delete the data from the server
+                // Example: deleteData(filteredData[index].id);
+            }
 
             const filterData = (column, value) => {
                 filteredData = data.filter(item => item[column] === value);
