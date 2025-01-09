@@ -62,9 +62,6 @@ app.use((req, res, next) => {
     }
 });
 
-const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
 // Authentication route
 app.post('/authenticate', (req, res) => {
     const { password } = req.body;
@@ -94,8 +91,8 @@ app.post('/submit', (req, res) => {
         category: category || null,
         cost: cost || null,
         notes: notes || null,
-        day: dayNames[now.getDay()],
-        month: monthNames[now.getMonth()],
+        day: now.toLocaleString('default', { weekday: 'long' }),
+        month: now.toLocaleString('default', { month: 'long' }),
         time: now.toLocaleTimeString(),
         timestamp
     };
