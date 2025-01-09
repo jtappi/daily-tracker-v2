@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             const tbody = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
             const resetBtn = document.getElementById('resetBtn');
+            const overlay = document.getElementById('overlay');
             let filteredData = data;
 
             const renderTable = () => {
@@ -83,11 +84,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
             function editRow(index) {
                 const row = tbody.rows[index];
+                row.classList.add('editing-row');
                 for (let i = 0; i < row.cells.length - 1; i++) {
                     row.cells[i].contentEditable = 'true';
                     row.cells[i].removeEventListener('click', filterHandler); // Remove filter functionality
                 }
                 toggleIcons(row, true);
+                Array.from(tbody.rows).forEach((r, i) => {
+                    if (i !== index) {
+                        r.classList.add('blur');
+                    }
+                });
+                overlay.classList.remove('d-none');
             }
 
             function saveRow(index) {
@@ -124,6 +132,11 @@ document.addEventListener('DOMContentLoaded', () => {
                             row.cells[i].addEventListener('click', filterHandler); // Re-add filter functionality
                         }
                         toggleIcons(row, false);
+                        row.classList.remove('editing-row');
+                        Array.from(tbody.rows).forEach((r) => {
+                            r.classList.remove('blur');
+                        });
+                        overlay.classList.add('d-none');
                         showAlert('success', 'Item updated successfully');
                     } else {
                         showAlert('danger', 'Failed to update item');
@@ -149,6 +162,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     row.cells[i].addEventListener('click', filterHandler); // Re-add filter functionality
                 }
                 toggleIcons(row, false);
+                row.classList.remove('editing-row');
+                Array.from(tbody.rows).forEach((r) => {
+                    r.classList.remove('blur');
+                });
+                overlay.classList.add('d-none');
             }
 
             function toggleIcons(row, isEditing) {
