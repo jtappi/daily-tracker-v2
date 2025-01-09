@@ -161,10 +161,29 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             function deleteRow(index) {
-                filteredData.splice(index, 1);
-                renderTable();
-                // Delete the data from the server
-                // Example: deleteData(filteredData[index].id);
+                const id = filteredData[index].id;
+                fetch(`/data/${id}`, {
+                    method: 'DELETE'
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(result => {
+                    if (result.success) {
+                        filteredData.splice(index, 1);
+                        renderTable();
+                        showAlert('success', 'Item deleted successfully');
+                    } else {
+                        showAlert('danger', 'Failed to delete item');
+                    }
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                    showAlert('danger', 'Failed to delete item');
+                });
             }
 
             const filterData = (column, value) => {
