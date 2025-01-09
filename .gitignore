@@ -14,3 +14,6 @@ npm-debug.log*
 
 # Ignore data.json file
 src/data.json
+cert.pem
+csr.pem
+key.pem

@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
+// const https = require('https'); SSL stuff, it works
 const fs = require('fs');
 const path = require('path');
 const helmet = require('helmet');
@@ -21,7 +22,7 @@ const port = process.env.PORT || 3000;
 const secretKey = process.env.SECRET_KEY;
 const encryptionKey = process.env.ENCRYPTION_KEY;
 const encryptionIv = process.env.ENCRYPTION_IV;
-const encryptedPassword = process.env.ENCRYPTED_PASSWORD;
+const storedHashedPassword = process.env.HASHED_PASSWORD; // Example hashed password from .env
 
 // Use Helmet to set various HTTP headers for security
 app.use(helmet());
@@ -67,25 +68,11 @@ const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Frida
 // Authentication route
 app.post('/authenticate', (req, res) => {
     const { password } = req.body;
-    const key = Buffer.from(encryptionKey, 'hex');
-    const iv = Buffer.from(encryptionIv, 'hex');
-
-    function decrypt(text) {
-        const decipher = crypto.createDecipheriv('aes-256-cbc', key, iv);
-        let decrypted = decipher.update(text, 'hex', 'utf8');
-        decrypted += decipher.final('utf8');
-        return decrypted;
+    if (password !== storedHashedPassword) {
+        return res.status(401).json({ success: false, message: 'Invalid credentials' });
     }
-
-    const storedPassword = decrypt(encryptedPassword);
-
-    if (password === storedPassword) {
-        req.session.authenticated = true;
-        res.json({ success: true });
-    } else {
-        req.session.authenticated = false;
-        res.json({ success: false });
-    }
+    req.session.authenticated = true;
+    res.json({ success: true, message: 'Login successful' });
 });
 
 // Serve the login page
@@ -198,6 +185,17 @@ app.get('/index.html', (req, res) => {
     }
 });
 
+// SSL stuff it works
+// // Load SSL certificates
+// const sslOptions = {
+//     key: fs.readFileSync('key.pem'),
+//     cert: fs.readFileSync('cert.pem')
+// };
+
+// // Start HTTPS server
+// https.createServer(sslOptions, app).listen(port, () => {
+//     console.log(`Server is running on https://localhost:${port}`);
+// });
 // Start server
 app.listen(port, () => {
     console.log(`Server is running on port http://localhost:${port}`);
