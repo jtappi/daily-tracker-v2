@@ -19,50 +19,55 @@
                 <button id="viewAllDataBtn" class="btn btn-primary">View All Data</button>
             </div>
         </div>
-        <div class="card p-4">
-            <div class="form-group position-relative">
-                <input type="text" id="itemName" class="form-control" placeholder="Type something..." data-testid="item-name-input">
-                <div id="suggestions" class="dropdown-menu w-100" data-testid="suggestions-dropdown"></div>
+        <div class="row equal-height">
+            <div class="col-md-3">
+                <div id="topItems" class="mb-3" data-testid="top-items-container"></div>
             </div>
-            <div id="topItems" class="mb-3" data-testid="top-items-container"></div>
-            <div id="categoryButtons" class="btn-group btn-group-toggle hidden" data-toggle="buttons" data-testid="category-buttons">
-                <label class="btn btn-outline-primary categoryBtn" data-category="Home" data-testid="category-home">
-                    <input type="radio" name="category" autocomplete="off"> Home
-                </label>
-                <label class="btn btn-outline-primary categoryBtn" data-category="Medication" data-testid="category-medication">
-                    <input type="radio" name="category" autocomplete="off"> Medication
-                </label>
-                <label class="btn btn-outline-primary categoryBtn" data-category="Bill" data-testid="category-bill">
-                    <input type="radio" name="category" autocomplete="off"> Bill
-                </label>
-                <label class="btn btn-outline-primary categoryBtn" data-category="Health" data-testid="category-health">
-                    <input type="radio" name="category" autocomplete="off"> Health
-                </label>
-                <label class="btn btn-outline-primary categoryBtn" data-category="Pain" data-testid="category-pain">
-                    <input type="radio" name="category" autocomplete="off"> Pain
-                </label>
-                <label class="btn btn-outline-primary categoryBtn" data-category="Food" data-testid="category-food">
-                    <input type="radio" name="category" autocomplete="off"> Food
-                </label>
-                <label class="btn btn-outline-primary categoryBtn" data-category="TO DO" data-testid="category-todo">
-                    <input type="radio" name="category" autocomplete="off"> To Do
-                </label>
+            <div class="col-md-9">
+                <div class="card p-4 d-flex flex-column">
+                    <div class="form-group position-relative">
+                        <input type="text" id="itemName" class="form-control" placeholder="Type something..." data-testid="item-name-input" aria-haspopup="true" aria-expanded="false">
+                        <div id="suggestions" class="dropdown-menu w-100" data-testid="suggestions-dropdown"></div>
+                    </div>
+                    <div id="categoryButtons" class="btn-group btn-group-toggle hidden" data-toggle="buttons" data-testid="category-buttons">
+                        <label class="btn btn-outline-primary categoryBtn" data-category="Home" data-testid="category-home">
+                            <input type="radio" name="category" autocomplete="off"> Home
+                        </label>
+                        <label class="btn btn-outline-primary categoryBtn" data-category="Medication" data-testid="category-medication">
+                            <input type="radio" name="category" autocomplete="off"> Medication
+                        </label>
+                        <label class="btn btn-outline-primary categoryBtn" data-category="Bill" data-testid="category-bill">
+                            <input type="radio" name="category" autocomplete="off"> Bill
+                        </label>
+                        <label class="btn btn-outline-primary categoryBtn" data-category="Health" data-testid="category-health">
+                            <input type="radio" name="category" autocomplete="off"> Health
+                        </label>
+                        <label class="btn btn-outline-primary categoryBtn" data-category="Pain" data-testid="category-pain">
+                            <input type="radio" name="category" autocomplete="off"> Pain
+                        </label>
+                        <label class="btn btn-outline-primary categoryBtn" data-category="Food" data-testid="category-food">
+                            <input type="radio" name="category" autocomplete="off"> Food
+                        </label>
+                        <label class="btn btn-outline-primary categoryBtn" data-category="TO DO" data-testid="category-todo">
+                            <input type="radio" name="category" autocomplete="off"> To Do
+                        </label>
+                    </div>
+                    <div class="form-group mt-3">
+                        <input type="text" id="costInput" class="form-control hidden" placeholder="$" disabled data-testid="cost-input">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="notesInput" class="form-control hidden" placeholder="Notes" disabled data-testid="notes-input">
+                    </div>
+                    <div class="form-group hidden" id="caloriesContainer">
+                        <input type="text" id="caloriesInput" class="form-control" placeholder="Calories" data-testid="calories-input">
+                    </div>
+                    <div class="mt-auto">
+                        <button id="submitBtn" class="btn btn-primary btn-block mt-3">Submit</button>
+                    </div>
+                </div>
             </div>
-            <div class="form-group mt-3">
-                <input type="text" id="costInput" class="form-control hidden" placeholder="$" disabled data-testid="cost-input">
-            </div>
-            <div class="form-group">
-                <input type="text" id="notesInput" class="form-control hidden" placeholder="Notes" disabled data-testid="notes-input">
-            </div>
-            <div class="form-group hidden" id="caloriesContainer">
-                <input type="text" id="caloriesInput" class="form-control" placeholder="Calories" data-testid="calories-input">
-            </div>
-            <button id="submitBtn" class="btn btn-success mt-3" data-testid="submit-btn">Submit</button>
         </div>
     </div>
-    <script src="jquery-3.5.1.min.js"></script>
-    <script src="popper.min.js"></script>
-    <script src="bootstrap.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

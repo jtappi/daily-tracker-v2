@@ -5,13 +5,16 @@ document.addEventListener('DOMContentLoaded', () => {
             event.preventDefault();
             const password = document.getElementById('password').value;
 
+            // Hash the password before sending it to the server
+            const hashedPassword = CryptoJS.SHA256(password).toString();
+
             try {
                 const response = await fetch('/authenticate', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ password })
+                    body: JSON.stringify({ password: hashedPassword })
                 });
 
                 const result = await response.json();

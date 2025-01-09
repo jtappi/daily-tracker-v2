@@ -1,10 +1,3 @@
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    position: relative;
-}
-
 #viewDataBtn {
     position: relative;
     top: 0;
@@ -26,51 +19,6 @@
     margin-bottom: 10px;
 }
 
-#submitBtn {
-    padding: 10px 20px;
-}
-
-#suggestions {
-    list-style-type: none;
-    padding: 0;
-}
-
-.hidden {
-    display: none;
-}
-
-.categoryBtn.selected {
-    background-color: #007bff;
-    color: white;
-}
-
-#costInput, #notesInput {
-    margin-top: 10px;
-}
-
-.card {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-}
-
-.card-title {
-    margin-bottom: 20px;
-}
-
-.tooltip-inner {
-    background-color: #333;
-    color: #fff;
-    border-radius: 4px;
-    padding: 10px;
-    font-size: 14px;
-    max-width: 200px;
-    text-align: center;
-}
-
-.tooltip .arrow::before {
-    border-top-color: #333;
-}
-
 .loading-spinner {
     position: fixed;
     top: 50%;
@@ -87,4 +35,113 @@
 .monkey-video {
     max-width: 100%;
     height: auto;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+}
+
+.equal-height {
+    display: flex;
+}
+
+#topItems {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: #fff;
+    height: 100%;
+}
+
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: #fff;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    margin-bottom: 20px;
+}
+
+#topItems .item {
+    width: 100%;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.flex-grow-1 {
+    flex-grow: 1;
+}
+
+.mt-auto {
+    margin-top: auto;
+}
+
+#suggestions {
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 0.25rem;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
+    display: none;
+}
+
+#suggestions.show {
+    display: block;
+}
+
+#submitBtn {
+    padding: 10px 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+.categoryBtn.selected {
+    background-color: #007bff;
+    color: white;
+}
+
+#costInput, #notesInput {
+    margin-top: 10px;
+}
+
+.tooltip-inner {
+    background-color: #333;
+    color: #fff;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 14px;
+    max-width: 200px;
+    text-align: center;
+}
+
+.tooltip .arrow::before {
+    border-top-color: #333;
+}
+
+#categoryButtons {
+    margin-top: 10px;
 }
