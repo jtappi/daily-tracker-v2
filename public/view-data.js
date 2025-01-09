@@ -47,11 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Add click event to filter rows, excluding the Actions column
                     Array.from(row.cells).forEach((cell, cellIndex) => {
                         if (cellIndex < row.cells.length - 1) { // Exclude the last cell (Actions column)
-                            cell.addEventListener('click', () => {
-                                const column = cell.parentElement.parentElement.parentElement.querySelector(`th:nth-child(${cell.cellIndex + 1})`).getAttribute('data-column');
-                                const value = cell.textContent;
-                                filterData(column, value);
-                            });
+                            cell.addEventListener('click', filterHandler);
                         }
                     });
                 });
@@ -60,6 +56,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     placement: 'top',
                     trigger: 'click'
                 });
+            };
+
+            const filterHandler = (event) => {
+                const cell = event.currentTarget;
+                const column = cell.parentElement.parentElement.parentElement.querySelector(`th:nth-child(${cell.cellIndex + 1})`).getAttribute('data-column');
+                const value = cell.textContent;
+                filterData(column, value);
             };
 
             renderTable();
@@ -82,6 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const row = tbody.rows[index];
                 for (let i = 0; i < row.cells.length - 1; i++) {
                     row.cells[i].contentEditable = 'true';
+                    row.cells[i].removeEventListener('click', filterHandler); // Remove filter functionality
                 }
                 toggleIcons(row, true);
             }
@@ -117,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         filteredData[index] = updatedItem;
                         for (let i = 0; i < row.cells.length - 1; i++) {
                             row.cells[i].contentEditable = 'false';
+                            row.cells[i].addEventListener('click', filterHandler); // Re-add filter functionality
                         }
                         toggleIcons(row, false);
                         showAlert('success', 'Item updated successfully');
@@ -141,6 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 row.cells[6].innerText = filteredData[index].timestamp;
                 for (let i = 0; i < row.cells.length - 1; i++) {
                     row.cells[i].contentEditable = 'false';
+                    row.cells[i].addEventListener('click', filterHandler); // Re-add filter functionality
                 }
                 toggleIcons(row, false);
             }
