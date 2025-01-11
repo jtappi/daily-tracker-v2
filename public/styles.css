@@ -191,3 +191,38 @@ body {
     filter: none;
     pointer-events: auto;
 }
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    .table thead th {
+        font-size: 0.875rem;
+    }
+
+    .table tbody td {
+        font-size: 0.875rem;
+    }
+
+    .btn {
+        font-size: 0.875rem;
+    }
+
+    .modal-dialog {
+        max-width: 90%;
+    }
+
+    .modal-title {
+        font-size: 1.25rem;
+    }
+
+    .modal-body {
+        font-size: 1rem;
+    }
+
+    .modal-footer .btn {
+        font-size: 0.875rem;
+    }
+}
