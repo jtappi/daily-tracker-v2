@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     row.insertCell(4).textContent = item.day;
                     row.insertCell(5).textContent = item.month;
                     const timeCell = row.insertCell(6);
-                    timeCell.textContent = item.timestamp;
+                    timeCell.textContent = item.time;
 
                     // Add actions column
                     const actionsCell = row.insertCell(7);
@@ -285,5 +285,5 @@ function showAlert(type, message) {
         alert.classList.remove('show');
         alert.classList.add('hide');
         setTimeout(() => alert.remove(), 500);
-    }, 5000);
+    }, 1500);
 }
