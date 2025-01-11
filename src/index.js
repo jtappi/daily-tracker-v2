@@ -22,7 +22,7 @@ const port = process.env.PORT || 3000;
 const secretKey = process.env.SECRET_KEY;
 const encryptionKey = process.env.ENCRYPTION_KEY;
 const encryptionIv = process.env.ENCRYPTION_IV;
-const storedHashedPassword = process.env.HASHED_PASSWORD; // Example hashed password from .env
+const storedHashedPassword = process.env.HASHED_PASSWORD;
 
 // Use Helmet to set various HTTP headers for security
 app.use(helmet());
@@ -40,7 +40,9 @@ app.use((req, res, next) => {
     next();
 });
 
+// Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, '../public')));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
@@ -78,8 +80,9 @@ app.get('/login.html', (req, res) => {
     res.sendFile(path.join(__dirname, '../public', 'login.html'));
 });
 
+// Submit new entry
 app.post('/submit', (req, res) => {
-    const { text, category, cost, notes } = req.body;
+    const { text, category, cost, notes, calories } = req.body;
     if (!text || typeof text !== 'string' || text.trim() === '') {
         return res.status(400).json({ message: 'Invalid input' });
     }
@@ -91,6 +94,7 @@ app.post('/submit', (req, res) => {
         category: category || null,
         cost: cost || null,
         notes: notes || null,
+        calories: calories || null,
         day: now.toLocaleString('default', { weekday: 'long' }),
         month: now.toLocaleString('default', { month: 'long' }),
         time: now.toLocaleTimeString(),
@@ -98,10 +102,17 @@ app.post('/submit', (req, res) => {
     };
 
     fs.readFile(path.join(__dirname, 'data.json'), (err, data) => {
-        if (err) throw err;
-        const json = JSON.parse(data);
-        json.push(entry);
-        fs.writeFile(path.join(__dirname, 'data.json'), JSON.stringify(json, null, 2), (err) => {
+        if (err) {
+            console.error('Error reading data file:', err);
+            return res.status(500).json({ message: 'Internal server error' });
+        }
+
+        let jsonData = JSON.parse(data);
+        const highestId = jsonData.reduce((maxId, item) => Math.max(maxId, item.id || 0), 0);
+        entry.id = highestId + 1;
+        jsonData.push(entry);
+        
+        fs.writeFile(path.join(__dirname, 'data.json'), JSON.stringify(jsonData, null, 2), (err) => {
             if (err) throw err;
             res.json({ message: 'Text saved successfully!' });
         });
@@ -169,7 +180,7 @@ app.put('/data/:id', (req, res) => {
     const { id } = req.params;
     const updatedItem = req.body;
 
-    fs.readFile(dataFilePath, 'utf8', (err, data) => {
+    fs.readFile(path.join(__dirname, 'data.json'), 'utf8', (err, data) => {
         if (err) {
             console.error('Error reading data file:', err);
             return res.status(500).json({ success: false, message: 'Internal server error' });
@@ -184,7 +195,7 @@ app.put('/data/:id', (req, res) => {
 
         jsonData[index] = { ...jsonData[index], ...updatedItem };
 
-        fs.writeFile(dataFilePath, JSON.stringify(jsonData, null, 2), 'utf8', (err) => {
+        fs.writeFile(path.join(__dirname, 'data.json'), JSON.stringify(jsonData, null, 2), 'utf8', (err) => {
             if (err) {
                 console.error('Error writing data file:', err);
                 return res.status(500).json({ success: false, message: 'Internal server error' });
@@ -195,11 +206,10 @@ app.put('/data/:id', (req, res) => {
     });
 });
 
-// Delete data route
 app.delete('/data/:id', (req, res) => {
     const { id } = req.params;
 
-    fs.readFile(dataFilePath, 'utf8', (err, data) => {
+    fs.readFile(path.join(__dirname, 'data.json'), 'utf8', (err, data) => {
         if (err) {
             console.error('Error reading data file:', err);
             return res.status(500).json({ success: false, message: 'Internal server error' });
@@ -214,7 +224,7 @@ app.delete('/data/:id', (req, res) => {
 
         jsonData.splice(index, 1);
 
-        fs.writeFile(dataFilePath, JSON.stringify(jsonData, null, 2), 'utf8', (err) => {
+        fs.writeFile(path.join(__dirname, 'data.json'), JSON.stringify(jsonData, null, 2), 'utf8', (err) => {
             if (err) {
                 console.error('Error writing data file:', err);
                 return res.status(500).json({ success: false, message: 'Internal server error' });

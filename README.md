@@ -1,9 +1,8 @@
 # TO DO
-Add the abilit to delete an entry (with a confirmation)
 Add the ability to upload a receipt
-Add the ability to alter the timestamp when submitting a new item
 Ability to alter the whole entry
 Document DB instead of JSON
+Timestamp remains GMT but time should be converted to EST
 
 # My Node.js Project
 
