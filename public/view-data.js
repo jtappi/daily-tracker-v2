@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return response.json();
         })
         .then(data => {
+            // Sort the data in descending order based on the timestamp
+            data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
             const tbody = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
             const resetBtn = document.getElementById('resetBtn');
             const overlay = document.getElementById('overlay');
