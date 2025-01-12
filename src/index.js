@@ -88,7 +88,7 @@ app.post('/submit', (req, res) => {
     }
     const sanitizedText = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     const now = new Date();
-    const timestamp = now.toISOString();
+    const timestamp = now.toISOString('en-US', { timeZone: 'America/New_York' });
     const entry = {
         text: sanitizedText,
         category: category || null,
