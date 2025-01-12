@@ -6,6 +6,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    const analyzeDataBtn = document.getElementById('analyzeDataBtn');
+    if (analyzeDataBtn) {
+        analyzeDataBtn.addEventListener('click', () => {
+            window.location.href = '/analyze-data.html'; // Adjust the URL as needed
+        });
+    }
+
     const viewAllDataBtn = document.getElementById('viewAllDataBtn');
     if (viewAllDataBtn) {
         viewAllDataBtn.addEventListener('click', () => {
