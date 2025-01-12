@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         notesCell.classList.add('notes-tooltip');
                     }
                     row.insertCell(4).textContent = item.day;
-                    row.insertCell(5).textContent = item.month;
+                    row.insertCell(5).textContent = item.month + ' ' + new Date(item.timestamp).getDate();
                     const timeCell = row.insertCell(6);
                     timeCell.textContent = item.time;
 
