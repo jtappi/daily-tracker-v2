@@ -5,10 +5,10 @@ document.getElementById('backBtn').addEventListener('click', () => {
 document.addEventListener('DOMContentLoaded', () => {
     fetch('/data')
         .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+            if (response.status > 400) {
+                window.location.href = '/login.html';
+                return;
             }
-            return response.json();
         })
         .then(data => {
             // Sort the data in descending order based on the timestamp

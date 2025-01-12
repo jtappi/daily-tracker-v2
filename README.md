@@ -4,6 +4,7 @@ Document DB instead of JSON
 Timestamp remains GMT but time should be converted to EST
 Add dropdown to category in edit mode on view-data
 Add up to three prefill values during search in the dropdown.  Only 1 on mobile maybe?
+if authenticated, change the back to login button to logout
 
 
 # My Node.js Project
