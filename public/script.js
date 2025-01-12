@@ -210,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
             button.classList.add('btn', 'btn-outline-secondary', 'm-1');
             button.textContent = item.text;
             button.addEventListener('click', () => {
-                submitItem(item.text, item.category, item.cost, item.notes);
+                submitItem(item.text, item.category, item.cost, item.notes, item.calories);
             });
             topItemsContainer.appendChild(button);
         });
