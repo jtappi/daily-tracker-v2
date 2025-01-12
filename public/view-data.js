@@ -6,9 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch('/data')
         .then(response => {
             if (response.status > 400) {
-                window.location.href = '/login.html';
-                return;
+                return response.json();
             }
+            return response.json();
         })
         .then(data => {
             // Sort the data in descending order based on the timestamp
