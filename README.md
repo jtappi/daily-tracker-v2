@@ -4,7 +4,6 @@ Document DB instead of JSON
 Timestamp remains GMT but time should be converted to EST
 Add dropdown to category in edit mode on view-data
 Add up to three prefill values during search in the dropdown.  Only 1 on mobile maybe?
-View-data.html should show the newest value at the top
 
 
 # My Node.js Project

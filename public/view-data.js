@@ -47,9 +47,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         <i class="fas fa-undo undo-icon d-none" data-index="${index}"></i>
                     `;
 
-                    // Add click event to filter rows, excluding the Actions column
+                    // Add click event to filter rows, excluding the Notes and Actions columns
                     Array.from(row.cells).forEach((cell, cellIndex) => {
-                        if (cellIndex < row.cells.length - 1) { // Exclude the last cell (Actions column)
+                        const columnId = document.querySelector(`th:nth-child(${cellIndex + 1})`).id;
+                        if (columnId !== 'notes-header' && columnId !== 'actions-header') { // Exclude the Notes and Actions columns
                             cell.addEventListener('click', filterHandler);
                         }
                     });
