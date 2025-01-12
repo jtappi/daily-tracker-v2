@@ -224,6 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => {
             showAlert('danger', 'An error occurred while fetching data.');
             console.error('There was a problem with the fetch operation:', error);
+            window.location.href = '/login.html';
         });
 });
 
