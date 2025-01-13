@@ -95,9 +95,9 @@ app.post('/submit', (req, res) => {
         cost: cost || null,
         notes: notes || null,
         calories: calories || null,
-        day: now.toLocaleString('default', { weekday: 'long' }),
-        month: now.toLocaleString('default', { month: 'long' }),
-        time: now.toLocaleTimeString(),
+        day: now.toLocaleString('en-US', { timeZone: 'America/New_York', weekday: 'long' }),
+        month: now.toLocaleString('en-US', { timeZone: 'America/New_York', month: 'long' }),
+        time: now.toLocaleTimeString('en-US', { timeZone: 'America/New_York' }),
         timestamp
     };
 
