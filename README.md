@@ -1,13 +1,13 @@
 # TO DO
-Add the ability to upload a receipt
-Document DB instead of JSON
-Timestamp remains GMT but time should be converted to EST
-Add dropdown to category in edit mode on view-data
-Add up to three prefill values during search in the dropdown.  Only 1 on mobile maybe?
-if authenticated, change the back to login button to logout
-Add the back button to the analyze page.  rename that and the other back button to the same name and use the logic form script.js
-Fix the logout func.  it doesn't work as expected
-
+- Add the ability to upload a receipt
+- Document DB instead of JSON
+- Timestamp remains GMT but time should be converted to EST
+- Add dropdown to category in edit mode on view-data
+- Add up to three prefill values during search in the dropdown.  Only 1 on mobile maybe?
+- if authenticated, change the back to login button to logout
+- Add the back button to the analyze page.  rename that and the other back button to the same name and use the logic form script.js
+- Fix the logout func.  it doesn't work as expected
+- Make the tables in Anaylze data sortable and collapsable
 
 # My Node.js Project
 
