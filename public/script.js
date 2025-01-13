@@ -6,6 +6,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            // Clear authentication tokens or session data
+            localStorage.removeItem('authToken');
+            sessionStorage.removeItem('authToken');
+            // Redirect to login page
+            window.location.href = '/login.html';
+    });
+    }
+
     const analyzeDataBtn = document.getElementById('analyzeDataBtn');
     if (analyzeDataBtn) {
         analyzeDataBtn.addEventListener('click', () => {
