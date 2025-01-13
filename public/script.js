@@ -9,9 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', () => {
-            // Clear authentication tokens or session data
+            // Clear authentication tokens or session data and cookies
             localStorage.removeItem('authToken');
             sessionStorage.removeItem('authToken');
+            
+            // Delete the connect.sid cookie for trackmyweek.com
+            document.cookie = "connect.sid=;expires=" + new Date(0).toUTCString() + ";path=/;domain=trackmyweek.com;secure";
+            console.log('Attempted to delete connect.sid cookie for trackmyweek.com');
+
             // Redirect to login page
             window.location.href = '/login.html';
     });
