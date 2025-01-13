@@ -7,8 +7,6 @@
 - if authenticated, change the back to login button to logout
 - Add the back button to the analyze page.  rename that and the other back button to the same name and use the logic form script.js
 - Fix the logout func.  it doesn't work as expected
-- Make the tables in Anaylze data sortable and collapsable
-- fetchSuggestions is being called due to calling script.js.  move the buttons into their own script
 
 # My Node.js Project
 

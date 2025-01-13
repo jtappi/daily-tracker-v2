@@ -6,18 +6,37 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => console.error('Error fetching data:', error));
 
-    // Attach sortTable function to window to make it accessible from HTML
+    // Attach sortTable and toggleTableVisibility functions to window to make them accessible from HTML
     window.sortTable = sortTable;
+    window.toggleTableVisibility = toggleTableVisibility;
 
-    // Add event listeners for sortable table headers
+    // Add event listeners for sortable and collapsible table headers
     const categoryTableHeaders = document.querySelectorAll('#category-counts-table th');
     categoryTableHeaders.forEach((header, index) => {
-        header.addEventListener('click', () => sortTable('category-counts-table', index));
+        header.addEventListener('click', () => {
+            sortTable('category-counts-table', index);
+        });
     });
 
     const textTableHeaders = document.querySelectorAll('#text-counts-table th');
     textTableHeaders.forEach((header, index) => {
-        header.addEventListener('click', () => sortTable('text-counts-table', index));
+        header.addEventListener('click', () => {
+            sortTable('text-counts-table', index);
+        });
+    });
+
+    const categoryTableTitle = document.querySelectorAll('#categoryTitle');
+    categoryTableTitle.forEach((header) => {
+        header.addEventListener('click', () => {
+            toggleTableVisibility('category-counts-table');
+        });
+    });
+
+    const textTableTitle = document.querySelectorAll('#nameTitle');
+    textTableTitle.forEach((header) => {
+        header.addEventListener('click', () => {
+            toggleTableVisibility('text-counts-table');
+        });
     });
 
     function analyzeData(data) {
@@ -107,5 +126,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         rows.forEach(row => tbody.appendChild(row));
         table.setAttribute('data-sort-asc', !isAscending);
+    }
+
+    // Toggle table visibility
+    function toggleTableVisibility(tableId) {
+        const table = document.getElementById(tableId);
+        table.style.display = table.style.display === 'none' ? '' : 'none';
     }
 });
