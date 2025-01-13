@@ -70,5 +70,5 @@ function analyzeData(data) {
     }
 
     // Update last entry date and time
-    document.getElementById('last-entry-date-time').textContent = lastEntryDate.toLocaleString('en-US', { timeZone: 'America/New_York' });
+    document.getElementById('last-entry-date-time').textContent = lastEntryDate.toLocaleString();
 }
