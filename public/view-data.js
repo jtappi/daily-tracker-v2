@@ -190,6 +190,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 };
             }
 
+            // Fetch data and render chart
+            fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                const categories = data.map(item => item.category);
+                const costs = data.map(item => item.cost);
+
+                const ctx = document.getElementById('myChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: categories,
+                        datasets: [{
+                            label: 'Cost',
+                            data: costs,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
             function deleteRow(index) {
                 const id = filteredData[index].id;
                 fetch(`/data/${id}`, {
