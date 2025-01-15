@@ -191,20 +191,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Fetch data and render chart
-            fetch('data.json')
+            fetch('/data')
             .then(response => response.json())
             .then(data => {
-                const categories = data.map(item => item.category);
-                const costs = data.map(item => item.cost);
+                const text = data.map(item => item.text);
+                const timestamp = data.map(item => item.timestamp);
 
                 const ctx = document.getElementById('myChart').getContext('2d');
                 new Chart(ctx, {
                     type: 'bar',
                     data: {
-                        labels: categories,
+                        labels: timestamp,
                         datasets: [{
-                            label: 'Cost',
-                            data: costs,
+                            label: 'Activity',
+                            data: text,
                             backgroundColor: 'rgba(75, 192, 192, 0.2)',
                             borderColor: 'rgba(75, 192, 192, 1)',
                             borderWidth: 1

@@ -25,7 +25,14 @@ const encryptionIv = process.env.ENCRYPTION_IV;
 const storedHashedPassword = process.env.HASHED_PASSWORD;
 
 // Use Helmet to set various HTTP headers for security
-app.use(helmet());
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ["'self'"],
+            scriptSrc: ["'self'", "https://cdn.jsdelivr.net"]
+        }
+    }
+}));
 
 // Rate limiting to prevent abuse
 const limiter = rateLimit({
