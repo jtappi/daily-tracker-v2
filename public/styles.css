@@ -183,7 +183,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(85, 119, 81, 0.5);
     z-index: 1000;
     pointer-events: none;
 }
@@ -194,10 +194,9 @@ body {
 
 .editing-row {
     position: relative;
-    z-index: 1001;
-    background: white;
-    filter: none;
-    pointer-events: auto;
+    z-index: 1001; /* Ensure the editable row is above the overlay */
+    filter: none; /* Remove blur effect from the editable row */
+    pointer-events: auto; /* Allow interactions with the editable row */
 }
 
 /* Responsive styles */

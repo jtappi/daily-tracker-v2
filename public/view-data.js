@@ -24,18 +24,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 filteredData.forEach((item, index) => {
                     const row = tbody.insertRow();
                     row.insertCell(0).textContent = item.text;
+                    row.cells[0].setAttribute('id', 'text-cell');
                     row.insertCell(1).textContent = item.category || '';
+                    row.cells[1].setAttribute('id', 'category-cell');
                     row.insertCell(2).textContent = item.cost || '';
+                    row.cells[2].setAttribute('id', 'cost-cell');
                     const notesCell = row.insertCell(3);
+                    notesCell.setAttribute('id', 'notes-cell');
                     const notesText = item.notes || '';
                     notesCell.textContent = notesText.length > 20 ? notesText.substring(0, 20) + '...' : notesText;
                     row.insertCell(4).textContent = item.day;
+                    row.cells[4].setAttribute('id', 'day-cell');
                     row.insertCell(5).textContent = item.month + ' ' + new Date(item.timestamp).getDate();
+                    row.cells[5].setAttribute('id', 'month-cell');
                     const timeCell = row.insertCell(6);
+                    timeCell.setAttribute('id', 'time-cell');
                     timeCell.textContent = item.time;
 
                     // Add actions column
                     const actionsCell = row.insertCell(7);
+                    actionsCell.setAttribute('id', 'actions-cell');
                     actionsCell.innerHTML = `
                         <i class="fas fa-edit edit-icon" data-index="${index}"></i>
                         <i class="fas fa-trash-alt delete-icon" data-index="${index}"></i>
@@ -80,8 +88,11 @@ document.addEventListener('DOMContentLoaded', () => {
             function editRow(index) {
                 const row = tbody.rows[index];
                 row.classList.add('editing-row');
+                const nonEditableIds = ['time-cell', 'actions-cell', 'month-cell', 'day-cell'];
                 for (let i = 0; i < row.cells.length - 1; i++) {
-                    row.cells[i].contentEditable = 'true';
+                    if (!nonEditableIds.includes(row.cells[i].id)) {
+                        row.cells[i].contentEditable = 'true';                        
+                    }
                     row.cells[i].removeEventListener('click', filterHandler); // Remove filter functionality
                 }
                 toggleIcons(row, true);
@@ -101,9 +112,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     category: row.cells[1].innerText,
                     cost: row.cells[2].innerText,
                     notes: row.cells[3].innerText,
-                    day: row.cells[4].innerText,
-                    month: row.cells[5].innerText,
-                    timestamp: row.cells[6].innerText
+                    // day: row.cells[4].innerText,
+                    // month: row.cells[5].innerText,
+                    // timestamp: row.cells[6].innerText
                 };
 
                 fetch(`/data/${updatedItem.id}`, {
@@ -216,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 filteredData = data;
                 renderTable();
                 resetBtn.classList.add('hidden');
-                resetBtn.textContent = 'Reset';
+                resetBtn.textContent = 'Reset Filter';
             };
 
             resetBtn.addEventListener('click', resetFilter);

@@ -7,6 +7,7 @@
 - if authenticated, change the back to login button to logout
 - Add the back button to the analyze page.  rename that and the other back button to the same name and use the logic from navigation.js.  Add a new button called home and add it to the analyze and view data pages.  remove the back buttons
 - Fix the logout func.  it doesn't work as expected
+- overaly d-none look at the style and make it lighter
 
 # My Node.js Project
 
