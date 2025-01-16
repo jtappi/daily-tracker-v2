@@ -24,6 +24,11 @@ const encryptionKey = process.env.ENCRYPTION_KEY;
 const encryptionIv = process.env.ENCRYPTION_IV;
 const storedHashedPassword = process.env.HASHED_PASSWORD;
 
+function toISOStringEST(date) {
+    const dateEST = new Date(date.getTime() - (5 * 60 * 60 * 1000)); // Subtract 5 hours for EST
+    return dateEST.toISOString();
+  }
+
 // Middleware to generate a nonce
 app.use((req, res, next) => {
     res.locals.nonce = crypto.randomBytes(16).toString('base64');
@@ -103,7 +108,7 @@ app.post('/submit', (req, res) => {
     }
     const sanitizedText = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     const now = new Date();
-    const timestamp = now.toISOString('en-US', { timeZone: 'America/New_York' });
+    const timestamp = toISOStringEST(now);
     const entry = {
         text: sanitizedText,
         category: category || null,
