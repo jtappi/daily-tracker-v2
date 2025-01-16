@@ -51,7 +51,7 @@ app.use(limiter);
 
 // Middleware to set the X-Forwarded-Proto header to http
 app.use((req, res, next) => {
-    req.headers['x-forwarded-proto'] = 'http';
+    req.headers['x-forwarded-proto'] = 'https';
     next();
 });
 
