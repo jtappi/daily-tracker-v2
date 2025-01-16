@@ -1,4 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const categoryButtons = document.querySelectorAll('#categoryButtons .btn');
+    categoryButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            categoryButtons.forEach(btn => btn.classList.remove('btn-primary'));
+            categoryButtons.forEach(btn => btn.classList.add('btn-secondary'));
+            button.classList.remove('btn-secondary');
+            button.classList.add('btn-primary');
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
     const submitBtn = document.getElementById('submitBtn');
     if (submitBtn) {
         submitBtn.addEventListener('click', () => {
