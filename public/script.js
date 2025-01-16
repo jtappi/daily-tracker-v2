@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 suggestions.innerHTML = '';
                                 suggestions.classList.remove('show');
                                 if (item.category) {
-                                    document.querySelector(`.categoryBtn[data-category="${item.category}"]`).classList.add('selected');
+                                    document.querySelector(`[data-category="${item.category}"]`).classList.replace('btn-secondary', 'btn-primary');
                                 }
                                 if (item.cost) {
                                     document.getElementById('costInput').value = item.cost;
