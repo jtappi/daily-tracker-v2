@@ -194,26 +194,68 @@ document.addEventListener('DOMContentLoaded', () => {
             fetch('/data')
             .then(response => response.json())
             .then(data => {
-                const text = data.map(item => item.text);
-                const timestamp = data.map(item => item.timestamp);
+                // Filter data for today's events
+                const today = new Date().toISOString().split('T')[0];
+                console.log(`Today: ${today}`);
+                const todaysData = data.filter(item => item.timestamp.startsWith("2025-01-15"));
+                console.log(`Today's data: ${JSON.stringify(todaysData)}`);
+
+                const timeValues = todaysData.map(item => new Date(item.timestamp).toLocaleTimeString());
+                const textValues = todaysData.map(item => item.text);
+
+                // Extract unique text values
+                const uniqueTextValues = [...new Set(textValues)];
 
                 const ctx = document.getElementById('myChart').getContext('2d');
                 new Chart(ctx, {
-                    type: 'bar',
+                    type: 'line',
                     data: {
-                        labels: timestamp,
+                        labels: timeValues,
                         datasets: [{
-                            label: 'Activity',
-                            data: text,
+                            label: 'Event',
+                            data: textValues.map((text, index) => uniqueTextValues.indexOf(text) + 1), // Map text values to their unique index
                             backgroundColor: 'rgba(75, 192, 192, 0.2)',
                             borderColor: 'rgba(75, 192, 192, 1)',
-                            borderWidth: 1
+                            borderWidth: 1,
+                            fill: false,
+                            pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgba(75, 192, 192, 1)',
+                            pointRadius: 5,
+                            pointHoverRadius: 7,
+                            pointHitRadius: 10,
+                            pointStyle: 'circle'
                         }]
                     },
                     options: {
                         scales: {
+                            x: {
+                                title: {
+                                    display: false,
+                                    text: 'Time'
+                                }
+                            },
                             y: {
-                                beginAtZero: true
+                                title: {
+                                    display: false,
+                                    text: 'Event'
+                                },
+                                ticks: {
+                                    callback: function(value, index, values) {
+                                        return uniqueTextValues[value - 1]; // Display unique text values
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        const index = context.dataIndex;
+                                        return `Event: ${textValues[index]}`;
+                                    }
+                                }
                             }
                         }
                     }
@@ -222,6 +264,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(error => {
                 console.error('There was a problem with the fetch operation:', error);
             });
+
             function deleteRow(index) {
                 const id = filteredData[index].id;
                 fetch(`/data/${id}`, {

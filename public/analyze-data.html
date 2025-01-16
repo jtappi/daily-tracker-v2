@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Analyze Data</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://stackpath.bootstrapcdn.com; style-src 'self' https://cdnjs.cloudflare.com https://stackpath.bootstrapcdn.com 'nonce-{{nonce}}'; font-src 'self' https://cdnjs.cloudflare.com;">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Add Font Awesome -->
@@ -34,11 +35,11 @@
         </div>
         <div class="card p-4 mb-4">
             <h2 id="categoryTitle">Category</h2>
-            <table class="table table-striped" id="category-counts-table" style="display: none;">
+            <table class="table table-striped" id="category-counts-table">
                 <thead>
                     <tr>
-                        <th style="width: 80%;">Category</th>
-                        <th style="width: 20%;">Count</th>
+                        <th class="category-column">Category</th>
+                        <th class="count-column">Count</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -46,11 +47,11 @@
         </div>
         <div class="card p-4 mb-4">
             <h2 id="nameTitle">Name</h2>
-            <table class="table table-striped" id="text-counts-table" style="display: none;">
+            <table class="table table-striped" id="text-counts-table">
                 <thead>
                     <tr>
-                        <th style="width: 80%;">Text</th>
-                        <th style="width: 20%;">Count</th>
+                        <th class="text-column">Text</th>
+                        <th class="count-column">Count</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -61,7 +62,7 @@
     <script src="jquery-3.5.1.min.js"></script>
     <script src="popper.min.js"></script>
     <script src="bootstrap.min.js"></script>
-    <script src="analyze-data.js"></script>
-    <script src="navigation.js"></script> <!-- Include the new navigation script -->
+    <script src="analyze-data.js" nonce="{{nonce}}"></script>
+    <script src="navigation.js" nonce="{{nonce}}"></script>
 </body>
 </html>

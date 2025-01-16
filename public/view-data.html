@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Data</title>
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.jsdelivr.net;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://stackpath.bootstrapcdn.com; style-src 'self' https://cdnjs.cloudflare.com https://stackpath.bootstrapcdn.com 'nonce-{{nonce}}'; font-src 'self' https://cdnjs.cloudflare.com;">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Add Font Awesome -->
@@ -73,7 +73,8 @@
     <script src="popper.min.js"></script>
     <script src="bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Add Chart.js via CDN -->
-    <script src="view-data.js"></script>
-    <script src="navigation.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script> <!-- Add date adapter for Chart.js -->
+    <script src="view-data.js" nonce="{{nonce}}"></script>
+    <script src="navigation.js" nonce="{{nonce}}"></script>
 </body>
 </html>

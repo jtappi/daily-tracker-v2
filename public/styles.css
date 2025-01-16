@@ -199,6 +199,23 @@ body {
     pointer-events: auto; /* Allow interactions with the editable row */
 }
 
+.category-column {
+    width: 80%;
+}
+
+.count-column {
+    width: 20%;
+}
+
+.text-column {
+    width: 80%;
+}
+
+/* Add styles for table table-striped */
+.table.table-striped {
+    display: table;
+}
+
 /* Responsive styles */
 @media (max-width: 768px) {
     .table-responsive {

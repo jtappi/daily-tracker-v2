@@ -131,6 +131,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Toggle table visibility
     function toggleTableVisibility(tableId) {
         const table = document.getElementById(tableId);
-        table.style.display = table.style.display === 'none' ? '' : 'none';
+        table.style.display = table.style.display === 'table' ? 'none' : 'table';
     }
 });
