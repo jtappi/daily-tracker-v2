@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         // Filter data for the selected date
                         const todaysData = data.filter(item => item.timestamp.startsWith(date));
 
-                        const timeValues = todaysData.map(item => new Date(item.timestamp).toLocaleTimeString());
+                        const timeValues = todaysData.map(item => item.time);
                         const textValues = todaysData.map(item => item.text);
 
                         // Extract unique text values
