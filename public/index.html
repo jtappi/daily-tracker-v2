@@ -28,31 +28,15 @@
                         <input type="text" id="itemName" class="form-control" placeholder="Type something..." data-testid="item-name-input" aria-haspopup="true" aria-expanded="false">
                         <div id="suggestions" class="dropdown-menu w-100" data-testid="suggestions-dropdown"></div>
                     </div>
-                    <div id="categoryButtons" class="btn-group btn-group-toggle hidden" data-toggle="buttons" data-testid="category-buttons">
-                        <label class="btn btn-outline-primary categoryBtn" data-category="Home" data-testid="category-home">
-                            <input type="radio" name="category" autocomplete="off"> Home
-                        </label>
-                        <label class="btn btn-outline-primary categoryBtn" data-category="Medication" data-testid="category-medication">
-                            <input type="radio" name="category" autocomplete="off"> Medication
-                        </label>
-                        <label class="btn btn-outline-primary categoryBtn" data-category="Bill" data-testid="category-bill">
-                            <input type="radio" name="category" autocomplete="off"> Bill
-                        </label>
-                        <label class="btn btn-outline-primary categoryBtn" data-category="Health" data-testid="category-health">
-                            <input type="radio" name="category" autocomplete="off"> Health
-                        </label>
-                        <label class="btn btn-outline-primary categoryBtn" data-category="Pain" data-testid="category-pain">
-                            <input type="radio" name="category" autocomplete="off"> Pain
-                        </label>
-                        <label class="btn btn-outline-primary categoryBtn" data-category="Food" data-testid="category-food">
-                            <input type="radio" name="category" autocomplete="off"> Food
-                        </label>
-                        <label class="btn btn-outline-primary categoryBtn" data-category="TO DO" data-testid="category-todo">
-                            <input type="radio" name="category" autocomplete="off"> To Do
-                        </label>
-                        <label class="btn btn-outline-primary categoryBtn" data-category="Exercise" data-testid="category-exercise">
-                            <input type="radio" name="category" autocomplete="off"> Exercise
-                        </label>
+                    <div id="categoryButtons" class="d-flex justify-content-between flex-wrap" data-testid="category-buttons">
+                        <button class="btn btn-primary m-1" data-category="Home" data-testid="category-home">Home</button>
+                        <button class="btn btn-primary m-1" data-category="Medication" data-testid="category-medication">Medication</button>
+                        <button class="btn btn-primary m-1" data-category="Bill" data-testid="category-bill">Bill</button>
+                        <button class="btn btn-primary m-1" data-category="Health" data-testid="category-health">Health</button>
+                        <button class="btn btn-primary m-1" data-category="Pain" data-testid="category-pain">Pain</button>
+                        <button class="btn btn-primary m-1" data-category="Food" data-testid="category-food">Food</button>
+                        <button class="btn btn-primary m-1" data-category="TO DO" data-testid="category-todo">To Do</button>
+                        <button class="btn btn-primary m-1" data-category="Exercise" data-testid="category-exercise">Exercise</button>
                     </div>
                     <div class="form-group mt-3">
                         <input type="text" id="costInput" class="form-control hidden" placeholder="$" disabled data-testid="cost-input">
