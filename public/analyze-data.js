@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const textCounts = {};
         const dateCounts = {};
         let lastEntryDate = null;
+        let entryTime = null;
 
         data.forEach(item => {
             // Count categories
@@ -71,7 +72,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Determine last entry date
-            const entryDate = new Date(item.timestamp);
+            const entryDate = item.timestamp;
+            entryTime = item.month + ' ' + new Date(item.timestamp).getDate() + ' @ ' + item.time;
+
             if (!lastEntryDate || entryDate > lastEntryDate) {
                 lastEntryDate = entryDate;
             }
@@ -102,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Update last entry date and time
-        document.getElementById('last-entry-date-time').textContent = lastEntryDate.toLocaleString();
+        document.getElementById('last-entry-date-time').textContent = entryTime;
     }
 
     // Sorting function
