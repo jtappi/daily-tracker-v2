@@ -83,14 +83,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
             function editRow(index) {
                 const row = tbody.rows[index];
+
+                const dateInput = document.createElement('input');
+                dateInput.type = 'datetime-local';
+                dateInput.id = 'entryDate';
+                dateInput.className = 'form-control';
+                dateInput.classList.add('d-block');
+
                 row.classList.add('editing-row');
                 const nonEditableIds = ['time-cell', 'actions-cell', 'month-cell', 'day-cell'];
                 for (let i = 0; i < row.cells.length - 1; i++) {
                     if (!nonEditableIds.includes(row.cells[i].id)) {
-                        row.cells[i].contentEditable = 'true';                        
+                        row.cells[i].contentEditable = 'true';
+                    }
+                    if (nonEditableIds.includes(row.cells[i].id)) {
+                        if (row.cells[i].id === 'time-cell') {
+                            row.cells[i].innerHTML = '';
+                            row.cells[i].appendChild(dateInput);                            
+                        }
                     }
                     row.cells[i].removeEventListener('click', filterHandler); // Remove filter functionality
                 }
+
                 toggleIcons(row, true);
                 Array.from(tbody.rows).forEach((r, i) => {
                     if (i !== index) {
@@ -101,6 +115,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             function saveRow(index) {
+                // Prep Date values
+                const dateInput = document.getElementById('entryDate');
+                const date = dateInput.value;
+                const day = new Date(date).toLocaleString('en-US', { timeZone: 'America/New_York', weekday: 'long' });
+                const month = new Date(date).toLocaleString('en-US', { timeZone: 'America/New_York', month: 'long' });
+                const time = new Date(date).toLocaleTimeString('en-US', { timeZone: 'America/New_York' });
+
                 const row = tbody.rows[index];
                 const updatedItem = {
                     id: filteredData[index].id, // Ensure the id is included
@@ -108,9 +129,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     category: row.cells[1].innerText,
                     cost: row.cells[2].innerText,
                     notes: row.cells[3].innerText,
-                    // day: row.cells[4].innerText,
-                    // month: row.cells[5].innerText,
-                    // timestamp: row.cells[6].innerText
+                    day,
+                    month,
+                    time,
+                    timestamp: date
                 };
 
                 fetch(`/data/${updatedItem.id}`, {
