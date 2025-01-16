@@ -190,81 +190,109 @@ document.addEventListener('DOMContentLoaded', () => {
                 };
             }
 
-            // Fetch data and render chart
-            fetch('/data')
-            .then(response => response.json())
-            .then(data => {
-                // Filter data for today's events
-                const today = new Date().toISOString().split('T')[0];
-                console.log(`Today: ${today}`);
-                const todaysData = data.filter(item => item.timestamp.startsWith("2025-01-15"));
-                console.log(`Today's data: ${JSON.stringify(todaysData)}`);
+            let chartInstance = null; // Variable to keep track of the chart instance
 
-                const timeValues = todaysData.map(item => new Date(item.timestamp).toLocaleTimeString());
-                const textValues = todaysData.map(item => item.text);
+            // Function to fetch data and render chart
+            function fetchDataAndRenderChart(date) {
+                fetch('/data')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Filter data for the selected date
+                        const todaysData = data.filter(item => item.timestamp.startsWith(date));
 
-                // Extract unique text values
-                const uniqueTextValues = [...new Set(textValues)];
+                        const timeValues = todaysData.map(item => new Date(item.timestamp).toLocaleTimeString());
+                        const textValues = todaysData.map(item => item.text);
 
-                const ctx = document.getElementById('myChart').getContext('2d');
-                new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: timeValues,
-                        datasets: [{
-                            label: 'Event',
-                            data: textValues.map((text, index) => uniqueTextValues.indexOf(text) + 1), // Map text values to their unique index
-                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            borderWidth: 1,
-                            fill: false,
-                            pointBackgroundColor: 'rgba(75, 192, 192, 1)',
-                            pointBorderColor: '#fff',
-                            pointHoverBackgroundColor: '#fff',
-                            pointHoverBorderColor: 'rgba(75, 192, 192, 1)',
-                            pointRadius: 5,
-                            pointHoverRadius: 7,
-                            pointHitRadius: 10,
-                            pointStyle: 'circle'
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            x: {
-                                title: {
-                                    display: false,
-                                    text: 'Time'
-                                }
-                            },
-                            y: {
-                                title: {
-                                    display: false,
-                                    text: 'Event'
-                                },
-                                ticks: {
-                                    callback: function(value, index, values) {
-                                        return uniqueTextValues[value - 1]; // Display unique text values
-                                    }
-                                }
-                            }
-                        },
-                        plugins: {
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        const index = context.dataIndex;
-                                        return `Event: ${textValues[index]}`;
-                                    }
-                                }
-                            }
+                        // Extract unique text values
+                        const uniqueTextValues = [...new Set(textValues)];
+
+                        const ctx = document.getElementById('myChart').getContext('2d');
+
+                        // Destroy the existing chart instance if it exists
+                        if (chartInstance) {
+                            chartInstance.destroy();
                         }
-                    }
-                });
-            })
-            .catch(error => {
-                console.error('There was a problem with the fetch operation:', error);
+
+                        // Create a new chart instance
+                        chartInstance = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: timeValues,
+                                datasets: [{
+                                    label: 'Event',
+                                    data: textValues.map((text, index) => uniqueTextValues.indexOf(text) + 1), // Map text values to their unique index
+                                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                    borderColor: 'rgba(75, 192, 192, 1)',
+                                    borderWidth: 1,
+                                    fill: false,
+                                    pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                                    pointBorderColor: '#fff',
+                                    pointHoverBackgroundColor: '#fff',
+                                    pointHoverBorderColor: 'rgba(75, 192, 192, 1)',
+                                    pointRadius: 5,
+                                    pointHoverRadius: 7,
+                                    pointHitRadius: 10,
+                                    pointStyle: 'circle'
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    x: {
+                                        title: {
+                                            display: false,
+                                            text: 'Time'
+                                        }
+                                    },
+                                    y: {
+                                        title: {
+                                            display: false,
+                                            text: 'Event'
+                                        },
+                                        ticks: {
+                                            callback: function(value, index, values) {
+                                                return uniqueTextValues[value - 1]; // Display unique text values
+                                            }
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    tooltip: {
+                                        callbacks: {
+                                            label: function(context) {
+                                                const index = context.dataIndex;
+                                                return `Event: ${textValues[index]}`;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    })
+                    .catch(error => {
+                        console.error('There was a problem with the fetch operation:', error);
+                    });
+            }
+
+            // Function to get the local date in yyyy-MM-dd format
+            function getLocalDate() {
+                return new Date().toLocaleDateString('en-CA'); // 'en-CA' locale formats date as yyyy-MM-dd
+            }
+
+            // Add event listener to the date input
+            const chartDateInput = document.getElementById('chartDate');
+            const today = getLocalDate();
+            chartDateInput.value = today;
+
+            const initialDate = chartDateInput.value === '' ? getLocalDate() : chartDateInput.value;
+
+            chartDateInput.addEventListener('change', (event) => {
+                const selectedDate = event.target.value === '' ? getLocalDate() : event.target.value;
+                fetchDataAndRenderChart(selectedDate);
             });
 
+            // Initial fetch and render for today's date
+            fetchDataAndRenderChart(today);
+            
             function deleteRow(index) {
                 const id = filteredData[index].id;
                 fetch(`/data/${id}`, {
