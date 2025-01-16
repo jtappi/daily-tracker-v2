@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
-const https = require('https'); // SSL stuff, it works
+// const https = require('https'); // SSL stuff, it works
 const fs = require('fs');
 const path = require('path');
 const helmet = require('helmet');
@@ -51,7 +51,7 @@ app.use(limiter);
 
 // Middleware to set the X-Forwarded-Proto header to http
 app.use((req, res, next) => {
-    req.headers['x-forwarded-proto'] = 'https';
+    req.headers['x-forwarded-proto'] = 'http';
     next();
 });
 
@@ -64,7 +64,7 @@ app.use(session({
     secret: secretKey,
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true } // Set to true if using HTTPS
+    cookie: { secure: false } // Set to true if using HTTPS
 }));
 
 // Authentication middleware
@@ -273,19 +273,19 @@ app.get('/analyze-data', (req, res) => {
     res.render('analyze-data', { nonce: res.locals.nonce });
 });
 
-// SSL stuff it works
-// Load SSL certificates
-const sslOptions = {
-    key: fs.readFileSync('key.pem'),
-    cert: fs.readFileSync('cert.pem')
-};
+// // SSL stuff it works
+// // Load SSL certificates
+// const sslOptions = {
+//     key: fs.readFileSync('key.pem'),
+//     cert: fs.readFileSync('cert.pem')
+// };
 
-// Start HTTPS server
-https.createServer(sslOptions, app).listen(port, () => {
-    console.log(`Server is running on https://localhost:${port}`);
-});
-
-// // Start server
-// app.listen(port, () => {
-//     console.log(`Server is running on port http://localhost:${port}`);
+// // Start HTTPS server
+// https.createServer(sslOptions, app).listen(port, () => {
+//     console.log(`Server is running on https://localhost:${port}`);
 // });
+
+// Start server
+app.listen(port, () => {
+    console.log(`Server is running on port http://localhost:${port}`);
+});
