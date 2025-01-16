@@ -6,6 +6,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    const backBtn = document.getElementById('backBtn');
+    if (backBtn) {
+        backBtn.addEventListener('click', () => {
+            window.location.href = '/index.html';
+        });
+    }
+
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', () => {

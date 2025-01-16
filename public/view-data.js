@@ -1,7 +1,3 @@
-document.getElementById('backBtn').addEventListener('click', () => {
-    window.location.href = 'index.html';
-});
-
 document.addEventListener('DOMContentLoaded', () => {
     fetch('/data')
         .then(response => {
