@@ -1,21 +1,41 @@
 document.addEventListener('DOMContentLoaded', () => {
     const categoryButtons = document.querySelectorAll('#categoryButtons .btn');
+    const costInput = document.getElementById('costInput');
+    const caloriesInput = document.getElementById('caloriesInput');
+    const notesInput = document.getElementById('notesInput');
+
     categoryButtons.forEach(button => {
         button.addEventListener('click', () => {
-            categoryButtons.forEach(btn => btn.classList.remove('btn-primary'));
-            categoryButtons.forEach(btn => btn.classList.add('btn-secondary'));
+            categoryButtons.forEach(btn => {
+                btn.classList.remove('btn-primary');
+                btn.classList.add('btn-secondary');
+            });
             button.classList.remove('btn-secondary');
             button.classList.add('btn-primary');
+
+            // Enable inputs when a category is selected
+            costInput.disabled = false;
+            notesInput.disabled = false;
+
+            // Enable calories input only if the Food category is selected
+            if (button.dataset.category === 'Food') {
+                caloriesInput.disabled = false;
+            } else {
+                caloriesInput.disabled = true;
+            }
         });
     });
-});
 
-document.addEventListener('DOMContentLoaded', () => {
+    // Prevent decimal input in caloriesInput
+    caloriesInput.addEventListener('input', () => {
+        caloriesInput.value = caloriesInput.value.replace(/[^0-9]/g, '');
+    });
+
     const submitBtn = document.getElementById('submitBtn');
     if (submitBtn) {
         submitBtn.addEventListener('click', () => {
             const itemName = document.getElementById('itemName').value;
-            const selectedCategory = document.querySelector('.categoryBtn input:checked')?.parentElement.dataset.category || null;
+            const selectedCategory = document.querySelector('#categoryButtons .btn-primary').dataset.category;  // Get the selected category
             const cost = document.getElementById('costInput')?.value || null;
             const notes = document.getElementById('notesInput')?.value || null;
             const calories = document.getElementById('caloriesInput')?.value || null;
@@ -159,12 +179,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('itemName').value = '';
             document.getElementById('suggestions').innerHTML = '';
             document.getElementById('suggestions').classList.remove('show');
-            document.getElementById('categoryButtons').classList.add('hidden');
-            document.getElementById('costInput').classList.add('hidden');
-            document.getElementById('costInput').disabled = true;
-            document.getElementById('notesInput').classList.add('hidden');
-            document.getElementById('notesInput').disabled = true;
-            document.getElementById('caloriesContainer').classList.add('hidden');
             document.querySelectorAll('.categoryBtn').forEach(btn => btn.classList.remove('selected'));
         })
         .catch((error) => {

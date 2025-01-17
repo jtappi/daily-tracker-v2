@@ -9,7 +9,11 @@
 - Fix the logout func.  it doesn't work as expected
 - overaly d-none look at the style and make it lighter
 - fix the analyze-data hide/view tabs. 
-- move the header into a single file...code optimization is def needed
+- the Edit button - date entry is not putting in the correct time format .  this line dateInput.type = 'datetime-local';
+- When I click Edit, it needs to populate the existing date and time
+- fix the issue with the category and text fields always being visible.  
+- add required fields before clicking submit or save on the edit screen
+- calories are missing
 
 # My Node.js Project
 
