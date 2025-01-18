@@ -103,15 +103,22 @@ app.get('/login.html', (req, res) => {
 // Submit new entry
 app.post('/submit', (req, res) => {
     const { text, category, cost, notes, calories } = req.body;
+    
+    // Validate text and category
     if (!text || typeof text !== 'string' || text.trim() === '') {
-        return res.status(400).json({ message: 'Invalid input' });
+        return res.status(400).json({ message: 'Text is required' });
     }
+    
+    if (!category || typeof category !== 'string' || category.trim() === '') {
+        return res.status(400).json({ message: 'Category is required' });
+    }
+
     const sanitizedText = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     const now = new Date();
     const timestamp = toISOStringEST(now);
     const entry = {
         text: sanitizedText,
-        category: category || null,
+        category: category,
         cost: cost || null,
         notes: notes || null,
         calories: calories || null,

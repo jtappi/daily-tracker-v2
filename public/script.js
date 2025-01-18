@@ -90,24 +90,30 @@ document.addEventListener('DOMContentLoaded', () => {
                             a.classList.add('dropdown-item');
                             a.textContent = item.text;
                             a.addEventListener('click', () => {
+                                // Set text value
                                 document.getElementById('itemName').value = item.text;
                                 suggestions.innerHTML = '';
                                 suggestions.classList.remove('show');
+
+                                // Set category if exists
                                 if (item.category) {
-                                    // Reset any currently selected category
                                     const currentSelected = document.querySelector('#categoryButtons .btn-primary');
                                     if (currentSelected) {
                                         currentSelected.classList.replace('btn-primary', 'btn-secondary');
                                     }
-                                    // Set new category
-                                    document.querySelector(`[data-category="${item.category}"]`).classList.replace('btn-secondary', 'btn-primary');
+                                    const categoryButton = document.querySelector(`[data-category="${item.category}"]`);
+                                    if (categoryButton) {
+                                        categoryButton.classList.replace('btn-secondary', 'btn-primary');
+                                        handleCategorySelection(item.category);
+                                    }
                                 }
-                                if (item.cost) {
-                                    document.getElementById('costInput').value = item.cost;
-                                }
-                                if (item.notes) {
-                                    document.getElementById('notesInput').value = item.notes;
-                                }
+
+                                // Set additional fields
+                                if (item.cost) document.getElementById('costInput').value = item.cost;
+                                if (item.notes) document.getElementById('notesInput').value = item.notes;
+                                
+                                // Check form validity to enable submit
+                                checkFormValidity();
                             });
                             suggestions.appendChild(a);
                         });
@@ -252,4 +258,33 @@ document.addEventListener('DOMContentLoaded', () => {
             categoryButtons.classList.add('hidden');
         }
     });
+
+    function checkFormValidity() {
+        const text = document.getElementById('itemName').value.trim();
+        const category = document.querySelector('#categoryButtons .btn-primary');
+        const submitBtn = document.getElementById('submitBtn');
+        
+        submitBtn.disabled = !text || !category;
+    }
+
+    document.getElementById('itemName').addEventListener('input', checkFormValidity);
+
+    document.querySelectorAll('#categoryButtons .btn').forEach(button => {
+        button.addEventListener('click', () => {
+            // Remove selected class from all buttons
+            document.querySelectorAll('#categoryButtons .btn').forEach(btn => {
+                btn.classList.remove('btn-primary');
+                btn.classList.add('btn-secondary');
+            });
+            
+            // Add selected class to clicked button
+            button.classList.remove('btn-secondary');
+            button.classList.add('btn-primary');
+            
+            checkFormValidity();
+        });
+    });
+
+    // Initial state
+    document.getElementById('submitBtn').disabled = true;
 });
