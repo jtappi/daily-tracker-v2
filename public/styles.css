@@ -1,13 +1,14 @@
 /* Variables */
 :root {
-  --primary-color: #007bff;
-  --secondary-color: #6c757d;
-  --border-color: #ced4da;
-  --shadow-color: rgba(0, 0, 0, 0.1);
-  --text-color: #333;
-  --background-color: #fff;
-  --spacing-unit: 0.5rem;
-  --input-height: 38px;
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --border-color: #ced4da;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --text-color: #333;
+    --background-color: #fff;
+    --spacing-unit: 0.5rem;
+    --input-height: 38px;
+    --border-radius: 0.25rem;
 }
 
 #viewDataBtn {
@@ -146,7 +147,7 @@ body {
 }
 
 #costInput, #notesInput {
-    margin-top: 10px;
+    margin-top: 0;  /* Override previous margin */
 }
 
 .tooltip-inner {
@@ -418,8 +419,8 @@ body {
 /* Input Layout */
 .input-row {
     display: flex;
-    gap: var(--spacing-unit) * 2;
-    margin: var(--spacing-unit) * 2 0;
+    gap: var(--spacing-unit);
+    margin: 0;  /* Remove margin to prevent spacing issues */
     align-items: center;
 }
 
@@ -427,6 +428,7 @@ body {
     flex: 1;
     min-width: 200px;
     display: flex;
+    margin: 0;
 }
 
 /* Input states */
@@ -461,4 +463,32 @@ body {
     #categoryButtons {
         grid-template-columns: repeat(8, 1fr);
     }
+}
+
+/* Standardize input heights */
+.input-group,
+.input-group-prepend,
+.input-group-text,
+.form-control {
+    height: var(--input-height);
+    line-height: var(--input-height);
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.input-group-text {
+    padding: 0 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-control {
+    padding: 0 0.75rem;  /* Add horizontal padding only */
+}
+
+/* Standardize form groups */
+.form-group {
+    margin-bottom: var(--spacing-unit);
 }
