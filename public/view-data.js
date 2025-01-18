@@ -81,15 +81,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
+            function getTimestampById(index) {
+                const item = data[index];
+                return item ? item.timestamp : null;
+            }
+
             function editRow(index) {
                 const row = tbody.rows[index];
-
+                const timestamp = new Date(getTimestampById(index));
                 const dateInput = document.createElement('input');
                 dateInput.type = 'datetime-local';
                 dateInput.id = 'entryDate';
                 dateInput.className = 'form-control';
                 dateInput.classList.add('d-block');
-
+                
+                // Convert UTC to EST for display
+                const estTime = new Date(timestamp.getTime() - (5 * 60 * 60 * 1000));
+                const modTimeStamp = estTime.toISOString().slice(0, 16);
+                dateInput.value = modTimeStamp;
+                dateInput.dataset.timezone = 'America/New_York'; // Store timezone info
+                
                 row.classList.add('editing-row');
                 const nonEditableIds = ['time-cell', 'actions-cell', 'month-cell', 'day-cell'];
                 for (let i = 0; i < row.cells.length - 1; i++) {
@@ -99,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (nonEditableIds.includes(row.cells[i].id)) {
                         if (row.cells[i].id === 'time-cell') {
                             row.cells[i].innerHTML = '';
-                            row.cells[i].appendChild(dateInput);                            
+                            row.cells[i].appendChild(dateInput);
                         }
                     }
                     row.cells[i].removeEventListener('click', filterHandler); // Remove filter functionality
@@ -114,6 +125,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 overlay.classList.remove('d-none');
             }
 
+            function toISOStringEST(date) {
+                const dateEST = new Date(date.getTime() - (5 * 60 * 60 * 1000)); // Subtract 5 hours for EST
+                return dateEST.toISOString().slice(0, -1);
+            }
+
+            function convertDatetimeLocalToISO(datetimeLocalValue) {
+                // Create a Date object from the datetime-local value
+                const date = new Date(datetimeLocalValue);
+                
+                // Check if valid date
+                if (isNaN(date.getTime())) {
+                    return null;
+                }
+                
+                // Convert to ISO string
+                return toISOStringEST(date);
+            }
+
             function saveRow(index) {
                 // Prep Date values
                 const dateInput = document.getElementById('entryDate');
@@ -121,6 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const day = new Date(date).toLocaleString('en-US', { timeZone: 'America/New_York', weekday: 'long' });
                 const month = new Date(date).toLocaleString('en-US', { timeZone: 'America/New_York', month: 'long' });
                 const time = new Date(date).toLocaleTimeString('en-US', { timeZone: 'America/New_York' });
+                const timestamp = convertDatetimeLocalToISO(dateInput.value);
 
                 const row = tbody.rows[index];
                 const updatedItem = {
@@ -132,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     day,
                     month,
                     time,
-                    timestamp: date
+                    timestamp
                 };
 
                 fetch(`/data/${updatedItem.id}`, {
@@ -154,7 +184,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         for (let i = 0; i < row.cells.length - 1; i++) {
                             row.cells[i].contentEditable = 'false';
                             row.cells[i].addEventListener('click', filterHandler); // Re-add filter functionality
-                        }
+                            if (row.cells[i].id === 'time-cell') {
+                                row.cells[i].innerHTML = time;
+                            }
+                        }                        
                         toggleIcons(row, false);
                         row.classList.remove('editing-row');
                         Array.from(tbody.rows).forEach((r) => {

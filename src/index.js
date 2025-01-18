@@ -26,8 +26,8 @@ const storedHashedPassword = process.env.HASHED_PASSWORD;
 
 function toISOStringEST(date) {
     const dateEST = new Date(date.getTime() - (5 * 60 * 60 * 1000)); // Subtract 5 hours for EST
-    return dateEST.toISOString();
-  }
+    return dateEST.toISOString().slice(0, -1);
+}
 
 // Middleware to generate a nonce
 app.use((req, res, next) => {
