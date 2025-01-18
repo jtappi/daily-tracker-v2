@@ -4,27 +4,40 @@ document.addEventListener('DOMContentLoaded', () => {
     const caloriesInput = document.getElementById('caloriesInput');
     const notesInput = document.getElementById('notesInput');
 
-    categoryButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            categoryButtons.forEach(btn => {
+    let selectedCategory = null;
+
+    document.querySelectorAll('#categoryButtons button').forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove selected class from all buttons
+            document.querySelectorAll('#categoryButtons button').forEach(btn => {
                 btn.classList.remove('btn-primary');
                 btn.classList.add('btn-secondary');
             });
-            button.classList.remove('btn-secondary');
-            button.classList.add('btn-primary');
-
-            // Enable inputs when a category is selected
-            costInput.disabled = false;
-            notesInput.disabled = false;
-
-            // Enable calories input only if the Food category is selected
-            if (button.dataset.category === 'Food') {
-                caloriesInput.disabled = false;
-            } else {
-                caloriesInput.disabled = true;
-            }
+            
+            // Add selected class to clicked button
+            this.classList.remove('btn-secondary');
+            this.classList.add('btn-primary');
+            
+            // Update selected category
+            selectedCategory = this.dataset.category;
+            
+            // Enable/disable relevant inputs based on category
+            handleCategorySelection(selectedCategory);
         });
     });
+
+    function handleCategorySelection(category) {
+        // Enable inputs when a category is selected
+        costInput.disabled = false;
+        notesInput.disabled = false;
+
+        // Enable calories input only if the Food category is selected
+        if (category === 'Food') {
+            caloriesInput.disabled = false;
+        } else {
+            caloriesInput.disabled = true;
+        }
+    }
 
     // Prevent decimal input in caloriesInput
     caloriesInput.addEventListener('input', () => {
@@ -81,6 +94,12 @@ document.addEventListener('DOMContentLoaded', () => {
                                 suggestions.innerHTML = '';
                                 suggestions.classList.remove('show');
                                 if (item.category) {
+                                    // Reset any currently selected category
+                                    const currentSelected = document.querySelector('#categoryButtons .btn-primary');
+                                    if (currentSelected) {
+                                        currentSelected.classList.replace('btn-primary', 'btn-secondary');
+                                    }
+                                    // Set new category
                                     document.querySelector(`[data-category="${item.category}"]`).classList.replace('btn-secondary', 'btn-primary');
                                 }
                                 if (item.cost) {
