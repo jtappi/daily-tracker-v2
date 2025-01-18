@@ -249,13 +249,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 fetch('/data')
                     .then(response => response.json())
                     .then(data => {
-                        // Filter data for the selected date
-                        const todaysData = data.filter(item => item.timestamp.startsWith(date));
+                        // Filter and sort data for the selected date
+                        const todaysData = data
+                            .filter(item => item.timestamp.startsWith(date))
+                            .sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
 
                         const timeValues = todaysData.map(item => item.time);
                         const categoryValues = todaysData.map(item => item.category || 'Uncategorized');
-
-                        // Extract unique category values
                         const uniqueCategoryValues = [...new Set(categoryValues)];
 
                         const ctx = document.getElementById('myChart').getContext('2d');
@@ -270,7 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 labels: timeValues,
                                 datasets: [{
                                     label: 'Category',
-                                    data: categoryValues.map((category, index) => uniqueCategoryValues.indexOf(category) + 1),
+                                    data: categoryValues.map(category => uniqueCategoryValues.indexOf(category) + 1),
                                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                                     borderColor: 'rgba(75, 192, 192, 1)',
                                     borderWidth: 1,
@@ -299,7 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                             text: 'Category'
                                         },
                                         ticks: {
-                                            callback: function(value, index, values) {
+                                            callback: function(value) {
                                                 return uniqueCategoryValues[value - 1];
                                             }
                                         }
@@ -310,7 +310,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                         callbacks: {
                                             label: function(context) {
                                                 const index = context.dataIndex;
-                                                return `${todaysData[index].text}`;
+                                                return `Category: ${categoryValues[index]} - ${todaysData[index].text}`;
                                             }
                                         }
                                     }
