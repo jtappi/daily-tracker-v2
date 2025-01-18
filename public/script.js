@@ -1,29 +1,33 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Element references
     const categoryButtons = document.querySelectorAll('#categoryButtons .btn');
     const costInput = document.getElementById('costInput');
     const caloriesInput = document.getElementById('caloriesInput');
     const notesInput = document.getElementById('notesInput');
-
+    const submitBtn = document.getElementById('submitBtn');
     let selectedCategory = null;
 
-    document.querySelectorAll('#categoryButtons button').forEach(button => {
-        button.addEventListener('click', function() {
-            // Remove selected class from all buttons
-            document.querySelectorAll('#categoryButtons button').forEach(btn => {
-                btn.classList.remove('btn-primary');
-                btn.classList.add('btn-secondary');
-            });
-            
-            // Add selected class to clicked button
-            this.classList.remove('btn-secondary');
-            this.classList.add('btn-primary');
-            
-            // Update selected category
-            selectedCategory = this.dataset.category;
-            
-            // Enable/disable relevant inputs based on category
-            handleCategorySelection(selectedCategory);
-        });
+    // Single category button click handler
+    function handleCategoryClick(button) {
+        if (button.classList.contains('btn-primary')) {
+            // Deselect if already selected
+            button.classList.replace('btn-primary', 'btn-secondary');
+            selectedCategory = null;
+        } else {
+            // Deselect all others
+            categoryButtons.forEach(btn => btn.classList.replace('btn-primary', 'btn-secondary'));
+            // Select this one
+            button.classList.replace('btn-secondary', 'btn-primary');
+            selectedCategory = button.dataset.category;
+        }
+        
+        handleCategorySelection(selectedCategory);
+        checkFormValidity();
+    }
+
+    // Add click listener to each category button
+    categoryButtons.forEach(button => {
+        button.addEventListener('click', () => handleCategoryClick(button));
     });
 
     function handleCategorySelection(category) {
@@ -44,7 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
         caloriesInput.value = caloriesInput.value.replace(/[^0-9]/g, '');
     });
 
-    const submitBtn = document.getElementById('submitBtn');
     if (submitBtn) {
         submitBtn.addEventListener('click', () => {
             const itemName = document.getElementById('itemName').value;
@@ -269,22 +272,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('itemName').addEventListener('input', checkFormValidity);
 
-    document.querySelectorAll('#categoryButtons .btn').forEach(button => {
-        button.addEventListener('click', () => {
-            // Remove selected class from all buttons
-            document.querySelectorAll('#categoryButtons .btn').forEach(btn => {
-                btn.classList.remove('btn-primary');
-                btn.classList.add('btn-secondary');
-            });
-            
-            // Add selected class to clicked button
-            button.classList.remove('btn-secondary');
-            button.classList.add('btn-primary');
-            
-            checkFormValidity();
-        });
-    });
-
     // Initial state
-    document.getElementById('submitBtn').disabled = true;
+    submitBtn.disabled = true;
 });
