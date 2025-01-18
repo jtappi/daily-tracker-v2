@@ -186,6 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             row.cells[i].addEventListener('click', filterHandler); // Re-add filter functionality
                             if (row.cells[i].id === 'time-cell') {
                                 row.cells[i].innerHTML = time;
+                                row.cells[i].value = time;
                             }
                         }                        
                         toggleIcons(row, false);
