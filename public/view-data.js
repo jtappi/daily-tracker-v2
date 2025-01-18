@@ -253,26 +253,24 @@ document.addEventListener('DOMContentLoaded', () => {
                         const todaysData = data.filter(item => item.timestamp.startsWith(date));
 
                         const timeValues = todaysData.map(item => item.time);
-                        const textValues = todaysData.map(item => item.text);
+                        const categoryValues = todaysData.map(item => item.category || 'Uncategorized');
 
-                        // Extract unique text values
-                        const uniqueTextValues = [...new Set(textValues)];
+                        // Extract unique category values
+                        const uniqueCategoryValues = [...new Set(categoryValues)];
 
                         const ctx = document.getElementById('myChart').getContext('2d');
 
-                        // Destroy the existing chart instance if it exists
                         if (chartInstance) {
                             chartInstance.destroy();
                         }
 
-                        // Create a new chart instance
                         chartInstance = new Chart(ctx, {
                             type: 'line',
                             data: {
                                 labels: timeValues,
                                 datasets: [{
-                                    label: 'Event',
-                                    data: textValues.map((text, index) => uniqueTextValues.indexOf(text) + 1), // Map text values to their unique index
+                                    label: 'Category',
+                                    data: categoryValues.map((category, index) => uniqueCategoryValues.indexOf(category) + 1),
                                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                                     borderColor: 'rgba(75, 192, 192, 1)',
                                     borderWidth: 1,
@@ -298,11 +296,11 @@ document.addEventListener('DOMContentLoaded', () => {
                                     y: {
                                         title: {
                                             display: false,
-                                            text: 'Event'
+                                            text: 'Category'
                                         },
                                         ticks: {
                                             callback: function(value, index, values) {
-                                                return uniqueTextValues[value - 1]; // Display unique text values
+                                                return uniqueCategoryValues[value - 1];
                                             }
                                         }
                                     }
@@ -312,7 +310,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                         callbacks: {
                                             label: function(context) {
                                                 const index = context.dataIndex;
-                                                return `Event: ${textValues[index]}`;
+                                                return `${todaysData[index].text}`;
                                             }
                                         }
                                     }
