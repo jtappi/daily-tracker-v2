@@ -268,6 +268,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const submitBtn = document.getElementById('submitBtn');
         
         submitBtn.disabled = !text || !category;
+        if(submitBtn.disabled) {
+            document.getElementById('costInput').classList.add('hidden');
+            document.getElementById('costInput').disabled = true;
+            document.getElementById('notesInput').classList.add('hidden');
+            document.getElementById('notesInput').disabled = true;
+        }
     }
 
     document.getElementById('itemName').addEventListener('input', checkFormValidity);

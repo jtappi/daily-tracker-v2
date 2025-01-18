@@ -1,3 +1,15 @@
+/* Variables */
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --border-color: #ced4da;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --text-color: #333;
+  --background-color: #fff;
+  --spacing-unit: 0.5rem;
+  --input-height: 38px;
+}
+
 #viewDataBtn {
     position: relative;
     top: 0;
@@ -37,6 +49,7 @@
     height: auto;
 }
 
+/* Base styles */
 body {
     font-family: Arial, sans-serif;
 }
@@ -44,8 +57,7 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
-    position: relative;
+    padding: var(--spacing-unit) * 2;
 }
 
 .equal-height {
@@ -64,12 +76,13 @@ body {
     height: 100%;
 }
 
+/* Cards */
 .card {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 20px;
-    background-color: #fff;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--spacing-unit);
+    padding: var(--spacing-unit) * 2;
+    background-color: var(--background-color);
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -151,11 +164,12 @@ body {
 }
 
 /* Remove any existing categoryButtons styles */
+/* Category Buttons */
 #categoryButtons {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 columns for both mobile and desktop */
-    gap: 0.5rem;
-    margin-top: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: var(--spacing-unit);
+    margin-top: var(--spacing-unit) * 2;
     width: 100%;
 }
 
@@ -352,4 +366,99 @@ body {
 .btn-secondary {
     background-color: #6c757d;
     color: white;
+}
+
+/* Input Layout Styles */
+.input-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1rem 0;
+    align-items: flex-start;
+}
+
+.input-group {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    align-items: center;
+}
+
+.input-group-prepend {
+    display: flex;
+    align-items: center;
+}
+
+.input-group-text {
+    padding: .375rem .75rem;
+    border: 1px solid #ced4da;
+    background-color: #e9ecef;
+    border-radius: .25rem 0 0 .25rem;
+    height: 38px;
+    display: flex;
+    align-items: center;
+}
+
+.form-control {
+    height: 38px;
+    border-radius: 0 .25rem .25rem 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .input-row {
+        flex-direction: column;
+    }
+
+    .input-group {
+        width: 100%;
+    }
+}
+
+/* Input Layout */
+.input-row {
+    display: flex;
+    gap: var(--spacing-unit) * 2;
+    margin: var(--spacing-unit) * 2 0;
+    align-items: center;
+}
+
+.input-group {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+}
+
+/* Input states */
+.form-control:disabled,
+.input-group-text:disabled {
+    background-color: var(--secondary-color);
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.input-group .form-control:disabled {
+    pointer-events: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .input-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .input-group {
+        width: 100%;
+    }
+
+    #categoryButtons {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 769px) {
+    #categoryButtons {
+        grid-template-columns: repeat(8, 1fr);
+    }
 }
