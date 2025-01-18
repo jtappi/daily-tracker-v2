@@ -277,6 +277,12 @@ body {
     .modal-footer .btn {
         font-size: 0.875rem;
     }
+
+    .edit-icon, .delete-icon, .save-icon, .undo-icon {
+        font-size: 1.5rem;
+        padding: 8px;
+        margin-right: 15px;
+    }
 }
 
 /* Desktop and up */
