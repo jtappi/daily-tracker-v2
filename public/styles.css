@@ -431,6 +431,22 @@ body {
     margin: 0;
 }
 
+.input-group-text {
+    padding: 0 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-color);
+    background-color: #e9ecef;
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+
+.form-control {
+    height: var(--input-height);
+    padding: 0 0.75rem;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+}
+
 /* Input states */
 .form-control:disabled,
 .input-group-text:disabled {
@@ -491,4 +507,62 @@ body {
 /* Standardize form groups */
 .form-group {
     margin-bottom: var(--spacing-unit);
+}
+
+/* Login Page Specific */
+.login-card {
+    box-shadow: var(--shadow-color);
+    border-radius: var(--border-radius);
+    background: var(--background-color);
+}
+
+#loginForm .form-control {
+    height: var(--input-height);
+    font-size: 16px; /* Prevents zoom on iOS */
+    padding: 0.75rem;
+}
+
+#loginForm .btn {
+    height: var(--input-height);
+    font-size: 16px;
+}
+
+/* Remove duplicate input-row styles */
+.input-row {
+    display: flex;
+    gap: var(--spacing-unit);
+    margin: 0;
+    align-items: center;
+}
+
+/* Consolidate input group styles */
+.input-group {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    height: var(--input-height);
+}
+
+/* Single media query block */
+@media (max-width: 768px) {
+    .input-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .input-group {
+        width: 100%;
+    }
+
+    #categoryButtons {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    #loginForm .form-control,
+    #loginForm .btn {
+        font-size: 16px;
+        height: 48px; /* Larger touch targets on mobile */
+    }
 }
