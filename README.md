@@ -1,8 +1,6 @@
 # TO DO
 - Add the ability to upload a receipt
 - Document DB instead of JSON
-- Timestamp remains GMT but time should be converted to EST
-- Add dropdown to category in edit mode on view-data
 - Add up to three prefill values during search in the dropdown.  Only 1 on mobile maybe?
 - if authenticated, change the back to login button to logout
 - Add the back button to the analyze page.  rename that and the other back button to the same name and use the logic from navigation.js.  Add a new button called home and add it to the analyze and view data pages.  remove the back buttons
@@ -12,6 +10,8 @@
 - fix the issue with the category and text fields always being visible.  
 - add required fields before clicking submit or save on the edit screen
 - add work category, or maybe travel, or should i just use google api???
+- notes column needs to be updated to show all of the notes.  Maybe on the graph as well???
+- Update  top 5 quick entry to ask for notes and then submit
 
 # My Node.js Project
 

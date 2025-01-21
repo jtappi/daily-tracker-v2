@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('/data')
+// Add at top of file, after DOMContentLoaded
+const CATEGORIES = ['Home', 'Medication', 'Bill', 'Health', 'Pain', 'Food', 'TO DO', 'Exercise'];
+
+fetch('/data')
         .then(response => {
             if (response.status > 400) {
                 return response.json();
@@ -95,13 +98,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 dateInput.className = 'form-control';
                 dateInput.classList.add('d-block');
                 
-                // Convert UTC to EST for display
                 const estTime = new Date(timestamp.getTime() - (5 * 60 * 60 * 1000));
                 const modTimeStamp = estTime.toISOString().slice(0, 16);
                 dateInput.value = modTimeStamp;
-                dateInput.dataset.timezone = 'America/New_York'; // Store timezone info
+                dateInput.dataset.timezone = 'America/New_York';
                 
                 row.classList.add('editing-row');
+                
+                // Add category dropdown
+                const categoryCell = row.cells[1];
+                const currentCategory = categoryCell.textContent;
+                const select = document.createElement('select');
+                select.className = 'form-control category-select';
+                
+                CATEGORIES.forEach(category => {
+                    const option = document.createElement('option');
+                    option.value = category;
+                    option.textContent = category;
+                    if (category === currentCategory) {
+                        option.selected = true;
+                    }
+                    select.appendChild(option);
+                });
+                
+                categoryCell.textContent = '';
+                categoryCell.appendChild(select);
+                categoryCell.contentEditable = false;
                 const nonEditableIds = ['time-cell', 'actions-cell', 'month-cell', 'day-cell'];
                 for (let i = 0; i < row.cells.length - 1; i++) {
                     if (!nonEditableIds.includes(row.cells[i].id)) {
@@ -153,10 +175,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const timestamp = convertDatetimeLocalToISO(dateInput.value);
 
                 const row = tbody.rows[index];
+                const categorySelect = row.querySelector('.category-select');
                 const updatedItem = {
                     id: filteredData[index].id, // Ensure the id is included
                     text: row.cells[0].innerText,
-                    category: row.cells[1].innerText,
+                    category: categorySelect ? categorySelect.value : row.cells[1].textContent,
                     cost: row.cells[2].innerText,
                     notes: row.cells[3].innerText,
                     day,
@@ -188,6 +211,12 @@ document.addEventListener('DOMContentLoaded', () => {
                                 row.cells[i].innerHTML = time;
                                 row.cells[i].value = time;
                             }
+
+                            // Handle category cell specifically
+                            if (row.cells[i].id === 'category-cell') {
+                                const selectedCategory = categorySelect.value;
+                                row.cells[i].innerHTML = selectedCategory;
+                            }
                         }                        
                         toggleIcons(row, false);
                         row.classList.remove('editing-row');
@@ -208,8 +237,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             function undoRow(index) {
                 const row = tbody.rows[index];
+                const categoryCell = row.cells[1];
                 row.cells[0].innerText = filteredData[index].text;
-                row.cells[1].innerText = filteredData[index].category;
+                if (categoryCell.querySelector('.category-select')) {
+                    categoryCell.textContent = filteredData[index].category;
+                }
+                // row.cells[1].innerText = filteredData[index].category;
                 row.cells[2].innerText = filteredData[index].cost;
                 row.cells[3].innerText = filteredData[index].notes;
                 row.cells[4].innerText = filteredData[index].day;
