@@ -179,25 +179,37 @@ app.get('/top-items', (req, res) => {
         }
         const json = JSON.parse(data);
 
-        // Count occurrences of each text value
-        const itemCounts = json.reduce((acc, item) => {
+        // Track both count and latest timestamp for each text
+        const itemStats = json.reduce((acc, item) => {
             if (item.text) {
-                acc[item.text] = (acc[item.text] || 0) + 1;
+                if (!acc[item.text] || new Date(item.timestamp) > new Date(acc[item.text].latestTimestamp)) {
+                    acc[item.text] = {
+                        count: (acc[item.text]?.count || 0) + 1,
+                        latestTimestamp: item.timestamp,
+                        latestItem: item
+                    };
+                } else {
+                    acc[item.text].count += 1;
+                }
             }
             return acc;
         }, {});
 
-        // Get the top 5 items based on their counts
-        const topItems = Object.keys(itemCounts)
-            .sort((a, b) => itemCounts[b] - itemCounts[a])
-            .slice(0, 5)
-            .map(text => {
-                const item = json.find(item => item.text === text);
-                return item ? { ...item, category: item.category || 'none' } : undefined;
+        // Get top 5 items sorted by count and then by latest timestamp
+        const topItems = Object.entries(itemStats)
+            .sort(([, a], [, b]) => {
+                if (b.count !== a.count) {
+                    return b.count - a.count;
+                }
+                return new Date(b.latestTimestamp) - new Date(a.latestTimestamp);
             })
-            .filter(item => item !== undefined); // Filter out undefined values
+            .slice(0, 5)
+            .map(([, stats]) => ({
+                ...stats.latestItem,
+                category: stats.latestItem.category || 'none'
+            }))
+            .filter(item => item !== undefined);
 
-        // Send the top items as a JSON response
         res.json(topItems);
     });
 });
