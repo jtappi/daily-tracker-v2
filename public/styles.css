@@ -581,3 +581,30 @@ body {
     pointer-events: auto;
     opacity: 1;
 }
+
+/* Add these mobile-specific styles */
+@media (max-width: 576px) {
+    .table {
+        font-size: 0.875rem;
+    }
+    
+    .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    .card {
+        padding: 0.5rem;
+    }
+    
+    .modal-dialog {
+        margin: 0.5rem;
+    }
+    
+    .chart-container {
+        height: 40vh;
+        position: relative; 
+        height:50vh; 
+        width:100%
+    }
+}
