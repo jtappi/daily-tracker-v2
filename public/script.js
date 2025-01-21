@@ -252,6 +252,15 @@ document.addEventListener('DOMContentLoaded', () => {
     function showEditNotesModal(item) {
         const modal = $('#editNotesModal');
         const textarea = document.getElementById('editNotesText');
+        
+        modal.on('shown.bs.modal', function() {
+            textarea.focus();
+        });
+        
+        modal.on('hidden.bs.modal', function() {
+            document.activeElement.blur();
+        });
+        
         textarea.value = item.notes || '';
         
         const saveButton = document.getElementById('saveNotesBtn');
