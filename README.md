@@ -9,7 +9,6 @@
 - add required fields before clicking submit or save on the edit screen
 - add work category, or maybe travel, or should i just use google api???
 - notes column needs to be updated to show all of the notes.  Maybe on the graph as well???
-- Update  top 5 quick entry to ask for notes and then submit
 
 # My Node.js Project
 

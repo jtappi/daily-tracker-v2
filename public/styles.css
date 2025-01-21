@@ -613,3 +613,23 @@ body {
     min-height: 100px;
     resize: vertical;
 }
+
+.modal-dialog {
+    display: flex;
+    align-items: center;
+    min-height: calc(100% - 1rem);
+    margin: 0.5rem auto;
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+}
+
+@media (min-width: 576px) {
+    .modal-dialog {
+        min-height: calc(100% - 3.5rem);
+        margin: 1.75rem auto;
+    }
+}
