@@ -243,10 +243,25 @@ document.addEventListener('DOMContentLoaded', () => {
             button.classList.add('btn', 'btn-outline-secondary', 'm-1');
             button.textContent = item.text;
             button.addEventListener('click', () => {
-                submitItem(item.text, item.category, item.cost, item.notes, item.calories);
+                showEditNotesModal(item);
             });
             topItemsContainer.appendChild(button);
         });
+    }
+
+    function showEditNotesModal(item) {
+        const modal = $('#editNotesModal');
+        const textarea = document.getElementById('editNotesText');
+        textarea.value = item.notes || '';
+        
+        const saveButton = document.getElementById('saveNotesBtn');
+        saveButton.onclick = () => {
+            const updatedNotes = textarea.value;
+            submitItem(item.text, item.category, item.cost, updatedNotes, item.calories);
+            modal.modal('hide');
+        };
+        
+        modal.modal('show');
     }
 
     // Call fetchTopItems when the page loads

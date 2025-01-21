@@ -608,3 +608,8 @@ body {
         width:100%
     }
 }
+
+#editNotesText {
+    min-height: 100px;
+    resize: vertical;
+}
