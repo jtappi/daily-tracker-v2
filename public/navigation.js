@@ -40,4 +40,11 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = 'view-data.html';
         });
     }
+
+    const emBtn = document.getElementById('emBtn');
+    if (emBtn) {
+        emBtn.addEventListener('click', () => {
+            window.open('eisenhowerMatrix_v2.html', '_blank', 'noopener,noreferrer');
+        });
+    }
 });
