@@ -203,28 +203,25 @@ fetch('/data')
                 })
                 .then(result => {
                     if (result.success) {
-                        filteredData[index] = updatedItem;
-                        for (let i = 0; i < row.cells.length - 1; i++) {
-                            row.cells[i].contentEditable = 'false';
-                            row.cells[i].addEventListener('click', filterHandler); // Re-add filter functionality
-                            if (row.cells[i].id === 'time-cell') {
-                                row.cells[i].innerHTML = time;
-                                row.cells[i].value = time;
-                            }
+                        // Fetch fresh data to update the table
+                        fetch('/data')
+                            .then(response => response.json())
+                            .then(freshData => {
+                                data = freshData.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                                filteredData = data;
+                                renderTable();
+                                
+                                // Refresh chart with current date
+                                fetchDataAndRenderChart(getLocalDate());
 
-                            // Handle category cell specifically
-                            if (row.cells[i].id === 'category-cell') {
-                                const selectedCategory = categorySelect.value;
-                                row.cells[i].innerHTML = selectedCategory;
-                            }
-                        }                        
-                        toggleIcons(row, false);
-                        row.classList.remove('editing-row');
-                        Array.from(tbody.rows).forEach((r) => {
-                            r.classList.remove('blur');
-                        });
-                        overlay.classList.add('d-none');
-                        showAlert('success', 'Item updated successfully');
+                                toggleIcons(row, false);
+                                row.classList.remove('editing-row');
+                                Array.from(tbody.rows).forEach((r) => {
+                                    r.classList.remove('blur');
+                                });
+                                overlay.classList.add('d-none');
+                                showAlert('success', 'Item updated successfully');
+                            });
                     } else {
                         showAlert('danger', 'Failed to update item');
                     }
