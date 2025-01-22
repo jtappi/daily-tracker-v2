@@ -297,6 +297,17 @@ app.get('/analyze-data', (req, res) => {
     res.render('analyze-data', { nonce: res.locals.nonce });
 });
 
+app.post('/save-matrix-data', express.json(), (req, res) => {
+    const filePath = path.join(__dirname, 'eisenhowerMatrix_data.json');
+    fs.writeFile(filePath, JSON.stringify(req.body, null, 2), (err) => {
+        if (err) {
+            console.error('Error saving matrix data:', err);
+            return res.status(500).json({ error: 'Failed to save data' });
+        }
+        res.json({ success: true });
+    });
+});
+
 // // SSL stuff it works
 // // Load SSL certificates
 // const sslOptions = {

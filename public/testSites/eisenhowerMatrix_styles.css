@@ -1,0 +1,118 @@
+/* Layout */
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Matrix Layout */
+#matrix {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Quadrants */
+.quadrant {
+    padding: 1rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.do-first {
+    background-color: lightgreen;
+}
+
+.schedule {
+    background-color: lightblue;
+}
+
+.delegate {
+    background-color: lightyellow;
+}
+
+.eliminate {
+    background-color: lightcoral;
+}
+
+/* Task List */
+.task-list {
+    list-style: none;
+    padding: 0;
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    margin: 5px 0;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Form Styles */
+.task-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Completed Tasks Table */
+#completed-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+}
+
+#completed-table th,
+#completed-table td {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+#completed-table thead {
+    background-color: #f5f5f5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #matrix {
+        grid-template-columns: 1fr;
+    }
+    
+    .task-form {
+        flex-direction: column;
+    }
+    
+    #completed-table {
+        display: block;
+        overflow-x: auto;
+    }
+}

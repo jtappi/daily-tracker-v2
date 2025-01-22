@@ -14,6 +14,7 @@ npm-debug.log*
 
 # Ignore data.json file
 src/data.json
+src/eisenhowerMatrix_data.json
 cert.pem
 csr.pem
 key.pem
