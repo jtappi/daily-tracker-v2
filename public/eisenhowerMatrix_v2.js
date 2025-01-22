@@ -5,8 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     function persistData() {
-        // Save to localStorage
-        localStorage.setItem('eisenhowerMatrixData', JSON.stringify(data));
+        // // removing all of the localStorage code until i figure out if/where we need it
+        // // Save to localStorage
+        // localStorage.setItem('eisenhowerMatrixData', JSON.stringify(data));
         
         // Save to server
         fetch('/save-matrix-data', {
@@ -90,9 +91,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    const savedData = localStorage.getItem('eisenhowerMatrixData');
-    if (savedData) {
-        Object.assign(data, JSON.parse(savedData));
-        populateData();
-    }
+    fetch('/get-matrix-data')
+        .then(response => response.json())
+        .then(savedData => {
+            if (savedData) {
+                Object.assign(data, savedData);
+                populateData();
+            }
+        })
+        .catch(error => {
+            console.error('Error loading matrix data:', error);
+            // Fallback to localStorage if server fetch fails
+            const localData = localStorage.getItem('eisenhowerMatrixData');
+            if (localData) {
+                Object.assign(data, JSON.parse(localData));
+                populateData();
+            }
+        });
+
+        
+    // Fallback to localStorage if server fetch fails.  Not needed today
+    // const savedData = localStorage.getItem('eisenhowerMatrixData');
+    // if (savedData) {
+    //     Object.assign(data, JSON.parse(savedData));
+    //     populateData();
+    // }
 });

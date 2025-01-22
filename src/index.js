@@ -297,6 +297,32 @@ app.get('/analyze-data', (req, res) => {
     res.render('analyze-data', { nonce: res.locals.nonce });
 });
 
+app.get('/get-matrix-data', (req, res) => {
+    const filePath = path.join(__dirname, 'eisenhowerMatrix_data.json');
+    
+    // Check if file exists, create if not
+    if (!fs.existsSync(filePath)) {
+        const initialData = { tasks: [], completed: [] };
+        fs.writeFileSync(filePath, JSON.stringify(initialData, null, 2));
+        return res.json(initialData);
+    }
+
+    // Read existing file
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading matrix data:', err);
+            return res.status(500).json({ error: 'Failed to load data' });
+        }
+        try {
+            const jsonData = JSON.parse(data);
+            res.json(jsonData);
+        } catch (parseErr) {
+            console.error('Error parsing matrix data:', parseErr);
+            res.status(500).json({ error: 'Invalid data format' });
+        }
+    });
+});
+
 app.post('/save-matrix-data', express.json(), (req, res) => {
     const filePath = path.join(__dirname, 'eisenhowerMatrix_data.json');
     fs.writeFile(filePath, JSON.stringify(req.body, null, 2), (err) => {
