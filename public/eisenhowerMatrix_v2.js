@@ -35,11 +35,32 @@ document.addEventListener('DOMContentLoaded', () => {
         const textSpan = document.createElement('span');
         textSpan.textContent = task.content;
         
+        const noteIcon = document.createElement('i');
+        noteIcon.className = `fas fa-sticky-note ${task.notes ? 'has-notes' : ''}`;
+        noteIcon.setAttribute('data-id', task.id);
+        noteIcon.addEventListener('click', editNotes);
+        
         li.appendChild(checkIcon);
         li.appendChild(textSpan);
+        li.appendChild(noteIcon);
         
         li.addEventListener('dragstart', handleDragStart);
         div.appendChild(li);
+    }
+
+    function editNotes(event) {
+        const taskId = this.getAttribute('data-id');
+        const taskIndex = data.tasks.findIndex(task => task.id == taskId);
+        if (taskIndex > -1) {
+            const task = data.tasks[taskIndex];
+            // Show modal or prompt for notes
+            const notes = prompt('Enter notes:', task.notes || '');
+            if (notes !== null) {
+                task.notes = notes;
+                this.classList.toggle('has-notes', !!notes);
+                persistData();
+            }
+        }
     }
 
     function handleDragStart(e) {
