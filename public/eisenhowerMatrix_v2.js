@@ -20,7 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => console.error('Error saving data:', error));
     }
 
-    function appendTaskToList(task, ol) {
+    function appendTaskToList(task, div) {
+        div.className = 'div-list';
         const li = document.createElement('li');
         li.className = 'task-item';
         li.draggable = true;
@@ -38,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         li.appendChild(textSpan);
         
         li.addEventListener('dragstart', handleDragStart);
-        ol.appendChild(li);
+        div.appendChild(li);
     }
 
     function handleDragStart(e) {
@@ -92,11 +93,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function populateData() {
-        document.querySelectorAll('.quadrant ol').forEach(ol => ol.innerHTML = '');
+        document.querySelectorAll('.quadrant div').forEach(div => div.innerHTML = '');
         document.querySelector('#completed-table tbody').innerHTML = '';
 
         data.tasks.forEach(task => {
-            const quadrant = document.querySelector(`#${task.quadrant} ol`);
+            const quadrant = document.querySelector(`#${task.quadrant} div`);
             if (quadrant) {
                 appendTaskToList(task, quadrant);
             }
@@ -142,8 +143,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 };
                 data.tasks.push(task);
                 persistData();
-                const ol = quadrant.querySelector('ol');
-                appendTaskToList(task, ol);
+                const div = quadrant.querySelector('div');
+                appendTaskToList(task, div);
 
                 this.value = '';
             }

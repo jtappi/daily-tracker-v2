@@ -145,3 +145,7 @@ button:hover {
 .delete-completed:hover {
     color: #c82333;
 }
+
+.div-list {
+    padding-bottom: 10px;
+}
