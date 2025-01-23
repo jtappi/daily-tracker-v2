@@ -115,16 +115,56 @@ button:hover {
 @media (max-width: 768px) {
     #matrix {
         grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 1rem;
     }
-    
+
+    .quadrant {
+        min-height: 150px;
+        padding: 1rem;
+    }
+
     .task-form {
         flex-direction: column;
     }
-    
+
+    .task-item {
+        padding: 12px;
+        margin: 8px 0;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    #completed-table td {
+        padding: 12px 8px;
+    }
+
+    /* Larger touch targets for mobile */
+    .fa-edit, .fa-save, .fa-trash-alt {
+        font-size: 1.5rem;
+        padding: 8px;
+    }
+
+    /* Add spacing between icons */
+    td .fas {
+        margin: 0 10px;
+    }
+
     #completed-table {
         display: block;
         overflow-x: auto;
     }
+}
+
+/* Prevent text overflow in table cells */
+#completed-table td {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .fa-check-circle {
