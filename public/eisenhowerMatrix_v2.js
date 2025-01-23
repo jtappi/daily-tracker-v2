@@ -22,12 +22,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function appendTaskToList(task, ol) {
         const li = document.createElement('li');
-        li.textContent = task.content;
+        li.className = 'task-item';
+        li.draggable = true;
         li.setAttribute('data-id', task.id);
-        li.addEventListener('click', completeTask);
-        // Add touch event listeners for mobile devices
-        li.addEventListener('touchstart', completeTask);
+        
+        const checkIcon = document.createElement('i');
+        checkIcon.className = 'fas fa-check-circle';
+        checkIcon.setAttribute('data-id', task.id);
+        checkIcon.addEventListener('click', completeTask);
+
+        const textSpan = document.createElement('span');
+        textSpan.textContent = task.content;
+        
+        li.appendChild(checkIcon);
+        li.appendChild(textSpan);
+        
+        li.addEventListener('dragstart', handleDragStart);
         ol.appendChild(li);
+    }
+
+    function handleDragStart(e) {
+        e.dataTransfer.setData('text/plain', e.target.getAttribute('data-id'));
+        e.target.classList.add('dragging');
+    }
+
+    function initDragAndDrop() {
+        document.querySelectorAll('.quadrant').forEach(quadrant => {
+            quadrant.addEventListener('dragover', e => {
+                e.preventDefault();
+            });
+            
+            quadrant.addEventListener('drop', e => {
+                e.preventDefault();
+                const taskId = e.dataTransfer.getData('text/plain');
+                const taskElement = document.querySelector(`[data-id="${taskId}"]`);
+                
+                if (taskElement) {
+                    const taskIndex = data.tasks.findIndex(t => t.id == taskId);
+                    if (taskIndex > -1) {
+                        // Update task quadrant
+                        data.tasks[taskIndex].quadrant = quadrant.id;
+                        persistData();
+                        populateData();
+                    }
+                }
+                
+                document.querySelector('.dragging')?.classList.remove('dragging');
+            });
+        });
     }
 
     function completeTask(event) {
@@ -90,6 +132,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    initDragAndDrop();
 
     fetch('/get-matrix-data')
         .then(response => response.json())

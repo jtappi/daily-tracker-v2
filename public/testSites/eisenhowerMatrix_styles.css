@@ -1,3 +1,8 @@
+/* Global Font */
+body {
+    font-family: Calibri, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 /* Layout */
 .container {
     display: flex;
@@ -21,6 +26,11 @@
     padding: 1rem;
     border-radius: 0.25rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    min-height: 100px;
+}
+
+.quadrant.drag-over {
+    border: 2px dashed #666;
 }
 
 .do-first {
@@ -47,13 +57,13 @@
 
 .task-item {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 8px;
-    margin: 5px 0;
-    background: white;
-    border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    gap: 8px;
+    padding: 4px;
+}
+
+.task-item i {
+    cursor: pointer;
 }
 
 /* Form Styles */
@@ -116,3 +126,13 @@ button:hover {
         overflow-x: auto;
     }
 }
+
+.fa-check-circle {
+    color: #000000;
+    font-size: 1.2em;
+    margin-right: 8px;
+}
+
+/* .fa-check-circle:hover {
+    color: #000000;
+} */

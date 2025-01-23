@@ -11,6 +11,16 @@
 - notes column needs to be updated to show all of the notes.  Maybe on the graph as well???
 - refresh the top 5 after submission
 
+
+# TO DO - Eisenhower Matrix
+- Add restore func and make sure that it has a restore id, restored date and restore closed date
+- Max entries into the 1stQuad should be 3, 2ndQuad 10, 3rdQuad 10, 4thQuad Unlimited
+- When a quad is full, move it down to the next quad
+- Add notes to the completed table
+- Make the items movable (from one quad to another, within the quad, up or down)
+- may need to move the one click to complete into a button or something
+- show the start date in the quadrant
+
 # My Node.js Project
 
 This app will track your daily activities of all sorts!
