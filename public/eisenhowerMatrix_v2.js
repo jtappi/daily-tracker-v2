@@ -109,6 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
             tr.innerHTML = `
                 <td>${completedTask.content}</td>
                 <td>${completedTask.quadrant}</td>
+                <td>${completedTask.notes}</td>
                 <td>${completedTask.created}</td>
                 <td>${completedTask.completed}</td>
                 <td>
@@ -139,6 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     id: Date.now(),
                     content: this.value.trim(),
                     quadrant: quadrant.id,
+                    notes: '',
                     created: new Date().toLocaleString("en-US", { timeZone: "America/New_York"})
                 };
                 data.tasks.push(task);
