@@ -53,14 +53,35 @@ document.addEventListener('DOMContentLoaded', () => {
         const taskIndex = data.tasks.findIndex(task => task.id == taskId);
         if (taskIndex > -1) {
             const task = data.tasks[taskIndex];
-            // Show modal or prompt for notes
-            const notes = prompt('Enter notes:', task.notes || '');
-            if (notes !== null) {
-                task.notes = notes;
-                this.classList.toggle('has-notes', !!notes);
-                persistData();
-            }
+            showNotesModal(task, this);
         }
+    }
+
+    function showNotesModal(task, noteIcon) {
+        const modal = $('#editNotesModal');
+        const textarea = document.getElementById('editNotesText');
+        
+        modal.on('shown.bs.modal', function() {
+            textarea.focus();
+        });
+        
+        textarea.value = task.notes || '';
+        
+        const saveButton = document.getElementById('saveNotesBtn');
+        const originalHandler = saveButton.onclick;
+        saveButton.onclick = () => {
+            task.notes = textarea.value;
+            noteIcon.classList.toggle('has-notes', !!task.notes);
+            persistData();
+            modal.modal('hide');
+        };
+        
+        modal.on('hidden.bs.modal', function() {
+            document.activeElement.blur();
+            saveButton.onclick = originalHandler;
+        });
+        
+        modal.modal('show');
     }
 
     function handleDragStart(e) {

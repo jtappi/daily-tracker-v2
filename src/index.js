@@ -40,9 +40,22 @@ app.use(helmet({
     contentSecurityPolicy: {
         directives: {
             defaultSrc: ["'self'"],
-            scriptSrc: ["'self'", "https://cdn.jsdelivr.net"],
-            styleSrc: ["'self'", "https://cdnjs.cloudflare.com", "https://stackpath.bootstrapcdn.com", (req, res) => `'nonce-${res.locals.nonce}'`],
-            fontSrc: ["'self'", "https://cdnjs.cloudflare.com"]
+            scriptSrc: [
+                "'self'",
+                "https://cdn.jsdelivr.net",
+                "https://code.jquery.com",
+                "https://stackpath.bootstrapcdn.com"
+            ],
+            styleSrc: [
+                "'self'",
+                "https://cdnjs.cloudflare.com",
+                "https://stackpath.bootstrapcdn.com",
+                (req, res) => `'nonce-${res.locals.nonce}'`
+            ],
+            fontSrc: [
+                "'self'",
+                "https://cdnjs.cloudflare.com"
+            ]
         }
     }
 }));
