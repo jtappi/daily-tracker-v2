@@ -85,6 +85,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function deleteCompletedTask(index) {
+        data.completed.splice(index, 1);
+        persistData();
+        populateData();
+    }
+
     function populateData() {
         document.querySelectorAll('.quadrant ol').forEach(ol => ol.innerHTML = '');
         document.querySelector('#completed-table tbody').innerHTML = '';
@@ -96,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        data.completed.forEach(completedTask => {
+        data.completed.forEach((completedTask, index) => {
             const tbody = document.querySelector('#completed-table tbody');
             const tr = document.createElement('tr');
             tr.innerHTML = `
@@ -104,8 +110,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${completedTask.quadrant}</td>
                 <td>${completedTask.created}</td>
                 <td>${completedTask.completed}</td>
+                <td>
+                    <i class="fas fa-trash-alt delete-completed" data-index="${index}"></i>
+                </td>
             `;
             tbody.appendChild(tr);
+        });
+
+        // Add click handlers for delete icons
+        document.querySelectorAll('.delete-completed').forEach(icon => {
+            icon.addEventListener('click', function() {
+                const index = this.getAttribute('data-index');
+                deleteCompletedTask(index);
+            });
         });
     }
 

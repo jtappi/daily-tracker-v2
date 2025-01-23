@@ -136,3 +136,12 @@ button:hover {
 /* .fa-check-circle:hover {
     color: #000000;
 } */
+
+.delete-completed {
+    color: #dc3545;
+    cursor: pointer;
+}
+
+.delete-completed:hover {
+    color: #c82333;
+}
