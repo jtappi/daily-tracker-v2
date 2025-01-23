@@ -109,14 +109,49 @@ document.addEventListener('DOMContentLoaded', () => {
             tr.innerHTML = `
                 <td>${completedTask.content}</td>
                 <td>${completedTask.quadrant}</td>
-                <td>${completedTask.notes}</td>
+                <td class="notes-cell" data-index="${index}">${completedTask.notes}</td>
                 <td>${completedTask.created}</td>
                 <td>${completedTask.completed}</td>
                 <td>
+                    <i class="fas fa-edit edit-completed" data-index="${index}"></i>
+                    <i class="fas fa-save save-completed d-none" data-index="${index}"></i>
                     <i class="fas fa-trash-alt delete-completed" data-index="${index}"></i>
                 </td>
             `;
             tbody.appendChild(tr);
+        });
+
+        // Add click handlers for edit icons
+        document.querySelectorAll('.edit-completed').forEach(icon => {
+            icon.addEventListener('click', function() {
+                const index = this.getAttribute('data-index');
+                const notesCell = document.querySelector(`.notes-cell[data-index="${index}"]`);
+                notesCell.contentEditable = true;
+                notesCell.focus();
+                
+                // Toggle icons
+                this.classList.add('d-none');
+                this.nextElementSibling.classList.remove('d-none');
+            });
+        });
+
+        // Add click handlers for save icons
+        document.querySelectorAll('.save-completed').forEach(icon => {
+            icon.addEventListener('click', function() {
+                const index = this.getAttribute('data-index');
+                const notesCell = document.querySelector(`.notes-cell[data-index="${index}"]`);
+                
+                // Update data
+                data.completed[index].notes = notesCell.textContent;
+                persistData();
+                
+                // Disable editing
+                notesCell.contentEditable = false;
+                
+                // Toggle icons
+                this.classList.add('d-none');
+                this.previousElementSibling.classList.remove('d-none');
+            });
         });
 
         // Add click handlers for delete icons

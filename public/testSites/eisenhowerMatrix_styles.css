@@ -149,3 +149,24 @@ button:hover {
 .div-list {
     padding-bottom: 10px;
 }
+
+.notes-cell[contenteditable="true"] {
+    background-color: #fff;
+    padding: 2px 5px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.edit-completed, .save-completed {
+    color: #007bff;
+    cursor: pointer;
+    margin-right: 8px;
+}
+
+.edit-completed:hover, .save-completed:hover {
+    color: #0056b3;
+}
+
+.d-none {
+    display: none;
+}
