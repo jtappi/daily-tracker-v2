@@ -93,11 +93,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function populateData() {
-        document.querySelectorAll('.quadrant div').forEach(div => div.innerHTML = '');
+        // Clear only task lists, not input containers
+        document.querySelectorAll('.quadrant .div-list').forEach(div => div.innerHTML = '');
         document.querySelector('#completed-table tbody').innerHTML = '';
 
         data.tasks.forEach(task => {
-            const quadrant = document.querySelector(`#${task.quadrant} div`);
+            const quadrant = document.querySelector(`#${task.quadrant} .div-list`);
             if (quadrant) {
                 appendTaskToList(task, quadrant);
             }
@@ -163,27 +164,65 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    function createTask(quadrant, value) {
+        const task = {
+            id: Date.now(),
+            content: value.trim(),
+            quadrant: quadrant.id,
+            notes: '',
+            created: new Date().toLocaleString("en-US", { timeZone: "America/New_York"})
+        };
+        data.tasks.push(task);
+        persistData();
+        
+        // Create div-list if it doesn't exist
+        let listDiv = quadrant.querySelector('.div-list');
+        if (!listDiv) {
+            listDiv = document.createElement('div');
+            listDiv.className = 'div-list';
+            quadrant.appendChild(listDiv);
+        }
+        
+        appendTaskToList(task, listDiv);
+    }
+
     document.querySelectorAll('.quadrant').forEach(quadrant => {
+        // Create div-list container if it doesn't exist
+        let listDiv = quadrant.querySelector('.div-list');
+        if (!listDiv) {
+            listDiv = document.createElement('div');
+            listDiv.className = 'div-list';
+            quadrant.appendChild(listDiv);
+        }
+
+        const inputContainer = document.createElement('div');
+        inputContainer.className = 'input-container';
+        
         const input = document.createElement('input');
         input.type = 'text';
         input.placeholder = 'Enter task';
-        quadrant.appendChild(input);
+        
+        const submitBtn = document.createElement('button');
+        submitBtn.innerHTML = '<i class="fas fa-plus"></i>';
+        submitBtn.className = 'submit-task';
+        
+        inputContainer.appendChild(input);
+        inputContainer.appendChild(submitBtn);
+        quadrant.insertBefore(inputContainer, listDiv);
 
-        input.addEventListener('keydown', function (e) {
+        // Handle Enter key
+        input.addEventListener('keydown', function(e) {
             if (e.key === 'Enter' && this.value.trim() !== '') {
-                const task = {
-                    id: Date.now(),
-                    content: this.value.trim(),
-                    quadrant: quadrant.id,
-                    notes: '',
-                    created: new Date().toLocaleString("en-US", { timeZone: "America/New_York"})
-                };
-                data.tasks.push(task);
-                persistData();
-                const div = quadrant.querySelector('div');
-                appendTaskToList(task, div);
-
+                createTask(quadrant, this.value);
                 this.value = '';
+            }
+        });
+
+        // Handle button click
+        submitBtn.addEventListener('click', function() {
+            if (input.value.trim() !== '') {
+                createTask(quadrant, input.value);
+                input.value = '';
             }
         });
     });

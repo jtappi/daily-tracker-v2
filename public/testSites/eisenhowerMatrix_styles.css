@@ -93,6 +93,28 @@ button:hover {
     background-color: #45a049;
 }
 
+.input-container {
+    display: flex;
+    gap: 8px;
+    margin: 10px 0;
+}
+
+.input-container input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.submit-task {
+    padding: 8px 16px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
 /* Completed Tasks Table */
 #completed-table {
     width: 100%;
@@ -156,6 +178,16 @@ button:hover {
     #completed-table {
         display: block;
         overflow-x: auto;
+    }
+
+    .input-container input,
+    .submit-task {
+        padding: 12px;
+        font-size: 16px;
+    }
+    
+    .submit-task {
+        min-width: 44px;
     }
 }
 
