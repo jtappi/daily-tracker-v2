@@ -20,6 +20,7 @@
 - Make the items movable (from one quad to another, within the quad, up or down)
 - may need to move the one click to complete into a button or something
 - show the start date in the quadrant
+- Add the login check and redirect to login if not authenticated
 
 # My Node.js Project
 
