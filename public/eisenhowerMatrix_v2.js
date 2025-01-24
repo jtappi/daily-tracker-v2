@@ -281,12 +281,8 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => {
             console.error('Error loading matrix data:', error);
-            // Fallback to localStorage if server fetch fails
-            const localData = localStorage.getItem('eisenhowerMatrixData');
-            if (localData) {
-                Object.assign(data, JSON.parse(localData));
-                populateData();
-            }
+            console.log('Redirecting to login page from the Eisenhower Matrix');
+            window.location.href = '/login.html';            
         });
 
         
