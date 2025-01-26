@@ -294,42 +294,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // }
 
     // Questions functionality
-    const questionInput = document.querySelector('.question-quadrant input');
-    const submitQuestionBtn = document.querySelector('.submit-question');
-
-    submitQuestionBtn.addEventListener('click', async () => {
-        const question = questionInput.value.trim();
-        if (!question) return;
-
-        try {
-            const response = await fetch('/questions', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ question })
-            });
-
-            const result = await response.json();
-            if (result.id) {
-                // Clear input
-                questionInput.value = '';
-                
-                // Update questions table
-                appendQuestionToTable(result);
-            }
-        } catch (error) {
-            console.error('Error saving question:', error);
-        }
-    });
-
-    // Handle Enter key in question input
-    questionInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            submitQuestionBtn.click();
-        }
-    });
-
     function appendQuestionToTable(question) {
         const tbody = document.querySelector('#questions-table tbody');
         const tr = document.createElement('tr');
@@ -345,7 +309,11 @@ document.addEventListener('DOMContentLoaded', () => {
             </td>
         `;
 
-        // Add click handlers
+        addQuestionEventListeners(tr);
+        tbody.appendChild(tr);
+    }
+
+    function addQuestionEventListeners(tr) {
         tr.querySelector('.edit-question').addEventListener('click', function() {
             const id = this.getAttribute('data-id');
             const questionCell = tr.querySelector(`.question-cell[data-id="${id}"]`);
@@ -365,15 +333,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const answerCell = tr.querySelector(`.answer-cell[data-id="${id}"]`);
             
             const answer = answerCell.textContent.trim();
-            console.log('Answer:', answer);
-            console.log(`Answer length: ${answer.length}`);
             const updateData = {
                 question: questionCell.textContent.trim(),
                 answer: answer,
                 answeredDate: answer.length > 0 ? new Date().toLocaleString("en-US", { timeZone: "America/New_York"}) : null
             };
             
-            // Save to server
             updateQuestion(id, updateData);
             
             questionCell.contentEditable = false;
@@ -390,24 +355,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 tr.remove();
             }
         });
-
-        tbody.appendChild(tr);
     }
 
     async function updateQuestion(id, data) {
         try {
             const response = await fetch(`/questions/${id}`, {
                 method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             });
             
-            if (!response.ok) {
-                throw new Error('Failed to update question');
-            }
-            
+            if (!response.ok) throw new Error('Failed to update question');
             return await response.json();
         } catch (error) {
             console.error('Error updating question:', error);
@@ -421,14 +379,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 method: 'DELETE'
             });
             
-            if (!response.ok) {
-                throw new Error('Failed to delete question');
-            }
-            
+            if (!response.ok) throw new Error('Failed to delete question');
             return await response.json();
         } catch (error) {
             console.error('Error deleting question:', error);
             alert('Failed to delete question');
+        }
+    }
+
+    async function submitQuestion(questionText) {
+        try {
+            const response = await fetch('/questions', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ question: questionText })
+            });
+
+            const result = await response.json();
+            if (result.id) {
+                appendQuestionToTable(result);
+            }
+        } catch (error) {
+            console.error('Error saving question:', error);
         }
     }
 
@@ -443,5 +415,42 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
+    // Initialize questions functionality
+    const questionQuadrant = document.querySelector('#questions');
+    const questionsList = questionQuadrant.querySelector('.div-list');
+
+    // Create input container
+    const inputContainer = document.createElement('div');
+    inputContainer.className = 'input-container';
+    
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.placeholder = 'Enter question';
+    
+    const submitBtn = document.createElement('button');
+    submitBtn.innerHTML = '<i class="fas fa-plus"></i>';
+    submitBtn.className = 'submit-question';
+    
+    inputContainer.appendChild(input);
+    inputContainer.appendChild(submitBtn);
+    questionQuadrant.insertBefore(inputContainer, questionsList);
+
+    // Add event listeners
+    input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && this.value.trim() !== '') {
+            submitQuestion(this.value.trim());
+            this.value = '';
+        }
+    });
+
+    submitBtn.addEventListener('click', function() {
+        if (input.value.trim() !== '') {
+            submitQuestion(input.value.trim());
+            input.value = '';
+        }
+    });
+
+    // Load existing questions
     loadQuestions();
-});
+
+}); // End of DOMContentLoaded
