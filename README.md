@@ -18,6 +18,7 @@
 - When a quad is full, move it down to the next quad
 - Make the items movable within the quad, up or down
 - show the start date in the quadrant
+- update the Delete function on the tasks to mimic the questions.  need to verify before deleting
 
 
 # FOR USER
