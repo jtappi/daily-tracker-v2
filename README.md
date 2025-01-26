@@ -16,11 +16,12 @@
 - Add restore func and make sure that it has a restore id, restored date and restore closed date
 - Max entries into the 1stQuad should be 3, 2ndQuad 10, 3rdQuad 10, 4thQuad Unlimited
 - When a quad is full, move it down to the next quad
-- Add notes to the completed table
-- Make the items movable (from one quad to another, within the quad, up or down)
-- may need to move the one click to complete into a button or something
+- Make the items movable within the quad, up or down
 - show the start date in the quadrant
-- Add the login check and redirect to login if not authenticated
+
+
+# FOR USER
+- Add a Q&A section.  Ask a question and write down the answer
 
 # My Node.js Project
 

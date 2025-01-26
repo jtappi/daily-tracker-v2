@@ -287,6 +287,14 @@ app.delete('/data/:id', (req, res) => {
     });
 });
 
+const questionsController = require('./controllers/questions.controller');
+
+// Questions routes
+app.get('/questions', questionsController.getQuestions);
+app.post('/questions', questionsController.saveQuestion);
+app.put('/questions/:id', questionsController.updateAnswer);
+app.delete('/questions/:id', questionsController.deleteQuestion);
+
 // Default route to redirect to login if not authenticated
 app.get('/', (req, res) => {
     if (req.session.authenticated) {
