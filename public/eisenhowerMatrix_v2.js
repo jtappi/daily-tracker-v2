@@ -35,6 +35,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const textSpan = document.createElement('span');
         textSpan.textContent = task.content;
         
+        // Add days since creation
+        const daysSpan = document.createElement('span');
+        daysSpan.className = 'days-old';
+        const daysSinceCreation = Math.floor((new Date() - new Date(task.created)) / (1000 * 60 * 60 * 24));
+        daysSpan.textContent = `${daysSinceCreation}d`;
+        
         const noteIcon = document.createElement('i');
         noteIcon.className = `fas fa-sticky-note ${task.notes ? 'has-notes' : ''}`;
         noteIcon.setAttribute('data-id', task.id);
@@ -42,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         li.appendChild(checkIcon);
         li.appendChild(textSpan);
+        li.appendChild(daysSpan);
         li.appendChild(noteIcon);
         
         li.addEventListener('dragstart', handleDragStart);
