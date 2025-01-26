@@ -435,9 +435,32 @@ button:hover {
 
 .days-old {
     font-size: 0.8em;
-    color: #666;
-    background-color: #f0f0f0;
     padding: 2px 6px;
     border-radius: 10px;
     margin-left: 8px;
+}
+
+.age-new { 
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.age-recent {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.age-medium {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.age-old {
+    background-color: #cce5ff;
+    color: #004085;
+}
+
+.age-ancient {
+    background-color: #e2e3e5;
+    color: #383d41;
 }

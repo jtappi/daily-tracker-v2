@@ -17,7 +17,7 @@
 - Max entries into the 1stQuad should be 3, 2ndQuad 10, 3rdQuad 10, 4thQuad Unlimited
 - When a quad is full, move it down to the next quad
 - Make the items movable within the quad, up or down
-- show the start date in the quadrant
+- show the start date in the quadrant.  if less than 1 day, show total hours
 - update the Delete function on the tasks to mimic the questions.  need to verify before deleting
 
 

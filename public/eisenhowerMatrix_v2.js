@@ -20,6 +20,37 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => console.error('Error saving data:', error));
     }
 
+    const TIME_THRESHOLDS = {
+        NEW: 24,      // hours
+        RECENT: 72,   // 3 days in hours
+        MEDIUM: 120,  // 5 days in hours
+        OLD: 240      // 10 days in hours
+    };
+
+    function getTimeElapsed(createdDate) {
+        const msElapsed = new Date() - new Date(createdDate);
+        const hoursElapsed = Math.floor(msElapsed / (1000 * 60 * 60));
+        
+        let ageClass = '';
+        if (hoursElapsed < TIME_THRESHOLDS.NEW) {
+            ageClass = 'age-new';
+        } else if (hoursElapsed < TIME_THRESHOLDS.RECENT) {
+            ageClass = 'age-recent';
+        } else if (hoursElapsed < TIME_THRESHOLDS.MEDIUM) {
+            ageClass = 'age-medium';
+        } else if (hoursElapsed < TIME_THRESHOLDS.OLD) {
+            ageClass = 'age-old';
+        } else {
+            ageClass = 'age-ancient';
+        }
+
+        const display = hoursElapsed < 24 ? 
+            `${hoursElapsed}h` : 
+            `${Math.floor(hoursElapsed / 24)}d`;
+
+        return { display, ageClass };
+    }
+
     function appendTaskToList(task, div) {
         div.className = 'div-list';
         const li = document.createElement('li');
@@ -35,11 +66,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const textSpan = document.createElement('span');
         textSpan.textContent = task.content;
         
-        // Add days since creation
+        // Add time since creation
         const daysSpan = document.createElement('span');
-        daysSpan.className = 'days-old';
-        const daysSinceCreation = Math.floor((new Date() - new Date(task.created)) / (1000 * 60 * 60 * 24));
-        daysSpan.textContent = `${daysSinceCreation}d`;
+        const timeInfo = getTimeElapsed(task.created);
+        daysSpan.className = `days-old ${timeInfo.ageClass}`;
+        daysSpan.textContent = timeInfo.display;
         
         const noteIcon = document.createElement('i');
         noteIcon.className = `fas fa-sticky-note ${task.notes ? 'has-notes' : ''}`;
