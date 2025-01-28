@@ -441,26 +441,26 @@ button:hover {
 }
 
 .age-new { 
-    background-color: #d4edda;
-    color: #155724;
+    background-color: #007e00;
+    color: #ffffff;
 }
 
 .age-recent {
-    background-color: #02f19e;
-    color: #04610a;
+    background-color: #d9ff00;
+    color: #000000;
 }
 
 .age-medium {
-    background-color: #ff9036;
+    background-color: #ff5900;
     color: #ffffff;
 }
 
 .age-old {
-    background-color: #cd5c5c;
-    color: #fcd2d7;
+    background-color: #9e0000;
+    color: #ffffff;
 }
 
 .age-ancient {
-    background-color: #ffffff;
-    color: #004085;
+    background-color: #000000;
+    color: #ff0000;
 }
