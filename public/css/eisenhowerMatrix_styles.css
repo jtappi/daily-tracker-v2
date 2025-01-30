@@ -400,6 +400,17 @@ button:hover {
     .modal-footer .btn {
         font-size: 0.875rem;
     }
+
+    .fa-sticky-note {
+        padding: 8px;
+        min-width: 44px;
+        min-height: 44px;
+        font-size: 1.5rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 10px;
+    }
 }
 
 /* Prevent text overflow in table cells */
@@ -458,6 +469,7 @@ button:hover {
     color: #888;
     margin-left: 8px;
     cursor: pointer;
+    transition: color 0.2s ease;
 }
 
 .fa-sticky-note.has-notes {
