@@ -76,11 +76,11 @@ document.addEventListener('DOMContentLoaded', () => {
         noteIcon.className = `fas fa-sticky-note ${task.notes ? 'has-notes' : ''}`;
         noteIcon.setAttribute('data-id', task.id);
         noteIcon.addEventListener('click', editNotes);
-        
-        li.appendChild(checkIcon);
-        li.appendChild(textSpan);
+                
         li.appendChild(daysSpan);
+        li.appendChild(textSpan);
         li.appendChild(noteIcon);
+        li.appendChild(checkIcon);
         
         li.addEventListener('dragstart', handleDragStart);
         div.appendChild(li);
