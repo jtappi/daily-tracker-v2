@@ -1,3 +1,18 @@
+/* Variables */
+:root {
+    --primary: #007bff;
+    --primary-hover: #0056b3;
+    --danger: #dc3545;
+    --danger-hover: #c82333;
+    --success: #28a745;
+    --gray: #6c757d;
+    --light-gray: #dee2e6;
+    --lighter-gray: #f8f9fa;
+    --border-color: #ddd;
+    --shadow: 0 2px 4px rgba(0,0,0,0.1);
+    --modal-backdrop: rgba(0, 0, 0, 0.5);
+}
+
 /* Global Font */
 body {
     font-family: Calibri, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -25,7 +40,7 @@ body {
 .quadrant {
     padding: 1rem;
     border-radius: 0.25rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: var(--shadow);
     min-height: 100px;
 }
 
@@ -51,12 +66,12 @@ body {
 
 .question-quadrant {
     grid-column: 1 / span 2;
-    background-color: #f8f9fa;
-    border: 1px solid #dee2e6;
+    background-color: var(--lighter-gray);
+    border: 1px solid var(--light-gray);
     padding: 15px;
     margin-top: 20px;
     border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Added to match .quadrant */
+    box-shadow: var(--shadow);
 }
 
 /* Task List */
@@ -86,7 +101,7 @@ body {
 input[type="text"] {
     flex: 1;
     padding: 8px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
 }
 
@@ -112,7 +127,7 @@ button:hover {
 .input-container input {
     flex: 1;
     padding: 8px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
 }
 
@@ -135,12 +150,12 @@ button:hover {
 #completed-table th,
 #completed-table td {
     padding: 0.75rem;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     text-align: left;
 }
 
 #completed-table thead {
-    background-color: #f5f5f5;
+    background-color: var(--lighter-gray);
 }
 
 #questions-table {
@@ -152,16 +167,16 @@ button:hover {
 #questions-table th,
 #questions-table td {
     padding: 0.75rem;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     text-align: left;
 }
 
 #questions-table thead {
-    background-color: #f5f5f5;
+    background-color: var(--lighter-gray);
 }
 
 #questions-table th {
-    background-color: #f8f9fa;
+    background-color: var(--lighter-gray);
     font-weight: bold;
 }
 
@@ -173,7 +188,7 @@ button:hover {
 #questions-table .answer-cell[contenteditable="true"] {
     background-color: #fff;
     padding: 8px;
-    border: 1px solid #007bff;
+    border: 1px solid var(--primary);
     border-radius: 4px;
 }
 
@@ -182,26 +197,26 @@ button:hover {
 #questions-table .fa-trash-alt {
     cursor: pointer;
     margin: 0 5px;
-    color: #6c757d;
+    color: var(--gray);
 }
 
 #questions-table .fa-edit:hover {
-    color: #007bff;
+    color: var(--primary-hover);
 }
 
 #questions-table .fa-save:hover {
-    color: #28a745;
+    color: var(--success);
 }
 
 #questions-table .fa-trash-alt:hover {
-    color: #dc3545;
+    color: var(--danger-hover);
 }
 
 .question-cell[contenteditable="true"],
 .answer-cell[contenteditable="true"] {
     background-color: #fff;
     padding: 2px 5px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 3px;
 }
 
@@ -394,7 +409,7 @@ button:hover {
 }
 
 .fa-check-circle {
-    color: #000000;
+    color: #000;
     font-size: 1.2em;
     margin-right: 8px;
 }
@@ -404,12 +419,12 @@ button:hover {
 } */
 
 .delete-completed {
-    color: #dc3545;
+    color: var(--danger);
     cursor: pointer;
 }
 
 .delete-completed:hover {
-    color: #c82333;
+    color: var(--danger-hover);
 }
 
 .div-list {
@@ -419,18 +434,18 @@ button:hover {
 .notes-cell[contenteditable="true"] {
     background-color: #fff;
     padding: 2px 5px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 3px;
 }
 
 .edit-completed, .save-completed {
-    color: #007bff;
+    color: var(--primary);
     cursor: pointer;
     margin-right: 8px;
 }
 
 .edit-completed:hover, .save-completed:hover {
-    color: #0056b3;
+    color: var(--primary-hover);
 }
 
 .d-none {
@@ -438,7 +453,7 @@ button:hover {
 }
 
 .fa-sticky-note {
-    color: #888888;
+    color: #888;
     margin-left: 8px;
     cursor: pointer;
 }
@@ -466,7 +481,7 @@ button:hover {
 }
 
 #editNotesModal {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: var(--modal-backdrop);
 }
 
 .modal-content {
@@ -475,7 +490,7 @@ button:hover {
 }
 
 .modal-header {
-    border-bottom: 1px solid #dee2e6;
+    border-bottom: 1px solid var(--light-gray);
     padding: 1rem;
 }
 
@@ -484,7 +499,7 @@ button:hover {
 }
 
 .modal-footer {
-    border-top: 1px solid #dee2e6;
+    border-top: 1px solid var(--light-gray);
     padding: 1rem;
 }
 
@@ -517,14 +532,14 @@ button:hover {
 #questions-table .fa-trash-alt {
     cursor: pointer;
     margin: 0 5px;
-    color: #6c757d;
+    color: var(--gray);
 }
 
 #completed-table .fa-edit,
 #completed-table .fa-save,
 #questions-table .fa-edit,
 #questions-table .fa-save {
-    color: #007bff;
+    color: var(--primary);
     margin-right: 8px;
 }
 
@@ -532,17 +547,17 @@ button:hover {
 #completed-table .fa-save:hover,
 #questions-table .fa-edit:hover,
 #questions-table .fa-save:hover {
-    color: #0056b3;
+    color: var(--primary-hover);
 }
 
 #completed-table .fa-trash-alt,
 #questions-table .fa-trash-alt {
-    color: #dc3545;
+    color: var(--danger);
 }
 
 #completed-table .fa-trash-alt:hover,
 #questions-table .fa-trash-alt:hover {
-    color: #c82333;
+    color: var(--danger-hover);
 }
 
 .days-old {
@@ -554,25 +569,25 @@ button:hover {
 
 .age-new { 
     background-color: #007e00;
-    color: #ffffff;
+    color: #fff;
 }
 
 .age-recent {
     background-color: #d9ff00;
-    color: #000000;
+    color: #000;
 }
 
 .age-medium {
     background-color: #ff5900;
-    color: #ffffff;
+    color: #fff;
 }
 
 .age-old {
     background-color: #9e0000;
-    color: #ffffff;
+    color: #fff;
 }
 
 .age-ancient {
-    background-color: #000000;
+    background-color: #000;
     color: #ff0000;
 }
