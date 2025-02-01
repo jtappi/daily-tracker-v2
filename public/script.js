@@ -213,6 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('suggestions').innerHTML = '';
             document.getElementById('suggestions').classList.remove('show');
             document.querySelectorAll('.categoryBtn').forEach(btn => btn.classList.remove('selected'));
+            fetchTopItems();
         })
         .catch((error) => {
             showAlert('danger', 'An error occurred while submitting the data.');
