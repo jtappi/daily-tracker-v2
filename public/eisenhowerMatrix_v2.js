@@ -166,13 +166,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function confirmDelete(index) {
+    function confirmDelete(index, itemType) {
         $('#deleteModal').modal('show');
         document.getElementById('confirmDelete').onclick = () => {
-            data.completed.splice(index, 1);
-            $('#deleteModal').modal('hide');
-            persistData();
-            populateData();
+            if (itemType === 'task') {
+                data.completed.splice(index, 1);
+                $('#deleteModal').modal('hide');
+                persistData();
+                populateData();
+            } else {
+                deleteQuestion(index);
+                $('#deleteModal').modal('hide');
+                loadQuestions();
+            }
         };
     }
 
@@ -243,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.delete-completed').forEach(icon => {
             icon.addEventListener('click', function() {
                 const index = this.getAttribute('data-index');
-                confirmDelete(index);
+                confirmDelete(index, "task");
             });
         });
     }
@@ -392,10 +398,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         tr.querySelector('.delete-question').addEventListener('click', function() {
             const id = this.getAttribute('data-id');
-            if (confirm('Are you sure you want to delete this question?')) {
-                deleteQuestion(id);
-                tr.remove();
-            }
+            confirmDelete(id, "question");
         });
     }
 
@@ -447,6 +450,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function loadQuestions() {
+        // Clear existing questions
+        document.querySelector('#questions-table tbody').innerHTML = '';
+        
         fetch('/questions')
             .then(response => response.json())
             .then(questions => {
