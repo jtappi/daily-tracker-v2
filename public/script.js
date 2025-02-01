@@ -86,9 +86,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(data => {
                     const suggestions = document.getElementById('suggestions');
                     suggestions.innerHTML = '';
-                    if (data.length > 0) {
+                    
+                    // Filter duplicates and limit to 3 results
+                    const uniqueData = Array.from(new Map(data.map(item => [item.text, item])).values())
+                        .slice(0, 3);
+
+                    if (uniqueData.length > 0) {
                         suggestions.classList.add('show');
-                        data.forEach(item => {
+                        uniqueData.forEach(item => {
                             const a = document.createElement('a');
                             a.classList.add('dropdown-item');
                             a.textContent = item.text;
