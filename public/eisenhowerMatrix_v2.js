@@ -166,10 +166,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function deleteCompletedTask(index) {
-        data.completed.splice(index, 1);
-        persistData();
-        populateData();
+    function confirmDelete(index) {
+        $('#deleteModal').modal('show');
+        document.getElementById('confirmDelete').onclick = () => {
+            data.completed.splice(index, 1);
+            $('#deleteModal').modal('hide');
+            persistData();
+            populateData();
+        };
     }
 
     function populateData() {
@@ -239,7 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.delete-completed').forEach(icon => {
             icon.addEventListener('click', function() {
                 const index = this.getAttribute('data-index');
-                deleteCompletedTask(index);
+                confirmDelete(index);
             });
         });
     }
