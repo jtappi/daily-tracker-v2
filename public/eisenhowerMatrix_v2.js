@@ -171,13 +171,13 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('confirmDelete').onclick = () => {
             if (itemType === 'task') {
                 data.completed.splice(index, 1);
-                $('#deleteModal').modal('hide');
                 persistData();
                 populateData();
+                $('#deleteModal').modal('hide');
             } else {
                 deleteQuestion(index);
-                $('#deleteModal').modal('hide');
                 loadQuestions();
+                $('#deleteModal').modal('hide');
             }
         };
     }
