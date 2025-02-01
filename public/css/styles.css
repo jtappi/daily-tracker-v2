@@ -633,3 +633,46 @@ body {
         margin: 1.75rem auto;
     }
 }
+
+/* Action Button Styles */
+.fa-edit,
+.fa-save,
+.fa-trash-alt {
+    cursor: pointer;
+    margin: 0 5px;
+    color: var(--gray);
+    transition: color 0.2s ease;
+}
+
+.fa-edit,
+.fa-save {
+    color: var(--primary);
+    margin-right: 8px;
+}
+
+.fa-edit:hover,
+.fa-save:hover {
+    color: var(--primary-hover);
+}
+
+.fa-trash-alt {
+    color: var(--danger);
+}
+
+.fa-trash-alt:hover {
+    color: var(--danger-hover);
+}
+
+@media (max-width: 768px) {
+    .fa-edit,
+    .fa-save,
+    .fa-trash-alt {
+        padding: 8px;
+        min-width: 44px;
+        min-height: 44px;
+        font-size: 1.5rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
