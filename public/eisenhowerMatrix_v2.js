@@ -175,9 +175,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 populateData();
                 $('#deleteModal').modal('hide');
             } else {
-                deleteQuestion(index);
-                loadQuestions();
-                $('#deleteModal').modal('hide');
+                deleteQuestion(index)
+                    .then(() => {
+                        loadQuestions();
+                        $('#deleteModal').modal('hide');
+                    })
+                    .catch(error => {
+                        console.error('Error in confirmDelete:', error);
+                        alert('Failed to delete question');
+                    });
             }
         };
     }
