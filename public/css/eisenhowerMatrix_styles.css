@@ -411,6 +411,11 @@ button:hover {
         justify-content: center;
         margin: 0 10px;
     }
+
+    #viewQuestionsBtn {
+        width: auto;
+        min-width: 100px;
+    }
 }
 
 /* Prevent text overflow in table cells */
@@ -625,4 +630,22 @@ button:hover {
     height: 100%;
     border: 0;
     border-radius: 0;
+}
+
+#viewQuestions {
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px;
+}
+
+#viewQuestionsBtn {
+    width: auto;
+    min-width: 120px;
+}
+
+@media (max-width: 768px) {
+    #viewQuestionsBtn {
+        width: auto;
+        min-width: 100px;
+    }
 }
