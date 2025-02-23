@@ -649,3 +649,18 @@ button:hover {
         min-width: 100px;
     }
 }
+
+#closeQuestionsBtn {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    width: auto;
+    max-width: 50px;
+}
+
+@media (max-width: 768px) {
+    #closeQuestionsBtn {
+        width: auto;
+        max-width: 50px;
+    }
+}
