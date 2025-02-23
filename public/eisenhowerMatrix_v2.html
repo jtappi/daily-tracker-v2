@@ -16,6 +16,9 @@
 </head>
 
 <body>
+<div id="viewQuestions">
+    <button id="viewQuestionsBtn" class="btn btn-primary">View Questions</button>
+</div>
 
 <div id="matrix">
     <div class="quadrant do-first" id="doFirst" data-name="doFirst">
@@ -34,11 +37,6 @@
         <h3>ELIMINATE</h3>
         <div></div>
     </div>
-
-    <div class="question-quadrant" id="questions">
-        <h3>QUESTIONS</h3>
-        <div class="div-list"></div>
-    </div>
 </div>
 
 <div class="table-responsive">
@@ -51,21 +49,6 @@
                 <th>Created</th>
                 <th>Completed</th>
                 <th></th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
-</div>
-
-<div class="table-responsive">
-    <table id="questions-table">
-        <thead>
-            <tr>
-                <th>Question</th>
-                <th>Answer</th>
-                <th>Created</th>
-                <th>Answered</th>
-                <th>Actions</th>
             </tr>
         </thead>
         <tbody></tbody>
@@ -114,6 +97,43 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="questionsModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-fullscreen" role="document">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
+                <h5 class="modal-title">Questions</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                    <span>&times;</span>
+                </button>
+            </div> -->
+            <div class="modal-body">
+                <div class="question-quadrant" id="questions">
+                    <h5>QUESTIONS
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                        <span>&times;</span>
+                    </button></h5>
+                    <div class="div-list"></div>
+                </div>
+                <div class="table-responsive">
+                    <table id="questions-table">
+                        <thead>
+                            <tr>
+                                <th>Question</th>
+                                <th>Answer</th>
+                                <th>Created</th>
+                                <th>Answered</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script src="eisenhowerMatrix_v2.js"></script>
 

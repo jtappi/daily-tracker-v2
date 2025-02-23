@@ -4,6 +4,15 @@ document.addEventListener('DOMContentLoaded', () => {
         completed: []
     };
 
+    function initViewQuestionsModal() {
+        $("#viewQuestionsBtn").click(function () {
+            $("#questionsModal").modal("show");
+        });
+    }
+
+    // Call the function to initialize the modal launch
+    initViewQuestionsModal();
+
     function persistData() {
         // // removing all of the localStorage code until i figure out if/where we need it
         // // Save to localStorage
