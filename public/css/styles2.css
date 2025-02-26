@@ -2,11 +2,18 @@ body, html {
     margin: 0;
     padding: 0;
     height: 100%;
-    overflow-x: hidden;
     font-family: 'Helvetica Neue', Arial, sans-serif;
 }
+
+.gallery-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    width: 100%;
+}
+
 section {
-    height: 100vh;
+    height: 100%; /* 5 images per viewport (100/5) */
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,19 +21,91 @@ section {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     font-size: 2rem;
     transition: background-image 0.5s ease-in-out;
-}
-.artwork-info {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.400);
-    padding: 10px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    scroll-snap-align: start;
 }
 
-section:hover .artwork-info {
-    opacity: 1;
-    padding-left: 10%;
-    color: lightgray;
+.artwork-info {
+    font-size: 1.5rem;
+    padding: 8px;
+}
+
+/* Gradient overlays for fade effect */
+section::before,
+section::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 30px;
+    pointer-events: none;
+}
+
+section::before {
+    top: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+}
+
+section::after {
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+}
+
+/* Mobile Layout - 3 images per viewport */
+@media (max-width: 768px) {
+    section {
+        width: 100%; /* 3 images per viewport (100/3) */
+    }
+    
+    .artwork-info {
+        font-size: 1.5rem;
+        padding: 8px;
+    }
+
+    .gallery-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+    }
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+}
+
+.modal img {
+    max-width: 90%;
+    max-height: 90vh;
+    margin: auto;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.close-btn:hover {
+    color: #999;
 }
