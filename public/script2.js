@@ -191,7 +191,12 @@ artworks.forEach(art => {
     
     const div = document.createElement('div');
     div.className = 'artwork-info';
-    div.innerHTML = `<h5>${art.title}</h5>`;
+    // div.innerHTML = `<h5>${art.title}</h5>`;
+    div.innerHTML = `<h5>&nbsp;</h5>`;
+
+    // Create open icon
+    const openIcon = document.createElement('i');
+    openIcon.className = 'fas fa-regular fa-window-maximize open-icon';
     
     // Add click handler to open modal
     section.addEventListener('click', () => {
@@ -202,6 +207,7 @@ artworks.forEach(art => {
     });
     
     section.appendChild(div);
+    section.appendChild(openIcon);
     gallery.appendChild(section);
 });
 

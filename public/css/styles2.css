@@ -109,3 +109,19 @@ section::after {
 .close-btn:hover {
     color: #999;
 }
+
+.open-icon {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: rgb(218, 238, 0);
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+}
+
+.open-icon:hover {
+    opacity: 1;
+}
