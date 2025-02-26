@@ -172,6 +172,74 @@ const artworks = [
     { title: '172', src: '/images/art172.jpg' },
     { title: '173', src: '/images/art173.jpg' }
 ];
+let loadedImages = 0;
+const imagesPerLoad = 10;
+
+// Implement infinite scroll
+const observer = new IntersectionObserver((entries) => {
+    console.log('Intersection observed');
+    entries.forEach(entry => {
+        console.log(entry);
+        if (entry.isIntersecting && loadedImages < artworks.length) {
+            console.log('Loading more images 1');
+            loadMoreImages();
+        }
+    });
+}, { rootMargin: '100px' });
+
+function loadMoreImages() {
+    const start = loadedImages;
+    const end = Math.min(loadedImages + imagesPerLoad, artworks.length);
+    console.log(`Loading images ${start} to ${end}`);
+
+    for (let i = start; i < end; i++) {
+        const art = artworks[i];
+
+        const section = document.createElement('section');
+        section.style = `background-image: url('${art.src}'); background-size: cover; background-position: center; opacity: 0.75;`;
+        
+        const div = document.createElement('div');
+        div.className = 'artwork-info';
+        // div.innerHTML = `<h5>${art.title}</h5>`;
+        div.innerHTML = `<h5>&nbsp;</h5>`;
+
+        // Create open icon
+        const openIcon = document.createElement('i');
+        openIcon.className = 'fas fa-regular fa-magnifying-glass open-icon';
+        
+        // Add click handler to open modal
+        section.addEventListener('click', () => {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modalImg.src = art.src;
+            modal.style.display = 'block';
+        });
+        
+        section.appendChild(div);
+        section.appendChild(openIcon);
+        gallery.appendChild(section);
+    }
+    
+    loadedImages = end;
+    
+    // Update the observed section
+    observer.disconnect(); // Stop observing previous section
+    const newLastSection = document.querySelector('section:last-child');
+    if (newLastSection && loadedImages < artworks.length) {
+        observer.observe(newLastSection);
+    }
+}
+
+// Initial load
+loadMoreImages();
+
+// Observe the last section
+const lastSection = document.querySelector('section:last-child');
+console.log('Observing last section');
+if (lastSection) {
+    console.log('Observing last section 1');
+    observer.observe(lastSection);
+}
 
 // artworks.forEach(art => {
 //     const section = document.createElement('section');
@@ -179,37 +247,25 @@ const artworks = [
     
 //     const div = document.createElement('div');
 //     div.className = 'artwork-info';
-//     div.innerHTML = `<h3>${art.title}</h3>`;
+//     // div.innerHTML = `<h5>${art.title}</h5>`;
+//     div.innerHTML = `<h5>&nbsp;</h5>`;
+
+//     // Create open icon
+//     const openIcon = document.createElement('i');
+//     openIcon.className = 'fas fa-regular fa-window-maximize open-icon';
+    
+//     // Add click handler to open modal
+//     section.addEventListener('click', () => {
+//         const modal = document.getElementById('imageModal');
+//         const modalImg = document.getElementById('modalImage');
+//         modalImg.src = art.src;
+//         modal.style.display = 'block';
+//     });
     
 //     section.appendChild(div);
+//     section.appendChild(openIcon);
 //     gallery.appendChild(section);
 // });
-
-artworks.forEach(art => {
-    const section = document.createElement('section');
-    section.style = `background-image: url('${art.src}'); background-size: cover; background-position: center; opacity: 0.75;`;
-    
-    const div = document.createElement('div');
-    div.className = 'artwork-info';
-    // div.innerHTML = `<h5>${art.title}</h5>`;
-    div.innerHTML = `<h5>&nbsp;</h5>`;
-
-    // Create open icon
-    const openIcon = document.createElement('i');
-    openIcon.className = 'fas fa-regular fa-window-maximize open-icon';
-    
-    // Add click handler to open modal
-    section.addEventListener('click', () => {
-        const modal = document.getElementById('imageModal');
-        const modalImg = document.getElementById('modalImage');
-        modalImg.src = art.src;
-        modal.style.display = 'block';
-    });
-    
-    section.appendChild(div);
-    section.appendChild(openIcon);
-    gallery.appendChild(section);
-});
 
 // Add close button functionality
 document.getElementById('closeModal').addEventListener('click', () => {
