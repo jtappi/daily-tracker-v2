@@ -125,3 +125,38 @@ section::after {
 .open-icon:hover {
     opacity: 1;
 }
+
+.floating-header {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 24px;
+    z-index: 1000;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    text-align: center;
+    width: auto;
+    max-width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+    .floating-header {
+        font-size: 20px;
+        padding: 8px 16px;
+        top: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .floating-header {
+        font-size: 18px;
+        padding: 6px 12px;
+    }
+}
