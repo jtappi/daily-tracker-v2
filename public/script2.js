@@ -175,6 +175,9 @@ const artworks = [
 let loadedImages = 0;
 const imagesPerLoad = 10;
 
+// Add this after your artworks array
+let currentImageIndex = 0;
+
 // Shuffle the array
 const shuffleArray = (array) => array.sort(() => Math.random() - 0.5);
 
@@ -212,10 +215,11 @@ function loadMoreImages() {
         const openIcon = document.createElement('i');
         openIcon.className = 'fas fa-regular fa-magnifying-glass open-icon';
         
-        // Add click handler to open modal
+        // Modify your click handler in loadMoreImages function
         section.addEventListener('click', () => {
             const modal = document.getElementById('imageModal');
             const modalImg = document.getElementById('modalImage');
+            currentImageIndex = artworks.indexOf(art);
             modalImg.src = art.src;
             modal.style.display = 'block';
         });
@@ -246,32 +250,6 @@ if (lastSection) {
     observer.observe(lastSection);
 }
 
-// artworks.forEach(art => {
-//     const section = document.createElement('section');
-//     section.style = `background-image: url('${art.src}'); background-size: cover; background-position: center; opacity: 0.75;`;
-    
-//     const div = document.createElement('div');
-//     div.className = 'artwork-info';
-//     // div.innerHTML = `<h5>${art.title}</h5>`;
-//     div.innerHTML = `<h5>&nbsp;</h5>`;
-
-//     // Create open icon
-//     const openIcon = document.createElement('i');
-//     openIcon.className = 'fas fa-regular fa-window-maximize open-icon';
-    
-//     // Add click handler to open modal
-//     section.addEventListener('click', () => {
-//         const modal = document.getElementById('imageModal');
-//         const modalImg = document.getElementById('modalImage');
-//         modalImg.src = art.src;
-//         modal.style.display = 'block';
-//     });
-    
-//     section.appendChild(div);
-//     section.appendChild(openIcon);
-//     gallery.appendChild(section);
-// });
-
 // Add close button functionality
 document.getElementById('closeModal').addEventListener('click', () => {
     document.getElementById('imageModal').style.display = 'none';
@@ -282,4 +260,17 @@ document.getElementById('imageModal').addEventListener('click', (e) => {
     if (e.target.id === 'imageModal') {
         document.getElementById('imageModal').style.display = 'none';
     }
+});
+
+// Add these event listeners with your other modal listeners
+document.getElementById('nextImage').addEventListener('click', (e) => {
+    e.stopPropagation();
+    currentImageIndex = (currentImageIndex + 1) % artworks.length;
+    document.getElementById('modalImage').src = artworks[currentImageIndex].src;
+});
+
+document.getElementById('prevImage').addEventListener('click', (e) => {
+    e.stopPropagation();
+    currentImageIndex = (currentImageIndex - 1 + artworks.length) % artworks.length;
+    document.getElementById('modalImage').src = artworks[currentImageIndex].src;
 });
