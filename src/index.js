@@ -89,7 +89,7 @@ app.use(session({
 app.use((req, res, next) => {
     console.log('Session:', req.session);
     console.log('Request Path:', req.path);
-    if (req.session.authenticated || req.path === '/login' || req.path === '/authenticate') {
+    if (req.session.authenticated || req.path === '/login' || req.path === '/authenticate' || req.path === '/index2.html') {
         next();
     } else {
         console.log('Redirecting to login');
