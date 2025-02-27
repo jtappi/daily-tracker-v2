@@ -50,11 +50,13 @@ app.use(helmet({
                 "'self'",
                 "https://cdnjs.cloudflare.com",
                 "https://stackpath.bootstrapcdn.com",
+                "https://fonts.googleapis.com",
                 (req, res) => `'nonce-${res.locals.nonce}'`
             ],
             fontSrc: [
                 "'self'",
-                "https://cdnjs.cloudflare.com"
+                "https://cdnjs.cloudflare.com",
+                "https://fonts.gstatic.com"
             ]
         }
     }

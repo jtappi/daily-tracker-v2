@@ -179,7 +179,13 @@ const imagesPerLoad = 10;
 let currentImageIndex = 0;
 
 // Shuffle the array
-const shuffleArray = (array) => array.sort(() => Math.random() - 0.5);
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1)); // Random index from 0 to i
+        [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+    }
+    return array;
+}
 
 // Implement infinite scroll
 const observer = new IntersectionObserver((entries) => {
