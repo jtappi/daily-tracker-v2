@@ -44,10 +44,12 @@ app.use(helmet({
                 "'self'",
                 "https://cdn.jsdelivr.net",
                 "https://code.jquery.com",
-                "https://stackpath.bootstrapcdn.com"
+                "https://stackpath.bootstrapcdn.com",
+                "https://cdnjs.cloudflare.com"  // Added for Font Awesome
             ],
             styleSrc: [
                 "'self'",
+                "'unsafe-inline'",  // Required for some font styles
                 "https://cdnjs.cloudflare.com",
                 "https://stackpath.bootstrapcdn.com",
                 "https://fonts.googleapis.com",
@@ -56,7 +58,13 @@ app.use(helmet({
             fontSrc: [
                 "'self'",
                 "https://cdnjs.cloudflare.com",
-                "https://fonts.gstatic.com"
+                "https://fonts.gstatic.com",
+                "data:"  // Required for Font Awesome
+            ],
+            imgSrc: [
+                "'self'",
+                "data:",
+                "blob:"
             ]
         }
     }
