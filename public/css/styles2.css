@@ -105,6 +105,11 @@ section::after {
     transform: translate(-50%, -50%);
 }
 
+/* Add touch-action to modal image */
+#modalImage {
+    touch-action: pan-y pinch-zoom;
+}
+
 .close-btn {
     position: absolute;
     top: 20px;
@@ -239,6 +244,13 @@ section::after {
     font-size: 24px;
     cursor: pointer;
     z-index: 1001;
+}
+
+/* Hide navigation buttons on mobile */
+@media (max-width: 768px) {
+    .nav-btn {
+        display: none;
+    }
 }
 
 .prev-btn {

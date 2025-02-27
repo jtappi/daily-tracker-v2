@@ -281,6 +281,38 @@ document.getElementById('prevImage').addEventListener('click', (e) => {
     document.getElementById('modalImage').src = artworks[currentImageIndex].src;
 });
 
+// After your existing modal event listeners, add:
+
+const modal = document.getElementById('imageModal');
+let touchStartX = 0;
+let touchEndX = 0;
+
+modal.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+});
+
+modal.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+});
+
+function handleSwipe() {
+    const swipeThreshold = 50; // minimum distance for a swipe
+    const swipeDistance = touchEndX - touchStartX;
+    
+    if (Math.abs(swipeDistance) > swipeThreshold) {
+        if (swipeDistance > 0) {
+            // Swiped right - show previous image
+            currentImageIndex = (currentImageIndex - 1 + artworks.length) % artworks.length;
+            document.getElementById('modalImage').src = artworks[currentImageIndex].src;
+        } else {
+            // Swiped left - show next image
+            currentImageIndex = (currentImageIndex + 1) % artworks.length;
+            document.getElementById('modalImage').src = artworks[currentImageIndex].src;
+        }
+    }
+}
+
 // Add at the end of your script file
 document.addEventListener('DOMContentLoaded', () => {
     const banner = document.querySelector('.top-banner');
