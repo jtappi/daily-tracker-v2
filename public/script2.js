@@ -274,3 +274,23 @@ document.getElementById('prevImage').addEventListener('click', (e) => {
     currentImageIndex = (currentImageIndex - 1 + artworks.length) % artworks.length;
     document.getElementById('modalImage').src = artworks[currentImageIndex].src;
 });
+
+// Add at the end of your script file
+document.addEventListener('DOMContentLoaded', () => {
+    const banner = document.querySelector('.top-banner');
+    const gallery = document.querySelector('.gallery-container');
+    const expandBtn = document.querySelector('.expand-btn');
+
+    // Collapse banner after 10 seconds
+    setTimeout(() => {
+        banner.classList.add('collapsed');
+        gallery.classList.add('banner-collapsed');
+    }, 5000);
+
+    // Toggle banner expansion
+    // expandBtn.addEventListener('click', () => {
+    banner.addEventListener('click', () => {
+        banner.classList.toggle('collapsed');
+        gallery.classList.toggle('banner-collapsed');
+    });
+});
