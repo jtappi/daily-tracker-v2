@@ -132,7 +132,7 @@ section::after {
     left: 50%;
     transform: translateX(-50%);
     background-color: rgba(0, 0, 0, 0.7);
-    color: white;
+    color: rgb(0, 229, 255);
     padding: 10px 20px;
     border-radius: 5px;
     font-size: 24px;

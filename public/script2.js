@@ -175,6 +175,9 @@ const artworks = [
 let loadedImages = 0;
 const imagesPerLoad = 10;
 
+// Shuffle the array
+const shuffleArray = (array) => array.sort(() => Math.random() - 0.5);
+
 // Implement infinite scroll
 const observer = new IntersectionObserver((entries) => {
     console.log('Intersection observed');
@@ -191,6 +194,8 @@ function loadMoreImages() {
     const start = loadedImages;
     const end = Math.min(loadedImages + imagesPerLoad, artworks.length);
     console.log(`Loading images ${start} to ${end}`);
+
+    shuffleArray(artworks);
 
     for (let i = start; i < end; i++) {
         const art = artworks[i];
