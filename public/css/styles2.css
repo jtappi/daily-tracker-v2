@@ -9,6 +9,7 @@ body, html {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     width: 100%;
+    padding-top: 20px;
 }
 
 section {
@@ -68,6 +69,7 @@ section::after {
         display: grid;
         grid-template-columns: 1fr 1fr;
         width: 100%;
+        padding-top: 20px;
     }
 }
 
@@ -126,31 +128,81 @@ section::after {
     opacity: 1;
 }
 
+/* Remove or comment out the existing .floating-header styles */
+
+/*
 .floating-header {
     position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.7);
-    color: rgb(0, 229, 255);
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 24px;
-    z-index: 1000;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 15px 0;
+    background: linear-gradient(to bottom, rgba(156, 156, 156, 0.8) 0%, rgba(140, 140, 140, 0.6) 100%);
+    color: rgb(253, 253, 253);
     text-align: center;
+    font-size: 28px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    border-bottom: 1px solid rgba(0, 229, 255, 0.2);
+}
+*/
+
+.floating-logo {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(192, 192, 192, 0.6);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.floating-logo img {
+    height: 360px;
     width: auto;
-    max-width: 90%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .floating-logo {
+        top: 15px;
+        left: 15px;
+    }
+    
+    .floating-logo img {
+        height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .floating-logo {
+        top: 10px;
+        left: 10px;
+    }
+    
+    .floating-logo img {
+        height: 40px;
+    }
 }
 
 @media (max-width: 768px) {
     .floating-header {
-        font-size: 20px;
-        padding: 8px 16px;
-        top: 10px;
+        font-size: 22px;
+        padding: 12px 0;
+    }
+    
+    .gallery-container {
+        /* padding-top: 60px; */
+        padding-top: 20px;
     }
 }
 
