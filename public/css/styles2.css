@@ -265,31 +265,44 @@ section::after {
     background: rgba(0, 0, 0, 0.8);
 }
 
+/* Update the top-banner styles */
 .top-banner {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    /* background: rgba(88, 88, 88, 0.8); */
+    bottom: 0; /* Make it full screen */
+    background: rgba(255, 255, 255, 0.7); /* Lighter background */
     padding: 20px;
     display: flex;
-    align-items: center;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
     gap: 30px;
     z-index: 1000;
     transition: all 0.5s ease;
-    height: auto;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border-bottom: 1px solid rgba(192, 192, 192, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .top-banner.collapsed {
     height: 60px;
+    bottom: auto; /* Remove full-screen in collapsed state */
     padding: 10px 20px;
+    flex-direction: row; /* Horizontal layout when collapsed */
+    justify-content: flex-start;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.banner-content {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    max-width: 1200px;
 }
 
 .banner-logo {
-    height: 256px;
+    height: 512px;
     width: auto;
     transition: all 0.5s ease;
 }
@@ -301,20 +314,82 @@ section::after {
 .banner-text {
     font-family: 'Shadows Into Light', cursive;
     color: #434343;
+    text-align: left;
 }
 
 .banner-title {
-    font-size: 2.5em;
+    font-size: 4em; /* Larger initial size */
     margin: 0;
     line-height: 1.2;
     transition: all 0.5s ease;
 }
 
 .banner-subtitle {
-    font-size: 1.5em;
+    font-size: 2.5em; /* Larger initial size */
     margin: 5px 0 0 0;
     color: rgba(239, 91, 16, 0.802);
     transition: all 0.5s ease;
+}
+
+.banner-sidetitle {
+    font-size: 1.8em;
+    margin: 5px 0;
+    color: #666;
+}
+
+.collapsed .banner-logo {
+    height: 64px;
+}
+
+.collapsed .banner-title {
+    font-size: 1.5em;
+}
+
+.collapsed .banner-subtitle,
+.collapsed .banner-sidetitle {
+    display: none;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .banner-logo {
+        height: 200px; /* Smaller logo on mobile */
+    }
+
+    .banner-title {
+        font-size: 3em;
+    }
+
+    .banner-subtitle {
+        font-size: 2em;
+    }
+
+    .collapsed .banner-logo {
+        height: 40px;
+    }
+
+    .collapsed .banner-title {
+        font-size: 1.2em;
+    }
+
+    .banner-content {
+        gap: 20px;
+    }
+
+    .banner-sidetitle {
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 480px) {
+    .banner-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .banner-text {
+        text-align: center;
+    }
 }
 
 .banner-sidetitle {
