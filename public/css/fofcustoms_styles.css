@@ -6,8 +6,47 @@ nav ul li { display: inline; }
 nav ul li a { color: #fff; padding: 0.5rem 1rem; text-decoration: none; display: inline-block; }
 nav ul li a:hover { background-color: #555; }
 .container { padding: 5rem 1rem 1rem; max-width: 1200px; margin: auto; }
-.gallery { display: flex; flex-wrap: wrap; gap: 1rem; }
-.gallery img { width: 100%; max-width: 300px; border-radius: 8px; }
+.gallery {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 20px 0;
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
+}
+
+.gallery img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    flex-shrink: 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.gallery img:hover {
+    transform: scale(1.05);
+}
+
+/* Customize scrollbar for webkit browsers */
+.gallery::-webkit-scrollbar {
+    height: 8px;
+}
+
+.gallery::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.gallery::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.gallery::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
 form { display: flex; flex-direction: column; gap: 0.5rem; max-width: 600px; margin: auto; }
 form input, form textarea { padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; }
 form button { padding: 0.5rem; border: none; border-radius: 4px; background-color: #333; color: #fff; cursor: pointer; }
