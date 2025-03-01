@@ -119,14 +119,14 @@ section {
     border-radius: 2px;
 }
 
-.gallery-container {
+/* .gallery-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 50%;
     padding: 20px;
     box-sizing: border-box;
-}
+} */
 
 .gallery {
     display: flex;
@@ -161,9 +161,26 @@ section {
 .content-container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin: 2rem auto;
+    align-items: stretch; /* Ensure both items stretch to the same height */
+    width: 100%;
     max-width: 1200px;
+    margin: 4rem auto;
+    gap: 2rem;
+}
+
+.chatbox, .galleria {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content */
+}
+
+.chatbox, .galleria {
+    width: 45%;
+}
+
+.galleria.left, .galleria.right {
+    text-align: center; /* Ensures text and images align properly */
+    position: static; /* Removes unnecessary relative positioning */
 }
 
 form {
@@ -266,6 +283,29 @@ footer {
     cursor: pointer;
 }
 
+/* Gallery Styling */
+.galleria {
+    padding: 30px;
+    width: 40vw;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    position: relative; /* Positions each box from an edge */
+}
+
+/* Left Chatbox - Bleeds to the Left Edge */
+/* .galleria.left {
+    text-align: left;
+    left: 0px;
+    position: relative;
+} */
+
+/* Right Chatbox - Bleeds to the Right Edge */
+/* .galleria.right {
+    text-align: right;
+    right: 0px;
+    position: relative;
+} */
+
 /* Floating Chatboxes */
 .chatbox-container {
     display: flex;
@@ -317,5 +357,16 @@ footer {
         margin-bottom: 20px; /* Space between stacked boxes */
         transform: translateY(0); /* Remove offset for mobile */
         position: relative;
+    }
+
+    .content-container {
+        flex-direction: column; /* Stack elements vertically on small screens */
+        align-items: center;
+        text-align: center;
+    }
+
+    .chatbox, .galleria {
+        width: 100%; /* Make them full width when stacked */
+        text-align: center;
     }
 }
