@@ -1,11 +1,8 @@
 :root {
-    /* --primary: #1a237e; */
     --primary: #1f7564;
-    /* --secondary: #ff3d00; */
     --secondary: #f3774d;
     --dark: #121212;
     --light: #f5f5f5;
-    /* --gradient: linear-gradient(135deg, #1a237e 0%, #283593 100%); */
     --gradient: linear-gradient(135deg, #76c1b2 0%, #1f7564 100%);
 }
 
@@ -92,21 +89,25 @@ nav a:hover {
     max-width: 1200px;
     margin: 0 auto;
     padding: 4rem 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 section {
     margin-bottom: 6rem;
+    flex: 1;
 }
 
-section h5 {
+.section-title {
     text-align: center;
-    font-size: 1rem;
+    font-size: 1.5rem;
     color: var(--primary);
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
     position: relative;
 }
 
-section h5::after {
+.section-title::after {
     content: '';
     position: absolute;
     bottom: -10px;
@@ -118,13 +119,24 @@ section h5::after {
     border-radius: 2px;
 }
 
+.gallery-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
 .gallery {
     display: flex;
+    flex-direction: row-reverse;
     overflow-x: auto;
     gap: 30px;
     padding: 20px 0;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    justify-content: center;
 }
 
 .gallery::-webkit-scrollbar {
@@ -144,6 +156,14 @@ section h5::after {
 .gallery img:hover {
     transform: translateY(-10px);
     box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+}
+
+.content-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2rem auto;
+    max-width: 1200px;
 }
 
 form {
