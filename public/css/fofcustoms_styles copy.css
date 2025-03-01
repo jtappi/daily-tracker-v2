@@ -1,0 +1,94 @@
+body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+header {
+    padding-top: 80px; /* Add padding to account for fixed nav */
+    text-align: center;
+    background: #f5f5f5;
+    padding-bottom: 2rem;
+}
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 1rem;
+    z-index: 1000;
+}
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+nav a:hover {
+    color: #ddd;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+.gallery {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 20px 0;
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
+}
+
+.gallery img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    flex-shrink: 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.gallery img:hover {
+    transform: scale(1.05);
+}
+
+/* Customize scrollbar for webkit browsers */
+.gallery::-webkit-scrollbar {
+    height: 8px;
+}
+
+.gallery::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.gallery::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.gallery::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+form { display: flex; flex-direction: column; gap: 0.5rem; max-width: 600px; margin: auto; }
+form input, form textarea { padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; }
+form button { padding: 0.5rem; border: none; border-radius: 4px; background-color: #333; color: #fff; cursor: pointer; }
+form button:hover { background-color: #555; }
+footer { background-color: #333; color: #fff; text-align: center; padding: 1rem 0; margin-top: 2rem; }
+
+@media (max-width: 768px) {
+    nav ul {
+        gap: 1rem;
+    }
+    
+    header {
+        padding-top: 70px;
+    }
+}

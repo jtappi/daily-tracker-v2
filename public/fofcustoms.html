@@ -13,43 +13,50 @@
             <li><a href="#home">Home</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#" id="contactBtn">Contact</a></li>
         </ul>
     </nav>
+    
     <header id="home">
         <h1>FOF Customs</h1>
-        <p>Serving the Greater Greenville Area since 2017</p>
-        <p><strong>(864) 416-4450</strong></p>
+        <p class="subheading">Serving the Greater Greenville Area since 2017</p>
+        <p class="contact-number"><strong>(864) 416-4450</strong></p>
     </header>
-    <div class="container">
-        <section id="services">
-            <h2>Our Services</h2>
-            <p>At FOF Customs, we specialize in custom automotive modifications, offering a range of services to enhance your vehicle's performance and aesthetics.</p>
-        </section>
+    
+    <div class="content-container">
+        <div class="chatbox left">
+            <h3>Transform Your Home</h3>
+            <p>We bring your vision to life with expert remodeling. From kitchens and bathrooms to living rooms and garages, we create stunning, functional spaces tailored to your style.</p>
+        </div>
         <section id="gallery">
-            <h2>Gallery</h2>
+            <h5 class="section-title">Kitchens</h5>
             <div class="gallery">
-                <img src="images/art10.jpg" alt="Custom Car 1">
-                <img src="images/art20.jpg" alt="Custom Car 2">
-                <img src="images/art30.jpg" alt="Custom Car 3">
-                <img src="images/art40.jpg" alt="Custom Car 4">
+                <img src="images/kitchen3.jpeg" alt="Kitchen Remodel Sample">
+                <img src="images/kitchen2.jpeg" alt="Kitchen Remodel Sample">
+                <img src="images/kitchen2.jpeg" alt="Kitchen Remodel Sample">
             </div>
         </section>
-        <section id="contact">
-            <h2>Contact Us</h2>
-            <form id="contactForm">
-                <input type="text" name="name" id="name" placeholder="Name" required>
-                <input type="email" name="email" id="email" placeholder="Email" required>
-                <input type="tel" name="phone" id="phone" placeholder="Phone">
-                <textarea name="details" id="details" rows="4" placeholder="Details" required></textarea>
-                <button type="submit">Submit</button>
-            </form>
-            <p id="formMessage"></p>
+    </div>
+    
+    <div class="content-container">
+        <div class="chatbox right">
+            <h3>Our Services</h3>
+            <p>✔ Kitchen & Bath Remodeling<br>✔ Living Room & Garage Conversions<br>✔ Flooring & Painting<br>✔ Custom Home Designs & More</p>
+        </div>
+        <section id="gallery">
+            <h5 class="section-title">Bathrooms</h5>
+            <div class="gallery">
+                <img src="images/bathroom1.jpeg" alt="Bathroom Remodel Sample">
+                <img src="images/bathroom2.jpeg" alt="Bathroom Remodel Sample">
+                <img src="images/bathroom2.jpeg" alt="Bathroom Remodel Sample">
+            </div>
         </section>
     </div>
+    
     <footer>
         <p>&copy; 2025 FOF Customs. All rights reserved.</p>
     </footer>
+
     <script src="fofcustoms.js"></script>
 </body>
 </html>
