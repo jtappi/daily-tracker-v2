@@ -21,9 +21,14 @@ body {
 .row {
     position: relative;
     width: 100%;
-    min-height: 300px; /* Space for content and chatboxes */
-    margin: 6rem 0; /* Vertical spacing between rows */
+    min-height: 150px;
+    margin: 4rem 0; /* Reduced from 6rem */
     padding: 2rem 0;
+}
+
+/* Update last row margin */
+.row:last-child {
+    margin-bottom: 2rem; /* Reduce bottom margin of last row */
 }
 
 /* Example usage of multiple rows */
@@ -196,6 +201,7 @@ footer {
     text-align: center;
     padding: 2rem 0;
     margin-top: auto;
+    /* Remove any margin-top if present */
 }
 
 @media (max-width: 768px) {
@@ -297,4 +303,11 @@ form button {
 form button:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(26,35,126,0.3);
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    /* Remove any margin-bottom if present */
 }
