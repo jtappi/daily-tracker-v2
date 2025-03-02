@@ -13,10 +13,9 @@ body {
     padding: 0;
     background-color: var(--light);
     color: var(--dark);
-    display: flex; /* Added to make body a flex container */
-    flex-direction: column; /* Added to stack content vertically */
-    min-height: 100vh; /* Added to make body at least full viewport height */
-
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 header {
@@ -49,6 +48,20 @@ header h1 {
 header p {
     font-size: 1.2rem;
     opacity: 0.9;
+    max-width: 600px;
+    margin: 1rem auto;
+}
+
+.subheading {
+    opacity: 0.9;
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 1rem auto;
+}
+
+.contact-number {
+    opacity: 0.9;
+    font-size: 1.2rem;
     max-width: 600px;
     margin: 1rem auto;
 }
@@ -115,68 +128,82 @@ section {
     border-radius: 2px;
 }
 
+.gallery {
+    display: flex; /* Make images flex items */
+    overflow-x: auto; /* Allow horizontal scrolling */
+    gap: 10px;
+    padding: 20px 0;
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    -ms-overflow-style: none; /* Hide scrollbar for IE/Edge */
+    white-space: nowrap;
+    justify-content: left;
+}
+
+.gallery::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome/Safari */
+}
+
+.gallery img {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    flex-shrink: 0;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.gallery img:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+}
+
 .content-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center; /* Ensure both items stretch to the same height */
+    position: relative;
     width: 100%;
     max-width: 1200px;
     margin: 4rem auto;
-    gap: 2rem;
+    min-height: 400px; /* Space for absolute positioning */
 }
 
 .chatbox {
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Center content */
     width: 35%;
-}
-
-/* Floating Chatboxes */
-.chatbox {
     background: white;
     padding: 30px;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
     font-size: 1.2rem;
     line-height: 1.5;
-    position: absolute; /* Positions each box from an edge */
-    min-height: 180px;
+    position: absolute;
+    z-index: 2;
 }
 
-/* Left Chatbox - Bleeds to the Left Edge */
 .chatbox.left {
-    text-align: left;
-    left: 0;
-    transform: translateY(-20px); /* Raises this box */
+    left: 50px;
+    top: 0;
 }
 
-/* Left Chatbox - Bleeds to the Left Edge */
-.chatbox.left.gallery {
-    background: none;
-    padding: 0;
-    box-shadow: none;
-    text-align: right;
-    right: 0;
-    transform: translateY(-20px); /* Raises this box */
-    position: relative;
-}
-
-/* Right Chatbox - Bleeds to the Right Edge */
 .chatbox.right {
-    text-align: right;
-    right: 0;
-    transform: translateY(60px); /* Lowers this box */
+    right: 50px;
+    top: 60px; /* Offset from top */
 }
 
-/* Right Chatbox - Bleeds to the Right Edge */
-.chatbox.right.gallery {
+.chatbox.gallery {
+    width: 50%;
     background: none;
     padding: 0;
     box-shadow: none;
-    text-align: left;
-    left: 0;
-    transform: translateY(60px); /* Lowers this box */
-    position: relative;
+}
+
+.chatbox.left.gallery {
+    right: 50px;
+    left: auto;
+    top: 0;
+}
+
+.chatbox.right.gallery {
+    left: 50px;
+    right: auto;
+    top: 60px;
 }
 
 footer {
@@ -185,6 +212,8 @@ footer {
     text-align: center;
     padding: 2rem 0;
     margin-top: auto;
+    position: relative;
+    z-index: 3;
 }
 
 @media (max-width: 768px) {
@@ -199,21 +228,30 @@ footer {
     header h1 {
         font-size: 2.5rem;
     }
-    
+
     section h2 {
         font-size: 2rem;
     }
-
     .content-container {
-        flex-direction: column; /* Stack elements vertically on small screens */
-        align-items: center;
-        text-align: center;
+        margin: 2rem auto;
+        min-height: auto;
     }
 
     .chatbox {
-        width: 100%; /* Make them full width when stacked */
-        text-align: center;
         position: relative;
-        transform: translateY(0);
+        width: 90%;
+        left: auto;
+        right: auto;
+        margin: 1rem auto;
+    }
+
+    .chatbox.gallery {
+        width: 100%;
+        margin: 1rem 0;
+    }
+
+    .gallery img{
+        width: 300px;
+        height: 200px;
     }
 }
