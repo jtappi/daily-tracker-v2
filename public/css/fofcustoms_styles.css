@@ -238,6 +238,71 @@ footer {
     .chatbox.gallery{
         width:100%;
     }
+
+    /* Update row styles */
+    .row {
+        min-height: auto;
+        margin: 2rem 0;
+        padding: 1rem;
+    }
+
+    /* Update content container */
+    .content-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    /* Update chatbox styles for mobile */
+    .chatbox {
+        position: relative;
+        width: 100%;
+        height: auto;
+        min-height: 100px;
+        margin: 1rem 0;
+        left: 0;
+        right: 0;
+    }
+
+    .chatbox.left, .chatbox.right {
+        text-align: center;
+        width: auto;
+        margin: 1rem 20px;
+    }
+
+    /* Update gallery styles for mobile */
+    .gallery {
+        position: relative;
+        width: 100%;
+        margin: 1rem 0;
+        padding: 10px 0;
+    }
+
+    .gallery.left, .gallery.right {
+        left: auto;
+        right: auto;
+    }
+
+    /* Update gallery header for mobile */
+    .gallery-header {
+        position: relative;
+        width: 100%;
+        top: 0;
+        text-align: center;
+        padding: 1rem 0;
+        margin: 1rem 0;
+    }
+
+    .gallery-header.left, .gallery-header.right {
+        text-align: center;
+        padding: 0;
+    }
+
+    /* Update gallery images for mobile */
+    .gallery img {
+        width: 150px;
+        height: 120px;
+        margin: 0 5px;
+    }
 }
 
 /* Modal Styles */
