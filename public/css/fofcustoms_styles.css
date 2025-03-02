@@ -181,6 +181,10 @@ section {
     justify-content: center; /* Center content vertically */
 }
 
+.chatbox-header {
+    color: var(--primary);
+}
+
 /* Floating Chatboxes */
 .chatbox.left {
     text-align: left;
@@ -310,4 +314,78 @@ main {
     flex-direction: column;
     flex: 1;
     /* Remove any margin-bottom if present */
+}
+
+.gallery {
+    width: 35%;
+    position: absolute;
+    display: flex;
+    overflow-x: auto;
+    padding: 20px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.gallery.left {
+    left: 0;
+}
+
+.gallery.right {
+    right: 0;
+}
+
+.gallery::-webkit-scrollbar {
+    display: none;
+}
+
+.gallery img {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    flex-shrink: 0;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.gallery img:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+}
+
+.gallery-header {
+    position: absolute;
+    text-align: center;
+    width: 35%;
+    right: 0;
+    top: -80px;
+    color: var(--secondary);
+    margin: 0;
+    z-index: 100;
+}
+
+.gallery-header.left {
+    text-align: left;
+    left: 0;
+    padding: 0px 20px;
+}
+
+.gallery-header.right {
+    text-align: right;
+    right: 0;
+    padding: 0px 20px;
+}
+
+.row:nth-child(even) .gallery-header {
+    left: 0;
+    right: auto;
+}
+
+@media (max-width: 768px) {
+    .gallery-header {
+        position: relative;
+        width: 100%;
+        top: 0;
+        margin: 20px 0;
+    }
 }
