@@ -24,36 +24,54 @@
     </header>
     
     <main>
-        <div class="content-container">
-            <div class="chatbox left">
-                <h3>Transform Your Home</h3>
-                <p>We bring your vision to life with expert remodeling. From kitchens and bathrooms to living rooms and garages, we create stunning, functional spaces tailored to your style.</p>
+        <div class="row">
+            <div class="content-container">
+                <div class="chatbox left">
+                    <h3>Transform Your Home</h3>
+                    <p>We bring your vision to life with expert remodeling. From kitchens and bathrooms to living rooms and garages, we create stunning, functional spaces tailored to your style.</p>
+                </div>
+                <!-- <div class="chatbox left gallery">
+                        <img src="images/kitchen3.jpeg" alt="Kitchen Remodel Sample">
+                        <img src="images/kitchen2.jpeg" alt="Kitchen Remodel Sample">
+                        <img src="images/kitchen2.jpeg" alt="Kitchen Remodel Sample">
+                </div> -->
+                
             </div>
-            <div class="chatbox left gallery">
-                    <img src="images/kitchen3.jpeg" alt="Kitchen Remodel Sample">
-                    <img src="images/kitchen2.jpeg" alt="Kitchen Remodel Sample">
-                    <img src="images/kitchen2.jpeg" alt="Kitchen Remodel Sample">
-            </div>
-            
         </div>
-        
-        <div class="content-container">
-            <div class="chatbox right">
-                <h3>Our Services</h3>
-                <p>✔ Kitchen & Bath Remodeling<br>✔ Living Room & Garage Conversions<br>✔ Flooring & Painting<br>✔ Custom Home Designs & More</p>
+
+        <div class="row">
+            <div class="content-container">
+                <div class="chatbox right">
+                    <h3>Our Services</h3>
+                    <p>Kitchen & Bath Remodeling<br>Living Room & Garage Conversions<br>Flooring & Painting<br>Custom Home Designs & More</p>
+                </div>
+                <!-- <div class="chatbox right gallery">
+                        <img src="images/bathroom1.jpeg" alt="Bathroom Remodel Sample">
+                        <img src="images/bathroom2.jpeg" alt="Bathroom Remodel Sample">
+                        <img src="images/bathroom2.jpeg" alt="Bathroom Remodel Sample">
+                </div>       -->
             </div>
-            <div class="chatbox right gallery">
-                    <img src="images/bathroom1.jpeg" alt="Bathroom Remodel Sample">
-                    <img src="images/bathroom2.jpeg" alt="Bathroom Remodel Sample">
-                    <img src="images/bathroom2.jpeg" alt="Bathroom Remodel Sample">
-            </div>      
         </div>
     </main>
     
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">            
+            <form id="contactForm">
+                <span class="close">&times;</span>
+                <input type="text" name="name" id="name" placeholder="Name" required>
+                <input type="email" name="email" id="email" placeholder="Email" required>
+                <input type="tel" name="phone" id="phone" placeholder="Phone">
+                <textarea name="details" id="details" rows="4" placeholder="Details" required></textarea>
+                <button type="submit">Submit</button>                
+            </form>
+            <p id="formMessage"></p>
+        </div>
+    </div>
+
     <footer>
         <p>&copy; 2025 FOF Customs. All rights reserved.</p>
     </footer>
-
     <script src="fofcustoms.js"></script>
 </body>
 </html>

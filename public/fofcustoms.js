@@ -29,15 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Modal functionality
     const modal = document.getElementById("contactModal");
     const btn = document.getElementById("contactBtn");
-    const closeBtn = document.querySelector(".close");
 
     btn.addEventListener("click", function(event) {
         event.preventDefault(); // Prevent default link behavior
         modal.style.display = "block";
-    });
-
-    closeBtn.addEventListener("click", function() {
-        modal.style.display = "none";
     });
 
     window.addEventListener("click", function(event) {
