@@ -98,10 +98,20 @@ fetch('/data')
                 dateInput.className = 'form-control';
                 dateInput.classList.add('d-block');
                 
-                const estTime = new Date(timestamp.getTime() - (5 * 60 * 60 * 1000));
-                const modTimeStamp = estTime.toISOString().slice(0, 16);
-                dateInput.value = modTimeStamp;
-                dateInput.dataset.timezone = 'America/New_York';
+                const estTime = new Date(timestamp); // Use the original timestamp
+                const formatter = new Intl.DateTimeFormat('en-CA', { // en-CA to get YYYY-MM-DD
+                    timeZone: 'America/New_York',
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false, // Use 24-hour format
+                  });
+                
+                const estTimeString = formatter.format(estTime).replace(/\//g, '-').replace(', ', 'T');
+                dateInput.value = estTimeString;
+                // dateInput.dataset.timezone = 'America/New_York';
                 
                 row.classList.add('editing-row');
                 
@@ -148,8 +158,18 @@ fetch('/data')
             }
 
             function toISOStringEST(date) {
-                const dateEST = new Date(date.getTime() - (5 * 60 * 60 * 1000)); // Subtract 5 hours for EST
-                return dateEST.toISOString().slice(0, -1);
+                const dateEST = new Date(date);
+                const formatter = new Intl.DateTimeFormat('en-US', {
+                    timeZone: 'America/New_York',
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: 'numeric',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    second: 'numeric',
+                  });
+                const estTimeString = formatter.format(dateEST);
+                return estTimeString;
             }
 
             function convertDatetimeLocalToISO(datetimeLocalValue) {
