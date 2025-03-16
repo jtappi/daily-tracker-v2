@@ -111,7 +111,6 @@ fetch('/data')
                 
                 const estTimeString = formatter.format(estTime).replace(/\//g, '-').replace(', ', 'T');
                 dateInput.value = estTimeString;
-                // dateInput.dataset.timezone = 'America/New_York';
                 
                 row.classList.add('editing-row');
                 
